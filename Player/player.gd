@@ -9,8 +9,11 @@ enum DIRECTION {
 }
 
 @export var direction: DIRECTION
+@onready var SPRITE = $Sprite
+
 const SPEED = 200.0
 const MOVE_TIME = 0.5
+
 var is_moving := false
 var is_colliding:= false
 
@@ -72,5 +75,18 @@ func _update_positions()-> void:
 	match direction:
 		DIRECTION.UP, DIRECTION.DOWN:
 			$Collision.rotation = deg_to_rad(0)
+			SPRITE.rotation = deg_to_rad(0)
 		DIRECTION.LEFT, DIRECTION.RIGHT:
 			$Collision.rotation = deg_to_rad(90)
+			SPRITE.rotation = deg_to_rad(90)
+
+	match direction:
+		DIRECTION.UP:
+			SPRITE.flip_v = false
+		DIRECTION.DOWN:
+			SPRITE.flip_v = true
+		DIRECTION.LEFT:
+			SPRITE.flip_v = true 
+		DIRECTION.RIGHT:
+			SPRITE.flip_v = false
+			

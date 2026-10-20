@@ -1,13 +1,30 @@
 [gd_scene format=3 uid="uid://csjkhf8h4uaj5"]
 
 [ext_resource type="Script" uid="uid://bnp17op5lhfsp" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://cndd2e4q3fpu3" path="res://Assets/Player/Car.png" id="2_4ntmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
-size = Vector2(20, 35)
+size = Vector2(20, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gy5b4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4ntmi")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D" unique_id=528771189]
 script = ExtResource("1_l8h54")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2015481553]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_gy5b4")
 debug_color = Color(0.9808484, 0, 0.3801851, 0.41960785)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=36176894]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_gy5b4")
