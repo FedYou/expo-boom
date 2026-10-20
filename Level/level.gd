@@ -20,7 +20,7 @@ func _refresh_ui_move_lists() -> void:
 	_refresh_ui_pending_moves()
 
 func _refresh_ui_executed_moves() -> void:
-	for item in PENDING_MOVES.get_children():
+	for item in EXECUTED_MOVES.get_children():
 		item.queue_free()
 	
 	for move in executed_moves:
@@ -81,7 +81,7 @@ func _on_play_pressed() -> void:
 		return
 
 	executed_moves.append_array(pending_moves)
-	
+
 	PLAYER.execute_pending_moves(pending_moves.duplicate())
 	pending_moves.clear()
 	
