@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhw2rodh6t46d"
-path="res://.godot/imported/Abajo.png-8165a18902fcabf05d9fe8db8e582716.ctex"
+uid="uid://c8tvogww8hpko"
+path="res://.godot/imported/Right.png-4aecfef4094cc7864c72ee594af840f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Abajo.png"
-dest_files=["res://.godot/imported/Abajo.png-8165a18902fcabf05d9fe8db8e582716.ctex"]
+source_file="res://Assets/UI/MoveIcons/Right.png"
+dest_files=["res://.godot/imported/Right.png-4aecfef4094cc7864c72ee594af840f4.ctex"]
 
 [params]
 

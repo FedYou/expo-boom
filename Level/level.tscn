@@ -2,11 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://csjkhf8h4uaj5" path="res://Player/player.tscn" id="1_o6mkr"]
 [ext_resource type="Script" uid="uid://daoi16f6q247a" path="res://Level/level.gd" id="1_qmtf6"]
-[ext_resource type="Texture2D" uid="uid://c311ogoimo7e4" path="res://Assets/UI/Confirmar.png" id="3_d6qko"]
-[ext_resource type="Texture2D" uid="uid://cbrqy3b43p08i" path="res://Assets/UI/Arriba.png" id="4_22cqp"]
-[ext_resource type="Texture2D" uid="uid://bhw2rodh6t46d" path="res://Assets/UI/Abajo.png" id="5_wqlfs"]
-[ext_resource type="Texture2D" uid="uid://dwop4xapu5qp2" path="res://Assets/UI/Derecha.png" id="6_py82k"]
-[ext_resource type="Texture2D" uid="uid://276tmd6eoh5" path="res://Assets/UI/Izquierda.png" id="7_1teg4"]
+[ext_resource type="Texture2D" uid="uid://c311ogoimo7e4" path="res://Assets/UI/Buttons/Play.png" id="3_d6qko"]
+[ext_resource type="Texture2D" uid="uid://cbrqy3b43p08i" path="res://Assets/UI/Buttons/Up.png" id="4_22cqp"]
+[ext_resource type="Texture2D" uid="uid://cvqsjdc60s7gg" path="res://Assets/UI/Buttons/PlayPress.png" id="4_wqlfs"]
+[ext_resource type="Texture2D" uid="uid://234ue7ac4t8" path="res://Assets/UI/Buttons/PlayHover.png" id="5_py82k"]
+[ext_resource type="Texture2D" uid="uid://bhw2rodh6t46d" path="res://Assets/UI/Buttons/Down.png" id="5_wqlfs"]
+[ext_resource type="Texture2D" uid="uid://2yor25335dp5" path="res://Assets/UI/Buttons/PlayDisabled.png" id="6_k8npl"]
+[ext_resource type="Texture2D" uid="uid://dwop4xapu5qp2" path="res://Assets/UI/Buttons/Right.png" id="6_py82k"]
+[ext_resource type="Texture2D" uid="uid://276tmd6eoh5" path="res://Assets/UI/Buttons/Left.png" id="7_1teg4"]
+[ext_resource type="Texture2D" uid="uid://c5y3g6374m2rf" path="res://Assets/UI/Buttons/UpPress.png" id="7_luomk"]
+[ext_resource type="Texture2D" uid="uid://svanwnmrcqco" path="res://Assets/UI/Buttons/UpHover.png" id="8_k8npl"]
+[ext_resource type="Texture2D" uid="uid://bbd5ryb0lyqiy" path="res://Assets/UI/Buttons/DownPress.png" id="10_am3y4"]
+[ext_resource type="Texture2D" uid="uid://dae4lm3soiy06" path="res://Assets/UI/Buttons/DownHover.png" id="11_l5n2q"]
+[ext_resource type="Texture2D" uid="uid://dsumnh82qtx0b" path="res://Assets/UI/Buttons/RightPress.png" id="13_cv6tn"]
+[ext_resource type="Texture2D" uid="uid://cqiqet44qvdhx" path="res://Assets/UI/Buttons/RightHover.png" id="14_jghi6"]
+[ext_resource type="Texture2D" uid="uid://bcontnxev4si7" path="res://Assets/UI/Buttons/LeftPress.png" id="16_3opgi"]
+[ext_resource type="Texture2D" uid="uid://b5xgjqpfjfdgi" path="res://Assets/UI/Buttons/LeftHover.png" id="17_ys2en"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
 size = Vector2(452, 20)
@@ -39,51 +50,6 @@ shape = SubResource("RectangleShape2D_00nqh")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1700409480]
 
-[node name="Play" type="Button" parent="UI" unique_id=1738847166]
-offset_left = 612.0
-offset_top = 657.0
-offset_right = 652.0
-offset_bottom = 697.0
-icon = ExtResource("3_d6qko")
-flat = true
-metadata/_edit_use_anchors_ = true
-
-[node name="Up" type="Button" parent="UI" unique_id=469105161]
-offset_left = 656.0
-offset_top = 657.0
-offset_right = 696.0
-offset_bottom = 697.0
-icon = ExtResource("4_22cqp")
-flat = true
-metadata/_edit_use_anchors_ = true
-
-[node name="Down" type="Button" parent="UI" unique_id=1184642791]
-offset_left = 700.0
-offset_top = 657.0
-offset_right = 740.0
-offset_bottom = 697.0
-icon = ExtResource("5_wqlfs")
-flat = true
-metadata/_edit_use_anchors_ = true
-
-[node name="Right" type="Button" parent="UI" unique_id=917966894]
-offset_left = 744.0
-offset_top = 657.0
-offset_right = 784.0
-offset_bottom = 697.0
-icon = ExtResource("6_py82k")
-flat = true
-metadata/_edit_use_anchors_ = true
-
-[node name="Left" type="Button" parent="UI" unique_id=23718420]
-offset_left = 788.0
-offset_top = 657.0
-offset_right = 828.0
-offset_bottom = 697.0
-icon = ExtResource("7_1teg4")
-flat = true
-metadata/_edit_use_anchors_ = true
-
 [node name="ScrollPendingMoves" type="ScrollContainer" parent="UI" unique_id=2134034009]
 offset_left = 940.0
 offset_top = 562.0
@@ -104,8 +70,76 @@ offset_bottom = 715.0
 [node name="Container" type="HBoxContainer" parent="UI/ScrollExecutedMoves" unique_id=84297135]
 layout_mode = 2
 
-[connection signal="pressed" from="UI/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="UI/Up" to="." method="_on_up_pressed"]
-[connection signal="pressed" from="UI/Down" to="." method="_on_down_pressed"]
-[connection signal="pressed" from="UI/Right" to="." method="_on_right_pressed"]
-[connection signal="pressed" from="UI/Left" to="." method="_on_left_pressed"]
+[node name="Panel" type="Panel" parent="UI" unique_id=1725231094]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.5
+offset_top = -56.0
+offset_right = 88.5
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+
+[node name="Margin" type="MarginContainer" parent="UI/Panel" unique_id=462838110]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+
+[node name="Grid" type="GridContainer" parent="UI/Panel/Margin" unique_id=1672043221]
+custom_minimum_size = Vector2(64, 32)
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+offset_transform_enabled = true
+columns = 5
+
+[node name="Play" type="TextureButton" parent="UI/Panel/Margin/Grid" unique_id=1105352862]
+layout_mode = 2
+offset_transform_enabled = true
+texture_normal = ExtResource("3_d6qko")
+texture_pressed = ExtResource("4_wqlfs")
+texture_hover = ExtResource("5_py82k")
+texture_disabled = ExtResource("6_k8npl")
+metadata/_edit_use_anchors_ = true
+
+[node name="Up" type="TextureButton" parent="UI/Panel/Margin/Grid" unique_id=186525988]
+layout_mode = 2
+texture_normal = ExtResource("4_22cqp")
+texture_pressed = ExtResource("7_luomk")
+texture_hover = ExtResource("8_k8npl")
+metadata/_edit_use_anchors_ = true
+
+[node name="Down" type="TextureButton" parent="UI/Panel/Margin/Grid" unique_id=1529322228]
+layout_mode = 2
+texture_normal = ExtResource("5_wqlfs")
+texture_pressed = ExtResource("10_am3y4")
+texture_hover = ExtResource("11_l5n2q")
+metadata/_edit_use_anchors_ = true
+
+[node name="Right" type="TextureButton" parent="UI/Panel/Margin/Grid" unique_id=620342143]
+layout_mode = 2
+texture_normal = ExtResource("6_py82k")
+texture_pressed = ExtResource("13_cv6tn")
+texture_hover = ExtResource("14_jghi6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Left" type="TextureButton" parent="UI/Panel/Margin/Grid" unique_id=950135171]
+layout_mode = 2
+texture_normal = ExtResource("7_1teg4")
+texture_pressed = ExtResource("16_3opgi")
+texture_hover = ExtResource("17_ys2en")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="UI/Panel/Margin/Grid/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="UI/Panel/Margin/Grid/Up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="UI/Panel/Margin/Grid/Down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="UI/Panel/Margin/Grid/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="UI/Panel/Margin/Grid/Left" to="." method="_on_left_pressed"]

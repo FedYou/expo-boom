@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://276tmd6eoh5"
-path="res://.godot/imported/Izquierda.png-0599d50cb2c50b67551a341aed29cd54.ctex"
+uid="uid://b5xgjqpfjfdgi"
+path="res://.godot/imported/LeftHover.png-f1a6645c8ea274c85af880f10fdca03d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Izquierda.png"
-dest_files=["res://.godot/imported/Izquierda.png-0599d50cb2c50b67551a341aed29cd54.ctex"]
+source_file="res://Assets/UI/Buttons/LeftHover.png"
+dest_files=["res://.godot/imported/LeftHover.png-f1a6645c8ea274c85af880f10fdca03d.ctex"]
 
 [params]
 

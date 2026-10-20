@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c311ogoimo7e4"
-path="res://.godot/imported/Confirmar.png-9f0916c97c9d39ec6351d94b3042695e.ctex"
+uid="uid://cqiqet44qvdhx"
+path="res://.godot/imported/RightHover.png-d0b1cad17f424d72cd30b33f9e3e728b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Confirmar.png"
-dest_files=["res://.godot/imported/Confirmar.png-9f0916c97c9d39ec6351d94b3042695e.ctex"]
+source_file="res://Assets/UI/Buttons/RightHover.png"
+dest_files=["res://.godot/imported/RightHover.png-d0b1cad17f424d72cd30b33f9e3e728b.ctex"]
 
 [params]
 

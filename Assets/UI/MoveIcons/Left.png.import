@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbrqy3b43p08i"
-path="res://.godot/imported/Arriba.png-9fe0eda5c9b37fcb920a6defda32d36c.ctex"
+uid="uid://b6gqtfr4jm7aj"
+path="res://.godot/imported/Left.png-5d9682cc9abe9d7090dd025f67a1b355.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Arriba.png"
-dest_files=["res://.godot/imported/Arriba.png-9fe0eda5c9b37fcb920a6defda32d36c.ctex"]
+source_file="res://Assets/UI/MoveIcons/Left.png"
+dest_files=["res://.godot/imported/Left.png-5d9682cc9abe9d7090dd025f67a1b355.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var PLAYER = $Player
-@onready var PLAY_BT = $UI/Play
+@onready var PLAY_BT = $UI/Panel/Margin/Grid/Play
 @onready var PENDING_MOVES = $UI/ScrollPendingMoves/Container
 @onready var EXECUTED_MOVES = $UI/ScrollExecutedMoves/Container
 
@@ -44,13 +44,13 @@ func _get_content_item(move: Player.DIRECTION) -> TextureRect:
 
 	match move:
 		Player.DIRECTION.UP:
-			item.texture = preload("res://Assets/UI/Arriba.png")
+			item.texture = preload("res://Assets/UI/MoveIcons/Up.png")
 		Player.DIRECTION.DOWN:
-			item.texture = preload("res://Assets/UI/Abajo.png")
+			item.texture = preload("res://Assets/UI/MoveIcons/Down.png")
 		Player.DIRECTION.LEFT:
-			item.texture = preload("res://Assets/UI/Izquierda.png")
+			item.texture = preload("res://Assets/UI/MoveIcons/Left.png")
 		Player.DIRECTION.RIGHT:
-			item.texture = preload("res://Assets/UI/Derecha.png")
+			item.texture = preload("res://Assets/UI/MoveIcons/Right.png")
 
 	return item
 
