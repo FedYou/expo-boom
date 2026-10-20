@@ -2,6 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://csjkhf8h4uaj5" path="res://Player/player.tscn" id="1_o6mkr"]
 [ext_resource type="Script" uid="uid://daoi16f6q247a" path="res://Level/level.gd" id="1_qmtf6"]
+[ext_resource type="Texture2D" uid="uid://c311ogoimo7e4" path="res://Assets/UI/Confirmar.png" id="3_d6qko"]
+[ext_resource type="Texture2D" uid="uid://cbrqy3b43p08i" path="res://Assets/UI/Arriba.png" id="4_22cqp"]
+[ext_resource type="Texture2D" uid="uid://bhw2rodh6t46d" path="res://Assets/UI/Abajo.png" id="5_wqlfs"]
+[ext_resource type="Texture2D" uid="uid://dwop4xapu5qp2" path="res://Assets/UI/Derecha.png" id="6_py82k"]
+[ext_resource type="Texture2D" uid="uid://276tmd6eoh5" path="res://Assets/UI/Izquierda.png" id="7_1teg4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
 size = Vector2(452, 20)
@@ -35,55 +40,69 @@ shape = SubResource("RectangleShape2D_00nqh")
 [node name="UI" type="CanvasLayer" parent="." unique_id=1700409480]
 
 [node name="Play" type="Button" parent="UI" unique_id=1738847166]
-offset_left = 747.0
-offset_top = 569.0
-offset_right = 795.0
-offset_bottom = 600.0
-text = "Play"
+offset_left = 612.0
+offset_top = 657.0
+offset_right = 652.0
+offset_bottom = 697.0
+icon = ExtResource("3_d6qko")
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Up" type="Button" parent="UI" unique_id=469105161]
-offset_left = 626.0
-offset_top = 527.0
-offset_right = 656.0
-offset_bottom = 558.0
-text = "Up"
+offset_left = 656.0
+offset_top = 657.0
+offset_right = 696.0
+offset_bottom = 697.0
+icon = ExtResource("4_22cqp")
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Down" type="Button" parent="UI" unique_id=1184642791]
-offset_left = 616.0
-offset_top = 601.0
-offset_right = 669.0
-offset_bottom = 632.0
-text = "Down"
+offset_left = 700.0
+offset_top = 657.0
+offset_right = 740.0
+offset_bottom = 697.0
+icon = ExtResource("5_wqlfs")
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Right" type="Button" parent="UI" unique_id=917966894]
-offset_left = 643.0
-offset_top = 562.0
-offset_right = 692.0
-offset_bottom = 593.0
-text = "Right"
+offset_left = 744.0
+offset_top = 657.0
+offset_right = 784.0
+offset_bottom = 697.0
+icon = ExtResource("6_py82k")
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Left" type="Button" parent="UI" unique_id=23718420]
-offset_left = 595.0
+offset_left = 788.0
+offset_top = 657.0
+offset_right = 828.0
+offset_bottom = 697.0
+icon = ExtResource("7_1teg4")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollPendingMoves" type="ScrollContainer" parent="UI" unique_id=2134034009]
+offset_left = 940.0
 offset_top = 562.0
-offset_right = 634.0
-offset_bottom = 593.0
-text = "Left"
+offset_right = 1256.0
+offset_bottom = 602.0
 
-[node name="PendingMoves" type="ItemList" parent="UI" unique_id=2138804404]
-offset_left = 782.0
-offset_top = 346.0
-offset_right = 932.0
-offset_bottom = 554.0
-focus_mode = 0
-mouse_filter = 2
-icon_mode = 0
+[node name="Container" type="HBoxContainer" parent="UI/ScrollPendingMoves" unique_id=1672883105]
+layout_mode = 2
 
-[node name="ExecutedMoves" type="ItemList" parent="UI" unique_id=1119055705]
-offset_left = 786.0
-offset_top = 81.0
-offset_right = 925.0
-offset_bottom = 320.0
-mouse_filter = 2
+[node name="ScrollExecutedMoves" type="ScrollContainer" parent="UI" unique_id=40187345]
+anchors_preset = -1
+anchor_right = 0.031000001
+offset_left = 975.0
+offset_top = 675.0
+offset_right = 1205.32
+offset_bottom = 715.0
+
+[node name="Container" type="HBoxContainer" parent="UI/ScrollExecutedMoves" unique_id=84297135]
+layout_mode = 2
 
 [connection signal="pressed" from="UI/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="UI/Up" to="." method="_on_up_pressed"]
