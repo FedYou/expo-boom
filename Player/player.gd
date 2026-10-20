@@ -1,23 +1,54 @@
+class_name Player
 extends CharacterBody2D
 
-const SPEED = 300.0
+enum DIRECTION {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}
 
-func _physics_process(delta: float) -> void:
-	var direction_y := Input.get_axis("ui_up", "ui_down")
-	var direction_x := Input.get_axis("ui_left", "ui_right")
-	
-	## La funcion move_toward cambia la cantidad de un inical valor hasta llegar a un 
-	## valor deseado si sobrepasarlo.
-	##  move_toward(<valor inical>, <valor a llegar>, <cantidad a reducir>)
-	
-	if direction_x:
-		velocity.x = direction_x * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
-	if direction_y:
-		velocity.y = direction_y * SPEED
-	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+@export var direction: DIRECTION
+const SPEED = 200.0
+const MOVE_TIME = 0.5
+var is_moving := false
 
-	move_and_slide()
+
+func _ready() -> void:
+	_update_positions()
+
+func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
+	if is_moving:
+		return
+	is_moving = true
+
+	for move in pending_moves:
+		direction = move
+		match move:
+			DIRECTION.UP:
+				velocity.y = -SPEED
+			DIRECTION.DOWN:
+				velocity.y = SPEED
+			DIRECTION.LEFT:
+				velocity.x = -SPEED
+			DIRECTION.RIGHT:
+				velocity.x = SPEED
+
+		var elapsed := 0.0
+		while elapsed < MOVE_TIME:
+			await get_tree().physics_frame
+			move_and_slide()          # se en cada frame
+			elapsed += get_physics_process_delta_time()
+			_update_positions()
+
+		velocity = Vector2.ZERO       # el player SE DETIENE al terminar la acción
+
+	is_moving = false
+
+
+func _update_positions()-> void:
+	match direction:
+		DIRECTION.UP, DIRECTION.DOWN:
+			$Collision.rotation = deg_to_rad(0)
+		DIRECTION.LEFT, DIRECTION.RIGHT:
+			$Collision.rotation = deg_to_rad(90)

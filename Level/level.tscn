@@ -1,7 +1,92 @@
 [gd_scene format=3 uid="uid://brtjvkpege50d"]
 
 [ext_resource type="PackedScene" uid="uid://csjkhf8h4uaj5" path="res://Player/player.tscn" id="1_o6mkr"]
+[ext_resource type="Script" uid="uid://daoi16f6q247a" path="res://Level/level.gd" id="1_qmtf6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
+size = Vector2(452, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khwga"]
+size = Vector2(22, 462)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00nqh"]
+size = Vector2(326, 20)
 
 [node name="Level" type="Node2D" unique_id=733930567]
+script = ExtResource("1_qmtf6")
 
 [node name="Player" parent="." unique_id=528771189 instance=ExtResource("1_o6mkr")]
+position = Vector2(141, 672)
+
+[node name="Area2D" type="CharacterBody2D" parent="." unique_id=104466397]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=183425835]
+position = Vector2(352, 710)
+shape = SubResource("RectangleShape2D_gy5b4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1501587076]
+position = Vector2(568, 467)
+shape = SubResource("RectangleShape2D_khwga")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D" unique_id=158073132]
+position = Vector2(289, 638)
+shape = SubResource("RectangleShape2D_00nqh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1700409480]
+
+[node name="Play" type="Button" parent="CanvasLayer" unique_id=1738847166]
+offset_left = 747.0
+offset_top = 569.0
+offset_right = 795.0
+offset_bottom = 600.0
+text = "Play"
+
+[node name="Up" type="Button" parent="CanvasLayer" unique_id=469105161]
+offset_left = 626.0
+offset_top = 527.0
+offset_right = 656.0
+offset_bottom = 558.0
+text = "Up"
+
+[node name="Down" type="Button" parent="CanvasLayer" unique_id=1184642791]
+offset_left = 616.0
+offset_top = 601.0
+offset_right = 669.0
+offset_bottom = 632.0
+text = "Down"
+
+[node name="Right" type="Button" parent="CanvasLayer" unique_id=917966894]
+offset_left = 643.0
+offset_top = 562.0
+offset_right = 692.0
+offset_bottom = 593.0
+text = "Right"
+
+[node name="Left" type="Button" parent="CanvasLayer" unique_id=23718420]
+offset_left = 595.0
+offset_top = 562.0
+offset_right = 634.0
+offset_bottom = 593.0
+text = "Left"
+
+[node name="PendingMoves" type="ItemList" parent="CanvasLayer" unique_id=2138804404]
+offset_left = 782.0
+offset_top = 346.0
+offset_right = 932.0
+offset_bottom = 554.0
+focus_mode = 0
+mouse_filter = 2
+icon_mode = 0
+
+[node name="ExecutedMoves" type="ItemList" parent="CanvasLayer" unique_id=1119055705]
+offset_left = 786.0
+offset_top = 81.0
+offset_right = 925.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[connection signal="pressed" from="CanvasLayer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="CanvasLayer/Down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="CanvasLayer/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="CanvasLayer/Left" to="." method="_on_left_pressed"]
