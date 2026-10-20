@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var PLAYER = $Player
-@onready var PENDING_MOVES = $CanvasLayer/PendingMoves
-@onready var EXECUTED_MOVES = $CanvasLayer/ExecutedMoves
+@onready var PENDING_MOVES = $UI/PendingMoves
+@onready var EXECUTED_MOVES = $UI/ExecutedMoves
 
 var executed_moves :Array[Player.DIRECTION] = []
 var pending_moves: Array[Player.DIRECTION] = []
