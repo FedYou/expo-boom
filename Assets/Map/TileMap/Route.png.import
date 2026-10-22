@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vdvr0oifq0mo"
-path="res://.godot/imported/GuradRailTop.png-e12b4c2d58fe2c2a67d5cbda920d3af9.ctex"
+uid="uid://cj5t86rodym3g"
+path="res://.godot/imported/Route.png-b63bac3ebdd18664ed9f4a1e7da79583.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map/GuradRailTop.png"
-dest_files=["res://.godot/imported/GuradRailTop.png-e12b4c2d58fe2c2a67d5cbda920d3af9.ctex"]
+source_file="res://Assets/Map/TileMap/Route.png"
+dest_files=["res://.godot/imported/Route.png-b63bac3ebdd18664ed9f4a1e7da79583.ctex"]
 
 [params]
 

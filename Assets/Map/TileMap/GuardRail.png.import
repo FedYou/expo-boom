@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cykfh3lncpqs8"
-path="res://.godot/imported/route-corner.png-defcddae5993dcfac7a10f4ae7716ca3.ctex"
+uid="uid://b8dx06264rhjv"
+path="res://.godot/imported/GuardRail.png-ae6daa6896a9f94d5877a2deffd5b134.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Map/route-corner.png"
-dest_files=["res://.godot/imported/route-corner.png-defcddae5993dcfac7a10f4ae7716ca3.ctex"]
+source_file="res://Assets/Map/TileMap/GuardRail.png"
+dest_files=["res://.godot/imported/GuardRail.png-ae6daa6896a9f94d5877a2deffd5b134.ctex"]
 
 [params]
 
