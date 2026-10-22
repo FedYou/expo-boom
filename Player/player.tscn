@@ -21,10 +21,30 @@ animations = [{
 script = ExtResource("1_l8h54")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2015481553]
-scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_gy5b4")
 debug_color = Color(0.9808484, 0, 0.3801851, 0.41960785)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=36176894]
-scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_gy5b4")
+
+[node name="Vertical" type="Node2D" parent="." unique_id=294733744]
+rotation = 1.5707964
+scale = Vector2(1.5, 1.5)
+
+[node name="RayDown" type="RayCast2D" parent="Vertical" unique_id=2122827474]
+rotation = -1.5707964
+scale = Vector2(0.6666667, 0.6666667)
+target_position = Vector2(0, 24)
+
+[node name="RayTop" type="RayCast2D" parent="Vertical" unique_id=337551600]
+rotation = -1.5707964
+scale = Vector2(0.6666667, 0.6666667)
+target_position = Vector2(0, -24)
+
+[node name="Horizontal" type="Node2D" parent="." unique_id=634717042]
+
+[node name="RayRight" type="RayCast2D" parent="Horizontal" unique_id=1181980311]
+target_position = Vector2(24, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="Horizontal" unique_id=474223071]
+target_position = Vector2(-24, 0)
