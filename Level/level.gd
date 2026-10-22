@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var PLAYER = $Player
-@onready var PLAY_BT = $UI/Panel/Margin/Grid/Play
+@onready var PLAY_BT = $UI/Actions/Margin/Grid/Play
 @onready var PENDING_MOVES = $UI/ScrollPendingMoves/Container
 @onready var EXECUTED_MOVES = $UI/ScrollExecutedMoves/Container
 

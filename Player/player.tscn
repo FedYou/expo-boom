@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cndd2e4q3fpu3" path="res://Assets/Player/Car.png" id="2_4ntmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
-size = Vector2(20, 32)
+size = Vector2(12, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gy5b4"]
 animations = [{
