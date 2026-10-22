@@ -23,6 +23,8 @@ var is_colliding:= false
 func _ready() -> void:
 	_update_positions()
 
+
+
 func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 	if is_moving || is_colliding:
 		return
@@ -88,10 +90,18 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 					DIRECTION.RIGHT:
 						if $Horizontal/RayRight.is_colliding():
 							break
-			
-			
-			if !is_colliding && is_on_ceiling() || is_on_floor() || is_on_wall():
-				is_colliding=true
+			for i in get_slide_collision_count():
+				var collision = get_slide_collision(i)
+				var normal = collision.get_normal()
+
+				if normal.x > 0 && move == DIRECTION.LEFT:
+					is_colliding = true
+				elif normal.x < 0 && move == DIRECTION.RIGHT:
+					is_colliding = true
+				elif normal.y > 0 && move == DIRECTION.DOWN:
+					is_colliding = true
+				elif normal.y < 0 && move == DIRECTION.UP:
+					is_colliding = true
 			
 			if is_colliding:
 				match move:
