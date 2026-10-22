@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
-	if is_moving || is_colliding:
+	if is_moving:
 		return
 	is_moving = true
 
@@ -90,20 +90,23 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 					DIRECTION.RIGHT:
 						if $Horizontal/RayRight.is_colliding():
 							break
+			
+			var hit := false
+			
 			for i in get_slide_collision_count():
 				var collision = get_slide_collision(i)
 				var normal = collision.get_normal()
 
 				if normal.x > 0 && move == DIRECTION.LEFT:
-					is_colliding = true
+					hit = true
 				elif normal.x < 0 && move == DIRECTION.RIGHT:
-					is_colliding = true
-				elif normal.y > 0 && move == DIRECTION.DOWN:
-					is_colliding = true
-				elif normal.y < 0 && move == DIRECTION.UP:
-					is_colliding = true
+					hit = true
+				elif normal.y < 0 && move == DIRECTION.DOWN:
+					hit = true
+				elif normal.y > 0 && move == DIRECTION.UP:
+					hit = true
 			
-			if is_colliding:
+			if hit:
 				match move:
 					DIRECTION.UP:
 						velocity.y = REBOUND
@@ -113,9 +116,10 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 						velocity.x = REBOUND
 					DIRECTION.RIGHT:
 						velocity.x = -REBOUND
-				is_colliding=false
+				hit=false
 				move_and_slide()
-			
+				continue
+
 			match move:
 				DIRECTION.UP:
 					if position.y <= target_position:
@@ -141,11 +145,7 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 			elapsed += get_physics_process_delta_time()
 			move_and_slide()
 
-
 		velocity = Vector2.ZERO       # el player SE DETIENE
-		if is_colliding:
-			is_colliding = false
-
 	is_moving = false
 
 
