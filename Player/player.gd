@@ -44,29 +44,30 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 	for index in range(pending_moves.size()):
 		var move = pending_moves[index]
 		direction = move
+
 		_update_positions()
 		
-		var is_next_equal := false
+		var should_continue := false
 		
 		if pending_moves.size() - 1 > index:
 			if move == pending_moves[index +1 ]:
-				is_next_equal = true
-		else:
+				should_continue = true
+
+		if !should_continue:
 			match move:
 				DIRECTION.UP:
 					if $Vertical/RayTop.is_colliding():
-						is_next_equal = true
+						should_continue = true
 				DIRECTION.DOWN:
 					if $Vertical/RayDown.is_colliding():
-						is_next_equal = true
+						should_continue = true
 				DIRECTION.LEFT:
 					if $Horizontal/RayLeft.is_colliding():
-						is_next_equal = true
+						should_continue = true
 				DIRECTION.RIGHT:
 					if $Horizontal/RayRight.is_colliding():
-						is_next_equal = true
+						should_continue = true
 			
-		
 		var target_position = 0
 		match move:
 			DIRECTION.UP:
@@ -83,14 +84,14 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 				target_position = position.x + CELL
 
 		var elapsed := 0.0
-	
+
 		while elapsed < MOVE_TIME:
 			await get_tree().physics_frame
 			if must_wait:
 				await get_tree().create_timer(MUST_WAIT_TIME).timeout
 				must_wait = false
 				
-			if !is_next_equal:
+			if !should_continue:
 				match move:
 					DIRECTION.UP:
 						if $Vertical/RayTop.is_colliding():
