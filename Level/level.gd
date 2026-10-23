@@ -1,9 +1,9 @@
 extends Node2D
 
 @onready var PLAYER = $Player
-@onready var PLAY_BT = $Hub/Actions/Margin/Grid/Play
-@onready var PENDING_MOVES = $Hub/ScrollPendingMoves/Container
-@onready var EXECUTED_MOVES = $Hub/ScrollExecutedMoves/Container
+@onready var PLAY_BT = $HubScreen/Actions/Margin/Grid/Play
+@onready var PENDING_MOVES = $HubScreen/ScrollPendingMoves/Container
+@onready var EXECUTED_MOVES = $HubScreen/ScrollExecutedMoves/Container
 
 var executed_moves :Array[Player.DIRECTION] = []
 var pending_moves: Array[Player.DIRECTION] = []
@@ -14,13 +14,18 @@ func _ready() -> void:
 	_update_healt_ui()
 	_update_score_ui()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_update_play_bt_state()
 	_update_healt_ui()
 	_update_score_ui()
-	if !PLAYER.is_alive:
-		$Hub.hide()
+	if !PLAYER.is_alive && !PLAYER.win:
+		$HubScreen.hide()
 		$GameOverScreen.show()
+	
+	if PLAYER.win:
+		$HubScreen.hide()
+		$WinScreen.show()
+		_update_win_screen_ui()
 
 func _refresh_ui_move_lists() -> void:
 	_refresh_ui_executed_moves()
@@ -51,13 +56,13 @@ func _get_content_item(move: Player.DIRECTION) -> TextureRect:
 
 	match move:
 		Player.DIRECTION.UP:
-			item.texture = preload("res://Assets/UI/MoveIcons/Up.png")
+			item.texture = preload("res://Assets/Ui/MoveIcons/Up.png")
 		Player.DIRECTION.DOWN:
-			item.texture = preload("res://Assets/UI/MoveIcons/Down.png")
+			item.texture = preload("res://Assets/Ui/MoveIcons/Down.png")
 		Player.DIRECTION.LEFT:
-			item.texture = preload("res://Assets/UI/MoveIcons/Left.png")
+			item.texture = preload("res://Assets/Ui/MoveIcons/Left.png")
 		Player.DIRECTION.RIGHT:
-			item.texture = preload("res://Assets/UI/MoveIcons/Right.png")
+			item.texture = preload("res://Assets/Ui/MoveIcons/Right.png")
 
 	return item
 
@@ -71,20 +76,23 @@ func _update_healt_ui():
 	if PLAYER.is_alive:
 		match PLAYER.healt:
 			1: 
-				$Hub/MarginHeart/Heart/Heart1.texture = preload("res://Assets/UI/Heart.png")
-				$Hub/MarginHeart/Heart/Heart2.texture = preload("res://Assets/UI/HeartVoid.png")
-				$Hub/MarginHeart/Heart/Heart3.texture = preload("res://Assets/UI/HeartVoid.png")
+				$HubScreen/MarginHeart/Heart/Heart1.texture = preload("res://Assets/Ui/Heart.png")
+				$HubScreen/MarginHeart/Heart/Heart2.texture = preload("res://Assets/Ui/HeartVoid.png")
+				$HubScreen/MarginHeart/Heart/Heart3.texture = preload("res://Assets/Ui/HeartVoid.png")
 			2:
-				$Hub/MarginHeart/Heart/Heart1.texture = preload("res://Assets/UI/Heart.png")
-				$Hub/MarginHeart/Heart/Heart2.texture = preload("res://Assets/UI/Heart.png")
-				$Hub/MarginHeart/Heart/Heart3.texture = preload("res://Assets/UI/HeartVoid.png")
+				$HubScreen/MarginHeart/Heart/Heart1.texture = preload("res://Assets/Ui/Heart.png")
+				$HubScreen/MarginHeart/Heart/Heart2.texture = preload("res://Assets/Ui/Heart.png")
+				$HubScreen/MarginHeart/Heart/Heart3.texture = preload("res://Assets/Ui/HeartVoid.png")
 			3:
-				$Hub/MarginHeart/Heart/Heart1.texture = preload("res://Assets/UI/Heart.png")
-				$Hub/MarginHeart/Heart/Heart2.texture = preload("res://Assets/UI/Heart.png")
-				$Hub/MarginHeart/Heart/Heart3.texture = preload("res://Assets/UI/Heart.png")
+				$HubScreen/MarginHeart/Heart/Heart1.texture = preload("res://Assets/Ui/Heart.png")
+				$HubScreen/MarginHeart/Heart/Heart2.texture = preload("res://Assets/Ui/Heart.png")
+				$HubScreen/MarginHeart/Heart/Heart3.texture = preload("res://Assets/Ui/Heart.png")
 
 func _update_score_ui():
-	$Hub/MarginScore/Grid/Label.text = "Puntos " + str(PLAYER.score)
+	$HubScreen/MarginScore/Grid/Label.text = "Puntos " + str(PLAYER.score)
+
+func _update_win_screen_ui():
+	$WinScreen/Info/Label.text = "Puntos " + str(PLAYER.score) +"; Vida " + str(PLAYER.healt) + "/"+ str(PLAYER.healt) + "; Movimientos " + str(executed_moves.size())
 
 func _on_up_pressed() -> void:
 	pending_moves.push_back(PLAYER.DIRECTION.UP)
@@ -115,3 +123,21 @@ func _on_play_pressed() -> void:
 
 func _on_restart_button_pressed() -> void:
 	get_tree().reload_current_scene()
+
+func _on_cancel_pressed() -> void:
+	get_tree().reload_current_scene()
+
+func _on_accept_pressed() -> void:
+	if $WinScreen/Input.text.strip_edges().is_empty():
+		$WinScreen/Input/Label.show()
+		$WinScreen/Input.text = ""
+		return
+	
+	var player_name = $WinScreen/Input.text.strip_edges()
+	
+	ScoreServer.save_score(player_name, PLAYER.score, executed_moves,0.0)
+	
+	get_tree().reload_current_scene()
+
+func _on_exit_pressed() -> void:
+	get_tree().change_scene_to_file("res://Gui/main_screen.tscn")

@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="expo-boom"
-run/main_scene="res://Level/level.tscn"
+run/main_scene="uid://be6cmw3h61h2u"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+ScoreServer="*uid://b7mer7484fpf6"
 
 [display]
 

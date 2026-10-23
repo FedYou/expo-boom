@@ -24,7 +24,7 @@ var score : int = 0
 var is_moving := false
 var is_alive := true
 var must_wait:= false
-
+var win := false
 
 func _ready() -> void:
 	_update_positions()
@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 
 
 func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
-	if is_moving || !is_alive || must_wait:
+	if win || is_moving || !is_alive || must_wait:
 		return
 	is_moving = true
 
