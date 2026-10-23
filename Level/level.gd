@@ -22,10 +22,17 @@ func _process(_delta: float) -> void:
 	_update_healt_ui()
 	_update_score_ui()
 	_update_time_ui()
+	_update_movements_ui()
+	
+	if PLAYER.lost:
+		$HubScreen.hide()
+		$GameOverScreen.show()
+		return
 	
 	if !PLAYER.is_alive && !PLAYER.win:
 		$HubScreen.hide()
 		$GameOverScreen.show()
+		return
 	
 	if PLAYER.win:
 		$HubScreen.hide()
@@ -105,6 +112,10 @@ func _update_time_ui():
 	var time = (Time.get_ticks_msec() - start_time) / 1000.0
 	$HubScreen/MarginTime/Grid/Label.text = "Tiempo " + Global.format_time(time)
 
+func _update_movements_ui():
+	$HubScreen/MarginMovements/Grid/Label.text = "Movimientos " + str(PLAYER.movements_count) + "/" + str(PLAYER.max_movements)
+
+
 func _on_up_pressed() -> void:
 	pending_moves.push_back(PLAYER.DIRECTION.UP)
 	_refresh_ui_pending_moves()
@@ -125,9 +136,7 @@ func _on_play_pressed() -> void:
 	if PLAYER.is_moving:
 		return
 
-	executed_moves.append_array(pending_moves)
-
-	PLAYER.execute_pending_moves(pending_moves.duplicate())
+	PLAYER.execute_pending_moves(pending_moves.duplicate(), executed_moves)
 	pending_moves.clear()
 	
 	_refresh_ui_move_lists()

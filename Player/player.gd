@@ -9,6 +9,7 @@ enum DIRECTION {
 }
 
 @export var max_healt = 3
+@export var max_movements = 10
 @export var direction: DIRECTION
 @onready var SPRITE = $Sprite
 
@@ -25,6 +26,8 @@ var is_moving := false
 var is_alive := true
 var must_wait:= false
 var win := false
+var lost :=false
+var movements_count : int = 0
 
 func _ready() -> void:
 	_update_positions()
@@ -35,13 +38,16 @@ func _process(delta: float) -> void:
 		must_wait = false
 
 
-func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
-	if win || is_moving || !is_alive || must_wait:
+func execute_pending_moves(pending_moves: Array[DIRECTION], executed_moves: Array[DIRECTION]) -> void:
+	if lost|| win || is_moving || !is_alive || must_wait:
 		return
 	is_moving = true
 
 
 	for index in range(pending_moves.size()):
+		if win || lost:
+			break
+		
 		var move = pending_moves[index]
 		direction = move
 
@@ -167,8 +173,17 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 			move_and_slide()
 
 		velocity = Vector2.ZERO       # el player SE DETIENE
+		
+		movements_count+=1
+		executed_moves.push_back(move)
+		
+		if movements_count >= max_movements && !win:
+			lost = true
+			break
 	is_moving = false
 
+func add_movements(movements: int) -> void:
+	max_movements += randi_range(movements/2, movements)
 
 func add_points(points: int) -> void:
 	score += randi_range(1, points)

@@ -293,6 +293,22 @@ layout_mode = 2
 layout_mode = 2
 text = "Tiempo 0s"
 
+[node name="MarginMovements" type="MarginContainer" parent="HubScreen" unique_id=775514554]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.0
+offset_right = 65.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Grid" type="GridContainer" parent="HubScreen/MarginMovements" unique_id=1459360557]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HubScreen/MarginMovements/Grid" unique_id=528682237]
+layout_mode = 2
+text = "Movimientos 0/0"
+
 [node name="GameOverScreen" type="CanvasLayer" parent="." unique_id=1318678948]
 visible = false
 
