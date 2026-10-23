@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 ScoreServer="*uid://b7mer7484fpf6"
+Global="*uid://kv7gl16eswwa"
 
 [display]
 

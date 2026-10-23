@@ -7,17 +7,22 @@ extends Node2D
 
 var executed_moves :Array[Player.DIRECTION] = []
 var pending_moves: Array[Player.DIRECTION] = []
+var start_time: int = 0
+var end_time: int = 0
 
 func _ready() -> void:
 	_refresh_ui_move_lists()
 	_update_play_bt_state()
 	_update_healt_ui()
 	_update_score_ui()
+	start_time = Time.get_ticks_msec()
 
 func _process(_delta: float) -> void:
 	_update_play_bt_state()
 	_update_healt_ui()
 	_update_score_ui()
+	_update_time_ui()
+	
 	if !PLAYER.is_alive && !PLAYER.win:
 		$HubScreen.hide()
 		$GameOverScreen.show()
@@ -26,6 +31,8 @@ func _process(_delta: float) -> void:
 		$HubScreen.hide()
 		$WinScreen.show()
 		_update_win_screen_ui()
+		if end_time <= 0:
+			end_time = Time.get_ticks_msec()
 
 func _refresh_ui_move_lists() -> void:
 	_refresh_ui_executed_moves()
@@ -94,6 +101,10 @@ func _update_score_ui():
 func _update_win_screen_ui():
 	$WinScreen/Info/Label.text = "Puntos " + str(PLAYER.score) +"; Vida " + str(PLAYER.healt) + "/"+ str(PLAYER.healt) + "; Movimientos " + str(executed_moves.size())
 
+func _update_time_ui():
+	var time = (Time.get_ticks_msec() - start_time) / 1000.0
+	$HubScreen/MarginTime/Grid/Label.text = "Tiempo " + Global.format_time(time)
+
 func _on_up_pressed() -> void:
 	pending_moves.push_back(PLAYER.DIRECTION.UP)
 	_refresh_ui_pending_moves()
@@ -134,8 +145,9 @@ func _on_accept_pressed() -> void:
 		return
 	
 	var player_name = $WinScreen/Input.text.strip_edges()
+	var time = (end_time - start_time) / 1000.0
 	
-	ScoreServer.save_score(player_name, PLAYER.score, executed_moves,0.0)
+	ScoreServer.save_score(player_name, PLAYER.score, executed_moves, time)
 	
 	get_tree().reload_current_scene()
 
