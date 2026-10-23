@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbg27w20sjy0w"
-path="res://.godot/imported/Pozo.png-b9a7375b65170a4441c9d306d5708d1e.ctex"
+path="res://.godot/imported/Pothole.png-ee2bff42a0576898ced96cecb34d4b64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/Pozo.png"
-dest_files=["res://.godot/imported/Pozo.png-b9a7375b65170a4441c9d306d5708d1e.ctex"]
+source_file="res://Assets/Obstacles/Pothole.png"
+dest_files=["res://.godot/imported/Pothole.png-ee2bff42a0576898ced96cecb34d4b64.ctex"]
 
 [params]
 

@@ -26,7 +26,7 @@ gradient = SubResource("Gradient_4ntmi")
 fill = 1
 fill_from = Vector2(0.4622093, 0.46802327)
 
-[node name="Player" type="CharacterBody2D" unique_id=528771189]
+[node name="Player" type="CharacterBody2D" unique_id=528771189 groups=["player"]]
 script = ExtResource("1_l8h54")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2015481553]

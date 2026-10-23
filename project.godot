@@ -23,6 +23,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://urxrsxk8ydeb"
 
+[global_group]
+
+player=""
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

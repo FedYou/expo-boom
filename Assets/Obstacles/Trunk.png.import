@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bp8dvx4eswmq4"
-path="res://.godot/imported/Tronco.png-22b9f481ca172dfe9faed45d914c371d.ctex"
+path="res://.godot/imported/Trunk.png-5024f636803f0a82fb90ef266077f6a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/Tronco.png"
-dest_files=["res://.godot/imported/Tronco.png-22b9f481ca172dfe9faed45d914c371d.ctex"]
+source_file="res://Assets/Obstacles/Trunk.png"
+dest_files=["res://.godot/imported/Trunk.png-5024f636803f0a82fb90ef266077f6a8.ctex"]
 
 [params]
 

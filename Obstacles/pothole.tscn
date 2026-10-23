@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://mkmrk384itda"]
+
+[ext_resource type="Texture2D" uid="uid://bbg27w20sjy0w" path="res://Assets/Obstacles/Pothole.png" id="1_3x543"]
+[ext_resource type="Script" uid="uid://bl7c4l4ojyuo1" path="res://Obstacles/pothole.gd" id="1_m3jmt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
+size = Vector2(26, 25)
+
+[node name="Pothole" type="Area2D" unique_id=938554628]
+script = ExtResource("1_m3jmt")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1197687625]
+texture = ExtResource("1_3x543")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1633601663]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_gy5b4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bydmptbajswuk"]
+
+[ext_resource type="Script" uid="uid://dtws5ca7ukycy" path="res://Obstacles/trunk.gd" id="1_40lei"]
+[ext_resource type="Texture2D" uid="uid://bp8dvx4eswmq4" path="res://Assets/Obstacles/Trunk.png" id="1_q8xib"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
+size = Vector2(30, 13)
+
+[node name="Trunk" type="Area2D" unique_id=1648015434]
+script = ExtResource("1_40lei")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=514296196]
+texture = ExtResource("1_q8xib")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1321662913]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_gy5b4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
