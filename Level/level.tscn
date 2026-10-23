@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://2yor25335dp5" path="res://Assets/UI/Buttons/PlayDisabled.png" id="6_k8npl"]
 [ext_resource type="Texture2D" uid="uid://dwop4xapu5qp2" path="res://Assets/UI/Buttons/Right.png" id="6_py82k"]
 [ext_resource type="Texture2D" uid="uid://276tmd6eoh5" path="res://Assets/UI/Buttons/Left.png" id="7_1teg4"]
+[ext_resource type="PackedScene" uid="uid://c16qptoqggdwb" path="res://Businesses/GasStation.tscn" id="7_du4cn"]
 [ext_resource type="Texture2D" uid="uid://c5y3g6374m2rf" path="res://Assets/UI/Buttons/UpPress.png" id="7_luomk"]
 [ext_resource type="Texture2D" uid="uid://svanwnmrcqco" path="res://Assets/UI/Buttons/UpHover.png" id="8_k8npl"]
 [ext_resource type="Texture2D" uid="uid://bbd5ryb0lyqiy" path="res://Assets/UI/Buttons/DownPress.png" id="10_am3y4"]
@@ -104,6 +105,11 @@ direction = 1
 
 [node name="Pothole" parent="Map/Obstacles" unique_id=938554628 instance=ExtResource("24_ys2en")]
 position = Vector2(83, 625)
+
+[node name="Businesses" type="Node2D" parent="Map" unique_id=223346920]
+
+[node name="GasStation" parent="Map" unique_id=701319482 instance=ExtResource("7_du4cn")]
+position = Vector2(431, 587)
 
 [node name="Player" parent="." unique_id=528771189 instance=ExtResource("1_o6mkr")]
 position = Vector2(271, 623)

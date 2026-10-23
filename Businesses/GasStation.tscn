@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c16qptoqggdwb"]
+
+[ext_resource type="Texture2D" uid="uid://bqlas6hf53kcw" path="res://Assets/Businesses/GasStation.png" id="1_jva8a"]
+[ext_resource type="Script" uid="uid://crhyuffkqtoib" path="res://Businesses/gas_station.gd" id="1_pyyw4"]
+
+[sub_resource type="Gradient" id="Gradient_4ntmi"]
+offsets = PackedFloat32Array(0, 0.004032258, 0.625)
+colors = PackedColorArray(0, 0, 0, 1, 0.9838117, 0.9838117, 0.9838117, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gy5b4"]
+gradient = SubResource("Gradient_4ntmi")
+fill = 1
+fill_from = Vector2(0.49709302, 0.49709302)
+
+[node name="GasStation" type="Node2D" unique_id=701319482]
+script = ExtResource("1_pyyw4")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=884532045]
+texture = ExtResource("1_jva8a")
+
+[node name="RayCast" type="RayCast2D" parent="." unique_id=1787259063]
+position = Vector2(0, 18)
+target_position = Vector2(0, 30)
+
+[node name="Light" type="PointLight2D" parent="." unique_id=157820981]
+position = Vector2(-5.9604645e-08, 0)
+scale = Vector2(3.174, 2.7)
+color = Color(0.8066859, 0.8321675, 0.9513659, 1)
+texture = SubResource("GradientTexture2D_gy5b4")

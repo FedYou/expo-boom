@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqlas6hf53kcw"
-path="res://.godot/imported/Nafta.png-ffd332b2c08804b47f2543215015a56e.ctex"
+uid="uid://fqanewjfibiv"
+path="res://.godot/imported/Tienda.png-875a37400a730945db266ebcf99072d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/Nafta.png"
-dest_files=["res://.godot/imported/Nafta.png-ffd332b2c08804b47f2543215015a56e.ctex"]
+source_file="res://Assets/Businesses/Tienda.png"
+dest_files=["res://.godot/imported/Tienda.png-875a37400a730945db266ebcf99072d3.ctex"]
 
 [params]
 

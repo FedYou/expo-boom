@@ -18,13 +18,13 @@ animations = [{
 }]
 
 [sub_resource type="Gradient" id="Gradient_4ntmi"]
-offsets = PackedFloat32Array(0, 0.004032258, 0.79435486)
-colors = PackedColorArray(0, 0, 0, 1, 0.8828619, 0.8828619, 0.8828619, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.004032258, 0.625)
+colors = PackedColorArray(0, 0, 0, 1, 0.9838117, 0.9838117, 0.9838117, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_gy5b4"]
 gradient = SubResource("Gradient_4ntmi")
 fill = 1
-fill_from = Vector2(0.4622093, 0.46802327)
+fill_from = Vector2(0.49709302, 0.49709302)
 
 [node name="Player" type="CharacterBody2D" unique_id=528771189 groups=["player"]]
 script = ExtResource("1_l8h54")

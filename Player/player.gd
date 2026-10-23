@@ -20,15 +20,20 @@ const REBOUND = 10.0
 var healt = max_healt
 var is_moving := false
 var is_alive := true
+var must_wait:= false
 
 
 func _ready() -> void:
 	_update_positions()
 
+func _process(delta: float) -> void:
+	if must_wait:
+		await get_tree().create_timer(2.0).timeout
+		must_wait = false
 
 
 func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
-	if is_moving || !is_alive:
+	if is_moving || !is_alive || must_wait:
 		return
 	is_moving = true
 
@@ -78,6 +83,10 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 	
 		while elapsed < MOVE_TIME:
 			await get_tree().physics_frame
+			if must_wait:
+				await get_tree().create_timer(2.0).timeout
+				must_wait = false
+				
 			if !is_next_equal:
 				match move:
 					DIRECTION.UP:
