@@ -1,9 +1,9 @@
 extends Node2D
 
 @onready var PLAYER = $Player
-@onready var PLAY_BT = $UI/Actions/Margin/Grid/Play
-@onready var PENDING_MOVES = $UI/ScrollPendingMoves/Container
-@onready var EXECUTED_MOVES = $UI/ScrollExecutedMoves/Container
+@onready var PLAY_BT = $Hub/Actions/Margin/Grid/Play
+@onready var PENDING_MOVES = $Hub/ScrollPendingMoves/Container
+@onready var EXECUTED_MOVES = $Hub/ScrollExecutedMoves/Container
 
 var executed_moves :Array[Player.DIRECTION] = []
 var pending_moves: Array[Player.DIRECTION] = []
@@ -11,9 +11,14 @@ var pending_moves: Array[Player.DIRECTION] = []
 func _ready() -> void:
 	_refresh_ui_move_lists()
 	_update_play_bt_state()
+	_update_healt_ui()
 
 func _process(delta: float) -> void:
 	_update_play_bt_state()
+	_update_healt_ui()
+	if !PLAYER.is_alive:
+		$Hub.hide()
+		$GameOverScreen.show()
 
 func _refresh_ui_move_lists() -> void:
 	_refresh_ui_executed_moves()
@@ -60,6 +65,22 @@ func _update_play_bt_state():
 	else:
 		PLAY_BT.disabled = false
 
+func _update_healt_ui():
+	if PLAYER.is_alive:
+		match PLAYER.healt:
+			1: 
+				$Hub/MarginHeart/Heart/Heart1.texture = preload("res://Assets/UI/Heart.png")
+				$Hub/MarginHeart/Heart/Heart2.texture = preload("res://Assets/UI/HeartVoid.png")
+				$Hub/MarginHeart/Heart/Heart3.texture = preload("res://Assets/UI/HeartVoid.png")
+			2:
+				$Hub/MarginHeart/Heart/Heart1.texture = preload("res://Assets/UI/Heart.png")
+				$Hub/MarginHeart/Heart/Heart2.texture = preload("res://Assets/UI/Heart.png")
+				$Hub/MarginHeart/Heart/Heart3.texture = preload("res://Assets/UI/HeartVoid.png")
+			3:
+				$Hub/MarginHeart/Heart/Heart1.texture = preload("res://Assets/UI/Heart.png")
+				$Hub/MarginHeart/Heart/Heart2.texture = preload("res://Assets/UI/Heart.png")
+				$Hub/MarginHeart/Heart/Heart3.texture = preload("res://Assets/UI/Heart.png")
+		
 func _on_up_pressed() -> void:
 	pending_moves.push_back(PLAYER.DIRECTION.UP)
 	_refresh_ui_pending_moves()
@@ -86,3 +107,6 @@ func _on_play_pressed() -> void:
 	pending_moves.clear()
 	
 	_refresh_ui_move_lists()
+
+func _on_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()

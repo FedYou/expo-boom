@@ -3,15 +3,6 @@
 [ext_resource type="Script" uid="uid://bnp17op5lhfsp" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://cndd2e4q3fpu3" path="res://Assets/Player/Car.png" id="2_4ntmi"]
 
-[sub_resource type="Gradient" id="Gradient_4ntmi"]
-offsets = PackedFloat32Array(0, 0.004032258, 0.79435486)
-colors = PackedColorArray(0, 0, 0, 1, 0.8828619, 0.8828619, 0.8828619, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gy5b4"]
-gradient = SubResource("Gradient_4ntmi")
-fill = 1
-fill_from = Vector2(0.4622093, 0.46802327)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
 size = Vector2(12, 32)
 
@@ -26,13 +17,17 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_4ntmi"]
+offsets = PackedFloat32Array(0, 0.004032258, 0.79435486)
+colors = PackedColorArray(0, 0, 0, 1, 0.8828619, 0.8828619, 0.8828619, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gy5b4"]
+gradient = SubResource("Gradient_4ntmi")
+fill = 1
+fill_from = Vector2(0.4622093, 0.46802327)
+
 [node name="Player" type="CharacterBody2D" unique_id=528771189]
 script = ExtResource("1_l8h54")
-
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1711775572]
-scale = Vector2(1.5, 1.5)
-color = Color(1, 0.34901962, 0.2509804, 1)
-texture = SubResource("GradientTexture2D_gy5b4")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2015481553]
 shape = SubResource("RectangleShape2D_gy5b4")
@@ -62,3 +57,8 @@ target_position = Vector2(24, 0)
 
 [node name="RayLeft" type="RayCast2D" parent="Horizontal" unique_id=474223071]
 target_position = Vector2(-24, 0)
+
+[node name="Light" type="PointLight2D" parent="." unique_id=1711775572]
+scale = Vector2(1.5, 1.5)
+color = Color(1, 0.34901962, 0.2509804, 1)
+texture = SubResource("GradientTexture2D_gy5b4")

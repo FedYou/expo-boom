@@ -8,6 +8,7 @@ enum DIRECTION {
 	RIGHT
 }
 
+@export var max_healt = 3
 @export var direction: DIRECTION
 @onready var SPRITE = $Sprite
 
@@ -16,8 +17,9 @@ const MOVE_TIME = 0.25
 const CELL = 32.0
 const REBOUND = 10.0
 
+var healt = max_healt
 var is_moving := false
-var is_colliding:= false
+var is_alive := true
 
 
 func _ready() -> void:
@@ -26,7 +28,7 @@ func _ready() -> void:
 
 
 func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
-	if is_moving:
+	if is_moving || !is_alive:
 		return
 	is_moving = true
 
@@ -107,6 +109,11 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 					hit = true
 			
 			if hit:
+				healt-=1
+				if healt <= 0:
+					is_alive = false
+					break
+				
 				match move:
 					DIRECTION.UP:
 						velocity.y = REBOUND
