@@ -14,10 +14,13 @@ enum DIRECTION {
 
 const SPEED = 200.0
 const MOVE_TIME = 0.25
+const MUST_WAIT_TIME = 2.0
 const CELL = 32.0
 const REBOUND = 10.0
+const HIT_POINTS = 10
 
 var healt = max_healt
+var score : int = 0
 var is_moving := false
 var is_alive := true
 var must_wait:= false
@@ -28,7 +31,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if must_wait:
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(MUST_WAIT_TIME).timeout
 		must_wait = false
 
 
@@ -84,7 +87,7 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 		while elapsed < MOVE_TIME:
 			await get_tree().physics_frame
 			if must_wait:
-				await get_tree().create_timer(2.0).timeout
+				await get_tree().create_timer(MUST_WAIT_TIME).timeout
 				must_wait = false
 				
 			if !is_next_equal:
@@ -119,6 +122,7 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 			
 			if hit:
 				healt-=1
+				remove_points(HIT_POINTS)
 				if healt <= 0:
 					is_alive = false
 					break
@@ -163,6 +167,16 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> void:
 
 		velocity = Vector2.ZERO       # el player SE DETIENE
 	is_moving = false
+
+
+func add_points(points: int) -> void:
+	score += randi_range(1, points)
+
+func remove_points(points: int) -> void:
+	score = maxi(0, score -  randi_range(1, points))
+
+func remove_all_points() -> void:
+	score = 0
 
 
 func _update_positions()-> void:

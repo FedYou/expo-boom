@@ -12,10 +12,12 @@ func _ready() -> void:
 	_refresh_ui_move_lists()
 	_update_play_bt_state()
 	_update_healt_ui()
+	_update_score_ui()
 
 func _process(delta: float) -> void:
 	_update_play_bt_state()
 	_update_healt_ui()
+	_update_score_ui()
 	if !PLAYER.is_alive:
 		$Hub.hide()
 		$GameOverScreen.show()
@@ -80,7 +82,10 @@ func _update_healt_ui():
 				$Hub/MarginHeart/Heart/Heart1.texture = preload("res://Assets/UI/Heart.png")
 				$Hub/MarginHeart/Heart/Heart2.texture = preload("res://Assets/UI/Heart.png")
 				$Hub/MarginHeart/Heart/Heart3.texture = preload("res://Assets/UI/Heart.png")
-		
+
+func _update_score_ui():
+	$Hub/MarginScore/Grid/Label.text = "Puntos " + str(PLAYER.score)
+
 func _on_up_pressed() -> void:
 	pending_moves.push_back(PLAYER.DIRECTION.UP)
 	_refresh_ui_pending_moves()

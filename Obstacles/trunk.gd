@@ -10,6 +10,7 @@ HORIZONTAL,
 @onready var sprite: Sprite2D = $Sprite
 @onready var collision: CollisionShape2D = $Collision
 
+const POINTS = 15
 var is_destroyed := false
 
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	if body.is_in_group("player"):
 		body.healt-=1
+		body.remove_points(POINTS)
 		is_destroyed = true
 		collision.set_deferred("disabled", true)
 		sprite.hide()

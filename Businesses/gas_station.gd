@@ -1,6 +1,7 @@
 extends Node2D
 @onready var raycast: RayCast2D = $RayCast
 
+const POINTS = 50
 var was_visited := false
 
 func _physics_process(_delta: float) -> void:
@@ -16,4 +17,6 @@ func _physics_process(_delta: float) -> void:
 		else:
 			was_visited = true
 			collider.must_wait=true
+	
+	collider.add_points(POINTS)
 		
