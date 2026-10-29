@@ -32,6 +32,10 @@ mouse_cursor/custom_image="uid://urxrsxk8ydeb"
 
 player=""
 
+[gui]
+
+theme/custom_font="uid://n07hbpgfe503"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

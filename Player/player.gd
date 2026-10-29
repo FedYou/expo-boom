@@ -12,19 +12,21 @@ enum DIRECTION {
 @export var max_movements = 10
 @export var direction: DIRECTION
 @onready var SPRITE = $Sprite
+@onready var LIGHT = $Light
+@onready var LIGHT_VERTICAL_POSITION = LIGHT.position
 
 const SPEED = 200.0
 const MOVE_TIME = 0.25
-const MUST_WAIT_TIME = 2.0
 const CELL = 32.0
 const REBOUND = 10.0
 const HIT_POINTS = 10
+
 
 var healt = max_healt
 var score : int = 0
 var is_moving := false
 var is_alive := true
-var must_wait:= false
+var must_wait:= 0.0
 var win := false
 var lost :=false
 var movements_count : int = 0
@@ -33,16 +35,15 @@ func _ready() -> void:
 	_update_positions()
 
 func _process(delta: float) -> void:
-	if must_wait:
-		await get_tree().create_timer(MUST_WAIT_TIME).timeout
-		must_wait = false
+	if must_wait > 0:
+		await get_tree().create_timer(must_wait).timeout
+		must_wait = 0
 
 
 func execute_pending_moves(pending_moves: Array[DIRECTION], executed_moves: Array[DIRECTION]) -> void:
 	if lost|| win || is_moving || !is_alive || must_wait:
 		return
 	is_moving = true
-
 
 	for index in range(pending_moves.size()):
 		if win || lost:
@@ -73,7 +74,7 @@ func execute_pending_moves(pending_moves: Array[DIRECTION], executed_moves: Arra
 				DIRECTION.RIGHT:
 					if $Horizontal/RayRight.is_colliding():
 						should_continue = true
-			
+
 		var target_position = 0
 		match move:
 			DIRECTION.UP:
@@ -93,10 +94,12 @@ func execute_pending_moves(pending_moves: Array[DIRECTION], executed_moves: Arra
 
 		while elapsed < MOVE_TIME:
 			await get_tree().physics_frame
-			if must_wait:
-				await get_tree().create_timer(MUST_WAIT_TIME).timeout
-				must_wait = false
-				
+			if must_wait > 0:
+				$Light/Back.energy = 2.0
+				await get_tree().create_timer(must_wait).timeout
+				must_wait = 0
+				$Light/Back.energy = 1.0
+			
 			if !should_continue:
 				match move:
 					DIRECTION.UP:
@@ -190,6 +193,13 @@ func add_points(points: int) -> void:
 
 func remove_points(points: int) -> void:
 	score = maxi(0, score -  randi_range(1, points))
+	$Light/Back.energy = 2.0
+	$Light/Front.energy = 0.0
+	await get_tree().create_timer(0.15).timeout
+	$Light/Front.energy = 0.5
+	await get_tree().create_timer(0.10).timeout
+	$Light/Back.energy = 1.0
+	$Light/Front.energy = 1.0
 
 func remove_all_points() -> void:
 	score = 0
@@ -197,12 +207,26 @@ func remove_all_points() -> void:
 
 func _update_positions()-> void:
 	match direction:
-		DIRECTION.UP, DIRECTION.DOWN:
+		DIRECTION.UP:
 			$Collision.rotation = deg_to_rad(0)
 			SPRITE.rotation = deg_to_rad(0)
-		DIRECTION.LEFT, DIRECTION.RIGHT:
+			LIGHT.rotation = deg_to_rad(0)
+			LIGHT.position = LIGHT_VERTICAL_POSITION
+		DIRECTION.RIGHT:
 			$Collision.rotation = deg_to_rad(90)
 			SPRITE.rotation = deg_to_rad(90)
+			LIGHT.rotation = deg_to_rad(90)
+			LIGHT.position = Vector2(40,0)
+		DIRECTION.DOWN:
+			$Collision.rotation = deg_to_rad(0)
+			SPRITE.rotation = deg_to_rad(0)
+			LIGHT.rotation = deg_to_rad(180)
+			LIGHT.position = Vector2(0,40)
+		DIRECTION.LEFT:
+			$Collision.rotation = deg_to_rad(90)
+			SPRITE.rotation = deg_to_rad(90)
+			LIGHT.rotation = deg_to_rad(-90)
+			LIGHT.position = Vector2(-40,0)
 
 	match direction:
 		DIRECTION.UP:

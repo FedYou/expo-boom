@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var PLAYER = $Player
+@onready var PLAYER = $Map/Player
 @onready var PLAY_BT = $HubScreen/Actions/Margin/Grid/Play
 @onready var PENDING_MOVES = $HubScreen/ScrollPendingMoves/Container
 @onready var EXECUTED_MOVES = $HubScreen/ScrollExecutedMoves/Container

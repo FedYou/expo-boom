@@ -7,7 +7,7 @@ HORIZONTAL,
 
 @export var direction: DIRECTION
 
-@onready var sprite: Sprite2D = $Sprite
+@onready var sprite = $Sprite
 @onready var collision: CollisionShape2D = $Collision
 
 const POINTS = 15
@@ -25,8 +25,14 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	if body.is_in_group("player"):
 		body.healt-=1
-		body.remove_points(POINTS)
 		is_destroyed = true
 		collision.set_deferred("disabled", true)
-		sprite.hide()
-		queue_free()
+		sprite.play("breakup")
+		body.remove_points(POINTS)
+		body.must_wait = 1.2
+		
+
+
+func _on_sprite_animation_finished() -> void:
+	if sprite.animation == "breakup":
+		sprite.play("break")

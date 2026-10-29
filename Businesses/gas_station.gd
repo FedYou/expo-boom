@@ -13,12 +13,11 @@ func _physics_process(_delta: float) -> void:
 
 	if collider is Node2D && collider.is_in_group("player"):
 		if collider.is_moving:
-			collider.must_wait=true
+			collider.must_wait=1.5
 			was_visited = true
 		else:
 			was_visited = true
-			collider.must_wait=true
-	
-	collider.add_movements(MOVEMENTS)
-	collider.add_points(POINTS)
+			collider.must_wait=1.5
+		collider.add_movements(MOVEMENTS)
+		collider.add_points(POINTS)
 		

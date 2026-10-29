@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://djbbmudxpq5m7"]
+
+[ext_resource type="Texture2D" uid="uid://doxc1t20d2pr1" path="res://Assets/Textures/Decorations/GrassSmall.png" id="1_418p0"]
+[ext_resource type="Script" uid="uid://b2weeh6pepui1" path="res://Decorations/grass_small.gd" id="1_pja3s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_418p0"]
+atlas = ExtResource("1_418p0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pja3s"]
+atlas = ExtResource("1_418p0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rev0j"]
+atlas = ExtResource("1_418p0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_khwga"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_418p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pja3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rev0j")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="GrassSmall" type="Node2D" unique_id=688452344]
+script = ExtResource("1_pja3s")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1798923836]
+sprite_frames = SubResource("SpriteFrames_khwga")
+frame = 2
+frame_progress = 0.21849915

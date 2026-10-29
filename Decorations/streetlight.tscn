@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://k3eiwkdvds63"]
+
+[ext_resource type="Script" uid="uid://dgsnwtud6qgde" path="res://Decorations/streetlight.gd" id="1_6eli7"]
+[ext_resource type="Texture2D" uid="uid://d3e70d4a4amex" path="res://Assets/Textures/Decorations/streetlight.png" id="1_xl18r"]
+[ext_resource type="Texture2D" uid="uid://b4ex8o2lvnxl" path="res://Assets/Textures/Decorations/streetlight-light.png" id="2_1hove"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6eli7"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(224, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xa1j"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syycy"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weqbc"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srt1v"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2v64y"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5n1n"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(160, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uswd2"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(192, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kv81"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(224, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8tkv"]
+atlas = ExtResource("1_xl18r")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gy5b4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eli7")
+}],
+"loop": 2,
+"name": &"break",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xa1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syycy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_weqbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srt1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2v64y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5n1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uswd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kv81")
+}],
+"loop": 0,
+"name": &"breakup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8tkv")
+}],
+"loop": 2,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
+size = Vector2(4, 8.590909)
+
+[node name="Streetlight" type="Area2D" unique_id=63021176]
+rotation = 6.2831855
+script = ExtResource("1_6eli7")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=400635954]
+position = Vector2(-4.1962935e-06, -24)
+sprite_frames = SubResource("SpriteFrames_gy5b4")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=172106848]
+position = Vector2(-7.8680495e-07, -4.725)
+scale = Vector2(1.1, 1.1)
+shape = SubResource("RectangleShape2D_gy5b4")
+
+[node name="Light" type="PointLight2D" parent="." unique_id=941083274]
+position = Vector2(13, -21.343748)
+scale = Vector2(1.25, 1.2285157)
+texture = ExtResource("2_1hove")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]

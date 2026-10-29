@@ -9,4 +9,5 @@ func _on_body_entered(body: Node2D) -> void:
 		body.healt = 0
 		body.is_alive = false
 		
+		
 		collision.set_deferred("disabled", true)

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://be6cmw3h61h2u"]
 
 [ext_resource type="Script" uid="uid://b8svlkas13xw2" path="res://Gui/main_screen.gd" id="1_mrpmu"]
-[ext_resource type="Texture2D" uid="uid://bfpor0jl1hgg6" path="res://Assets/Map/Grass.png" id="1_vxmjb"]
+[ext_resource type="Texture2D" uid="uid://bfpor0jl1hgg6" path="res://Assets/Textures/Map/Grass.png" id="1_vxmjb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mrpmu"]
 texture = ExtResource("1_vxmjb")
