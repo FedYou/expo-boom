@@ -38,20 +38,20 @@ scale = Vector2(1.5, 1.5)
 [node name="RayDown" type="RayCast2D" parent="Vertical" unique_id=2122827474]
 rotation = -1.5707964
 scale = Vector2(0.6666667, 0.6666667)
-target_position = Vector2(0, 20)
+target_position = Vector2(0, 24)
 
 [node name="RayTop" type="RayCast2D" parent="Vertical" unique_id=337551600]
 rotation = -1.5707964
 scale = Vector2(0.6666667, 0.6666667)
-target_position = Vector2(0, -20)
+target_position = Vector2(0, -24)
 
 [node name="Horizontal" type="Node2D" parent="." unique_id=634717042]
 
 [node name="RayRight" type="RayCast2D" parent="Horizontal" unique_id=1181980311]
-target_position = Vector2(20, 0)
+target_position = Vector2(24, 0)
 
 [node name="RayLeft" type="RayCast2D" parent="Horizontal" unique_id=474223071]
-target_position = Vector2(-20, 0)
+target_position = Vector2(-24, 0)
 
 [node name="Light" type="Node2D" parent="." unique_id=587398169]
 position = Vector2(0, -39.571)

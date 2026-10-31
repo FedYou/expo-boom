@@ -15,12 +15,12 @@ enum DIRECTION {
 @onready var LIGHT = $Light
 @onready var LIGHT_VERTICAL_POSITION = LIGHT.position
 
-const SPEED = 200.0
+
 const MOVE_TIME = 0.25
 const CELL = 32.0
 const REBOUND = 10.0
 const HIT_POINTS = 10
-
+const SPEED = 200.0
 
 var healt = max_healt
 var score : int = 0
@@ -65,17 +65,25 @@ func execute_pending_moves(pending_moves: Array[DIRECTION], executed_moves: Arra
 				DIRECTION.UP:
 					if $Vertical/RayTop.is_colliding():
 						should_continue = true
+					elif $Vertical/RayDown.is_colliding():
+						should_continue = true
 				DIRECTION.DOWN:
 					if $Vertical/RayDown.is_colliding():
+						should_continue = true
+					elif $Vertical/RayTop.is_colliding():
 						should_continue = true
 				DIRECTION.LEFT:
 					if $Horizontal/RayLeft.is_colliding():
 						should_continue = true
+					elif $Horizontal/RayRight.is_colliding():
+						should_continue = true
 				DIRECTION.RIGHT:
 					if $Horizontal/RayRight.is_colliding():
 						should_continue = true
+					elif $Horizontal/RayLeft.is_colliding():
+						should_continue = true
 
-		var target_position = 0
+		var target_position := 0.0
 		match move:
 			DIRECTION.UP:
 				velocity.y = -SPEED
