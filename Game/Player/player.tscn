@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://csjkhf8h4uaj5"]
+
+[ext_resource type="Script" uid="uid://bnp17op5lhfsp" path="res://Game/Player/player.gd" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://cndd2e4q3fpu3" path="res://Assets/Textures/Player/Car.png" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://bk1eytmyooyaf" path="res://Assets/Textures/Player/Light/back.png" id="4_gwnis"]
+[ext_resource type="Texture2D" uid="uid://y6tsvykhvgxy" path="res://Assets/Textures/Player/Light/front-32x32.png" id="5_k53q1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
+size = Vector2(12, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gy5b4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4ntmi")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=528771189 groups=["player"]]
+script = ExtResource("1_l8h54")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=2015481553]
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_gy5b4")
+debug_color = Color(0.9808484, 0, 0.3801851, 0.41960785)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=36176894]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_gy5b4")
+
+[node name="Vertical" type="Node2D" parent="." unique_id=294733744]
+rotation = 1.5707964
+scale = Vector2(1.5, 1.5)
+
+[node name="RayDown" type="RayCast2D" parent="Vertical" unique_id=2122827474]
+rotation = -1.5707964
+scale = Vector2(0.6666667, 0.6666667)
+target_position = Vector2(0, 24)
+
+[node name="RayTop" type="RayCast2D" parent="Vertical" unique_id=337551600]
+rotation = -1.5707964
+scale = Vector2(0.6666667, 0.6666667)
+target_position = Vector2(0, -24)
+
+[node name="Horizontal" type="Node2D" parent="." unique_id=634717042]
+
+[node name="RayRight" type="RayCast2D" parent="Horizontal" unique_id=1181980311]
+target_position = Vector2(24, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="Horizontal" unique_id=474223071]
+target_position = Vector2(-24, 0)
+
+[node name="Light" type="Node2D" parent="." unique_id=587398169]
+position = Vector2(0, -39.571)
+scale = Vector2(124.99999, 126.340195)
+
+[node name="Back" type="PointLight2D" parent="Light" unique_id=1763162761]
+position = Vector2(0, 0.4398521)
+scale = Vector2(0.008, 0.008492284)
+color = Color(0.95445794, 3.6098063e-06, 1.347661e-06, 1)
+texture = ExtResource("4_gwnis")
+
+[node name="Front" type="PointLight2D" parent="Light" unique_id=1607698289]
+position = Vector2(0, 0.059925497)
+scale = Vector2(1.6000004, 1.5635967)
+color = Color(0.99999994, 0.7750603, 0.37770998, 1)
+texture = ExtResource("5_k53q1")
+texture_scale = 0.01

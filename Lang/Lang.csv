@@ -1,0 +1,26 @@
+keys,es,en,it,pt
+hub.movements,Movimientos:,Moves:,Mosse:,Movimentos:
+hub.score,Puntos:,Score:,Punti:,Pontos:
+hub.time,Tiempo:,Time:,Tempo:,Tempo:
+controls.actions,Acciónes,Actions,Azioni,Ações
+game.bt_exit,Volver al menu,Back to menu,Torna al menu,Voltar ao menu
+game.over,Perdiste,You lost,Hai perso,Você perdeu
+game.bt_respawn,Reintentar,Try again,Riprova,Tentar novamente
+game.win,Ganaste,You won,Hai vinto,Você venceu
+game.win.input,Ingresa tu nombre,Enter your name,Inserisci il tuo nome,Digite seu nome
+game.win.input.error,Debes de ingresar un nombre,You must enter a name,Devi inserire un nome,Você precisa digitar um nome
+game.win.accept,Aceptar,Confirm,Conferma,Confirmar
+game.win.cancel,Cancelar,Cancel,Annulla,Cancelar
+game.win.position,Quedaste en la posición,You finished in position,La tua posizione in classifica:,Você ficou na posição
+game.win.score,Puntos totales:,Total score:,Punteggio totale:,Pontuação total:
+game.win.movements,Cantidad de movimientos hechos:,Moves made:,Mosse effettuate:,Movimentos realizados:
+game.win.time,Tiempo total en que te pasaste el nivel:,Total time to complete the level:,Tempo totale per completare il livello:,Tempo total para completar a fase:
+score.title,Tabla de Puntaje,Leaderboard,Classifica,Placar
+score.list.movements,Movimientos:,Moves:,Mosse:,Movimentos:
+score.list.score,Puntos:,Score:,Punti:,Pontos:
+score.list.time,Tiempo:,Time:,Tempo:,Tempo:
+score.list.name,Nombre:,Name:,Nome:,Nome:
+gui.language,Idioma,Language,Lingua,Idioma
+main.play,Jugar,Play,Gioca,Jogar
+main.score,Tabla de Puntaje,Leaderboard,Classifica,Placar
+main.exit,Salir,Exit,Esci,Sair

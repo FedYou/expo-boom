@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dwgxthryhptid"
+
+[deps]
+
+files=["res://Lang/Lang.es.translation", "res://Lang/Lang.en.translation", "res://Lang/Lang.it.translation", "res://Lang/Lang.pt.translation"]
+
+source_file="res://Lang/Lang.csv"
+dest_files=["res://Lang/Lang.es.translation", "res://Lang/Lang.en.translation", "res://Lang/Lang.it.translation", "res://Lang/Lang.pt.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

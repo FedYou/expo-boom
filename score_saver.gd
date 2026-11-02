@@ -72,4 +72,30 @@ func get_score(index: int) -> Dictionary:
 	return scores[index]
 
 func get_scores() -> Array:
+	var scores = scores.duplicate()
+	
+	scores.sort_custom(
+	func(a: Dictionary, b: Dictionary) -> bool:
+		if a["score"] == b["score"]:
+			return a["time"] < b["time"]
+		return a["score"] > b["score"]
+	)
+	
 	return scores
+
+func get_score_position(
+	score: int,
+	time: float
+) -> int:
+	var sorted_scores := get_scores()
+
+	for i in range(sorted_scores.size()):
+		var current: Dictionary = sorted_scores[i]
+
+		if score > current["score"]:
+			return i + 1
+
+		if score == current["score"] and time < current["time"]:
+			return i + 1
+
+	return sorted_scores.size() + 1

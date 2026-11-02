@@ -1,0 +1,437 @@
+[gd_scene format=3 uid="uid://bf7gju7yb74fb"]
+
+[ext_resource type="Script" uid="uid://bhfp2yehdo7u1" path="res://Gui/game_screen.gd" id="1_8nka1"]
+[ext_resource type="Texture2D" uid="uid://5dls85cm87dr" path="res://Assets/Ui/Heart.png" id="1_tyw17"]
+[ext_resource type="Texture2D" uid="uid://c311ogoimo7e4" path="res://Assets/Ui/Buttons/Play.png" id="3_uj1me"]
+[ext_resource type="Texture2D" uid="uid://cvqsjdc60s7gg" path="res://Assets/Ui/Buttons/PlayPress.png" id="4_4qulx"]
+[ext_resource type="Texture2D" uid="uid://234ue7ac4t8" path="res://Assets/Ui/Buttons/PlayHover.png" id="5_y1cep"]
+[ext_resource type="Texture2D" uid="uid://2yor25335dp5" path="res://Assets/Ui/Buttons/PlayDisabled.png" id="6_lh6a5"]
+[ext_resource type="Texture2D" uid="uid://cbrqy3b43p08i" path="res://Assets/Ui/Buttons/Up.png" id="7_y460k"]
+[ext_resource type="Texture2D" uid="uid://c5y3g6374m2rf" path="res://Assets/Ui/Buttons/UpPress.png" id="8_itila"]
+[ext_resource type="Texture2D" uid="uid://svanwnmrcqco" path="res://Assets/Ui/Buttons/UpHover.png" id="9_hf40a"]
+[ext_resource type="Texture2D" uid="uid://bhw2rodh6t46d" path="res://Assets/Ui/Buttons/Down.png" id="10_iaa25"]
+[ext_resource type="Texture2D" uid="uid://bbd5ryb0lyqiy" path="res://Assets/Ui/Buttons/DownPress.png" id="11_0i13e"]
+[ext_resource type="Texture2D" uid="uid://dae4lm3soiy06" path="res://Assets/Ui/Buttons/DownHover.png" id="12_qdlyy"]
+[ext_resource type="Texture2D" uid="uid://dwop4xapu5qp2" path="res://Assets/Ui/Buttons/Right.png" id="13_h8ghj"]
+[ext_resource type="Texture2D" uid="uid://dsumnh82qtx0b" path="res://Assets/Ui/Buttons/RightPress.png" id="14_4252r"]
+[ext_resource type="Texture2D" uid="uid://cqiqet44qvdhx" path="res://Assets/Ui/Buttons/RightHover.png" id="15_cmkwv"]
+[ext_resource type="Texture2D" uid="uid://276tmd6eoh5" path="res://Assets/Ui/Buttons/Left.png" id="16_8foqs"]
+[ext_resource type="Texture2D" uid="uid://bcontnxev4si7" path="res://Assets/Ui/Buttons/LeftPress.png" id="17_5ospq"]
+[ext_resource type="Texture2D" uid="uid://b5xgjqpfjfdgi" path="res://Assets/Ui/Buttons/LeftHover.png" id="18_lqp10"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tqcbx"]
+font_size = 23
+
+[sub_resource type="LabelSettings" id="LabelSettings_5wkfn"]
+font_size = 82
+
+[sub_resource type="LabelSettings" id="LabelSettings_gy5b4"]
+font_size = 82
+
+[sub_resource type="LabelSettings" id="LabelSettings_sruv1"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_bibml"]
+font_color = Color(0.6879741, 2.6832893e-06, 7.70092e-07, 1)
+
+[node name="GameScreen" type="CanvasLayer" unique_id=1292643777 node_paths=PackedStringArray("background")]
+script = ExtResource("1_8nka1")
+transition_duration = 0.5
+background = NodePath("Background")
+
+[node name="Hub" type="Control" parent="." unique_id=1435699804]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Left" type="MarginContainer" parent="Hub" unique_id=1046211329]
+layout_mode = 0
+offset_right = 102.0
+offset_bottom = 88.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Box" type="VBoxContainer" parent="Hub/Left" unique_id=201974083]
+layout_mode = 2
+
+[node name="Hearts" type="GridContainer" parent="Hub/Left/Box" unique_id=605509956]
+layout_mode = 2
+columns = 3
+
+[node name="Heart1" type="TextureRect" parent="Hub/Left/Box/Hearts" unique_id=1625782926]
+layout_mode = 2
+texture = ExtResource("1_tyw17")
+
+[node name="Heart2" type="TextureRect" parent="Hub/Left/Box/Hearts" unique_id=505495467]
+layout_mode = 2
+texture = ExtResource("1_tyw17")
+
+[node name="Heart3" type="TextureRect" parent="Hub/Left/Box/Hearts" unique_id=1903616768]
+layout_mode = 2
+texture = ExtResource("1_tyw17")
+
+[node name="Score" type="GridContainer" parent="Hub/Left/Box" unique_id=1162558583]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="Hub/Left/Box/Score" unique_id=1721900344]
+layout_mode = 2
+text = "hub.score"
+
+[node name="Value" type="Label" parent="Hub/Left/Box/Score" unique_id=1401854715]
+layout_mode = 2
+
+[node name="Center" type="MarginContainer" parent="Hub" unique_id=988562281]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -63.0
+offset_right = 63.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Movements" type="GridContainer" parent="Hub/Center" unique_id=299417120]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="Hub/Center/Movements" unique_id=1573460871]
+layout_mode = 2
+text = "hub.movements"
+horizontal_alignment = 1
+
+[node name="Value" type="Label" parent="Hub/Center/Movements" unique_id=171000709]
+layout_mode = 2
+
+[node name="Time" type="GridContainer" parent="Hub/Center" unique_id=496947462]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 40)
+columns = 2
+
+[node name="Label" type="Label" parent="Hub/Center/Time" unique_id=1165731507]
+layout_mode = 2
+text = "hub.time"
+
+[node name="Value" type="Label" parent="Hub/Center/Time" unique_id=736810009]
+layout_mode = 2
+
+[node name="Controls" type="Control" parent="Hub" unique_id=1114680098]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 720.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Actions" type="MarginContainer" parent="Hub/Controls" unique_id=1966585030]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+pivot_offset_ratio = Vector2(0, 1.095)
+offset_transform_enabled = true
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="VBoxContainer" parent="Hub/Controls/Actions" unique_id=923336419]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Hub/Controls/Actions/HBox" unique_id=306966097]
+layout_mode = 2
+text = "controls.actions"
+label_settings = SubResource("LabelSettings_tqcbx")
+horizontal_alignment = 1
+
+[node name="Grid" type="GridContainer" parent="Hub/Controls/Actions/HBox" unique_id=1659668442]
+custom_minimum_size = Vector2(64, 32)
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+offset_transform_enabled = true
+columns = 5
+
+[node name="Play" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=1320728784]
+layout_mode = 2
+texture_normal = ExtResource("3_uj1me")
+texture_pressed = ExtResource("4_4qulx")
+texture_hover = ExtResource("5_y1cep")
+texture_disabled = ExtResource("6_lh6a5")
+metadata/_edit_use_anchors_ = true
+
+[node name="Up" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=2100232667]
+layout_mode = 2
+texture_normal = ExtResource("7_y460k")
+texture_pressed = ExtResource("8_itila")
+texture_hover = ExtResource("9_hf40a")
+metadata/_edit_use_anchors_ = true
+
+[node name="Down" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=1503579703]
+layout_mode = 2
+texture_normal = ExtResource("10_iaa25")
+texture_pressed = ExtResource("11_0i13e")
+texture_hover = ExtResource("12_qdlyy")
+metadata/_edit_use_anchors_ = true
+
+[node name="Right" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=1923062389]
+layout_mode = 2
+texture_normal = ExtResource("13_h8ghj")
+texture_pressed = ExtResource("14_4252r")
+texture_hover = ExtResource("15_cmkwv")
+metadata/_edit_use_anchors_ = true
+
+[node name="Left" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=347511284]
+layout_mode = 2
+texture_normal = ExtResource("16_8foqs")
+texture_pressed = ExtResource("17_5ospq")
+texture_hover = ExtResource("18_lqp10")
+metadata/_edit_use_anchors_ = true
+
+[node name="Moves" type="Control" parent="Hub" unique_id=1530895039]
+anchors_preset = 0
+
+[node name="Pending" type="ScrollContainer" parent="Hub/Moves" unique_id=1749376668]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1060.0
+offset_top = 638.0
+offset_right = 1260.0
+offset_bottom = 670.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HBox" type="HBoxContainer" parent="Hub/Moves/Pending" unique_id=1560968464]
+layout_mode = 2
+
+[node name="Executed" type="ScrollContainer" parent="Hub/Moves" unique_id=1803921712]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1060.0
+offset_top = 670.0
+offset_right = 1260.0
+offset_bottom = 702.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HBox" type="HBoxContainer" parent="Hub/Moves/Executed" unique_id=2043210183]
+layout_mode = 2
+
+[node name="GameOver" type="Control" parent="." unique_id=1803987754]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="GameOver" unique_id=359449648]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5372549)
+
+[node name="Center" type="CenterContainer" parent="GameOver" unique_id=1940105125]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="GameOver/Center" unique_id=848725052]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameOver/Center/VBox" unique_id=1900766139]
+layout_mode = 2
+text = "game.over"
+label_settings = SubResource("LabelSettings_5wkfn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="GameOver/Center/VBox" unique_id=565145784]
+layout_mode = 2
+text = "game.bt_respawn"
+
+[node name="GameWin" type="Control" parent="." unique_id=395851722]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="GameWin" unique_id=675256024]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5372549)
+
+[node name="Center" type="CenterContainer" parent="GameWin" unique_id=1131514382]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="GameWin/Center" unique_id=232698616]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameWin/Center/VBox" unique_id=1725445701]
+layout_mode = 2
+text = "game.win"
+label_settings = SubResource("LabelSettings_gy5b4")
+
+[node name="MarginMessage" type="MarginContainer" parent="GameWin/Center/VBox" unique_id=624811187]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="Center" type="CenterContainer" parent="GameWin/Center/VBox/MarginMessage" unique_id=638493963]
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="GameWin/Center/VBox/MarginMessage/Center" unique_id=1488586705]
+layout_mode = 2
+columns = 2
+
+[node name="PositionLabel" type="Label" parent="GameWin/Center/VBox/MarginMessage/Center/Grid" unique_id=29124431]
+layout_mode = 2
+text = "game.win.position"
+label_settings = SubResource("LabelSettings_sruv1")
+
+[node name="PositionValue" type="Label" parent="GameWin/Center/VBox/MarginMessage/Center/Grid" unique_id=1469210719]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_sruv1")
+
+[node name="ScoreLabel" type="Label" parent="GameWin/Center/VBox/MarginMessage/Center/Grid" unique_id=1405086449]
+layout_mode = 2
+text = "game.win.score"
+
+[node name="ScoreValue" type="Label" parent="GameWin/Center/VBox/MarginMessage/Center/Grid" unique_id=165043711]
+layout_mode = 2
+
+[node name="MovementsLabel" type="Label" parent="GameWin/Center/VBox/MarginMessage/Center/Grid" unique_id=1780201746]
+layout_mode = 2
+text = "game.win.movements"
+
+[node name="MovementsValue" type="Label" parent="GameWin/Center/VBox/MarginMessage/Center/Grid" unique_id=1207368062]
+layout_mode = 2
+
+[node name="TimeLabel" type="Label" parent="GameWin/Center/VBox/MarginMessage/Center/Grid" unique_id=186285136]
+layout_mode = 2
+text = "game.win.time"
+
+[node name="TimeValue" type="Label" parent="GameWin/Center/VBox/MarginMessage/Center/Grid" unique_id=555089386]
+layout_mode = 2
+
+[node name="MarginInput" type="MarginContainer" parent="GameWin/Center/VBox" unique_id=1500184355]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="GameWin/Center/VBox/MarginInput" unique_id=443543214]
+layout_mode = 2
+
+[node name="Input" type="LineEdit" parent="GameWin/Center/VBox/MarginInput/VBox" unique_id=2049642335]
+layout_mode = 2
+placeholder_text = "game.win.input"
+
+[node name="InputLabel" type="Label" parent="GameWin/Center/VBox/MarginInput/VBox" unique_id=1233916214]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_bibml")
+
+[node name="Margin" type="MarginContainer" parent="GameWin/Center/VBox/MarginInput/VBox" unique_id=1133884747]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Center" type="CenterContainer" parent="GameWin/Center/VBox/MarginInput/VBox/Margin" unique_id=1454074577]
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="GameWin/Center/VBox/MarginInput/VBox/Margin/Center" unique_id=917529326]
+layout_mode = 2
+columns = 2
+
+[node name="Cancel" type="Button" parent="GameWin/Center/VBox/MarginInput/VBox/Margin/Center/Grid" unique_id=303036917]
+layout_mode = 2
+text = "game.win.cancel"
+
+[node name="Accept" type="Button" parent="GameWin/Center/VBox/MarginInput/VBox/Margin/Center/Grid" unique_id=1006781248]
+layout_mode = 2
+text = "game.win.accept"
+
+[node name="ExitMargin" type="MarginContainer" parent="." unique_id=1306534916]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -133.0
+offset_bottom = 48.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Exit" type="Button" parent="ExitMargin" unique_id=2098589926]
+layout_mode = 2
+text = "game.bt_exit"
+
+[node name="Background" type="ColorRect" parent="." unique_id=1710449139]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="GameOver/Center/VBox/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameWin/Center/VBox/MarginInput/VBox/Margin/Center/Grid/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="GameWin/Center/VBox/MarginInput/VBox/Margin/Center/Grid/Accept" to="." method="_on_accept_pressed"]
+[connection signal="pressed" from="ExitMargin/Exit" to="." method="_on_exit_pressed"]

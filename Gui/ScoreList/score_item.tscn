@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dlseoyoenmxuo"]
+
+[ext_resource type="Script" uid="uid://wnhadcjmxv0n" path="res://Gui/ScoreList/score_item.gd" id="1_md5hl"]
+
+[node name="ScoreItem" type="GridContainer" unique_id=682924696]
+offset_right = 570.0
+offset_bottom = 20.0
+columns = 9
+script = ExtResource("1_md5hl")
+
+[node name="PositionValue" type="Label" parent="." unique_id=630635217]
+layout_mode = 2
+
+[node name="TimeLabel" type="Label" parent="." unique_id=903219638]
+layout_mode = 2
+text = "score.list.time"
+
+[node name="TimeValue" type="Label" parent="." unique_id=1029613573]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=1751142737]
+layout_mode = 2
+text = "score.list.score"
+
+[node name="ScoreValue" type="Label" parent="." unique_id=1586218959]
+layout_mode = 2
+
+[node name="MovementsLabel" type="Label" parent="." unique_id=918291528]
+layout_mode = 2
+text = "score.list.movements"
+
+[node name="MovementsValue" type="Label" parent="." unique_id=1693004783]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="." unique_id=2135793805]
+layout_mode = 2
+text = "score.list.name"
+
+[node name="NameValue" type="Label" parent="." unique_id=961870112]
+layout_mode = 2

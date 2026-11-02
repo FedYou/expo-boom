@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://w5bh833m25t"]
+
+[ext_resource type="Script" uid="uid://b6ibx2kb71nbq" path="res://Gui/ScoreList/score_list.gd" id="1_n4c13"]
+
+[node name="ScoreList" type="ScrollContainer" unique_id=78587493]
+offset_right = 500.0
+offset_bottom = 300.0
+scroll_horizontal_by_default = true
+scroll_hint_mode = 2
+tile_scroll_hint = true
+script = ExtResource("1_n4c13")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1224767409]
+layout_mode = 2
+alignment = 1

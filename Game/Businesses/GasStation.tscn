@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://c16qptoqggdwb"]
+
+[ext_resource type="Texture2D" uid="uid://bqlas6hf53kcw" path="res://Assets/Textures/Businesses/GasStation.png" id="1_jva8a"]
+[ext_resource type="Script" uid="uid://crhyuffkqtoib" path="res://Game/Businesses/gas_station.gd" id="1_pyyw4"]
+
+[sub_resource type="Gradient" id="Gradient_4ntmi"]
+offsets = PackedFloat32Array(0, 0.004032258, 0.625)
+colors = PackedColorArray(0, 0, 0, 1, 0.9838117, 0.9838117, 0.9838117, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gy5b4"]
+gradient = SubResource("Gradient_4ntmi")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.49709302, 0.49709302)
+
+[sub_resource type="Gradient" id="Gradient_pyyw4"]
+offsets = PackedFloat32Array(0.684466, 0.8786408)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_khwga"]
+gradient = SubResource("Gradient_pyyw4")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.49337748, 1)
+
+[sub_resource type="Gradient" id="Gradient_vklyw"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_00nqh"]
+gradient = SubResource("Gradient_vklyw")
+fill_from = Vector2(1, 0.3410596)
+
+[node name="GasStation" type="Node2D" unique_id=701319482]
+script = ExtResource("1_pyyw4")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=884532045]
+position = Vector2(0, -33)
+scale = Vector2(1.19, 1.19)
+texture = ExtResource("1_jva8a")
+
+[node name="RayCast" type="RayCast2D" parent="." unique_id=1787259063]
+position = Vector2(0, 18)
+target_position = Vector2(0, 20)
+
+[node name="Light2" type="PointLight2D" parent="." unique_id=170497406]
+position = Vector2(1.7568359, -34)
+scale = Vector2(0.6553954, 0.5814063)
+color = Color(0.9724373, 0.83324826, 1.92523e-06, 1)
+texture = SubResource("GradientTexture2D_gy5b4")
+
+[node name="Light" type="PointLight2D" parent="." unique_id=157820981]
+position = Vector2(37.5, -4.5)
+scale = Vector2(1.0625, 2.6875)
+color = Color(0.9724373, 0.83324826, 1.92523e-06, 1)
+texture = SubResource("GradientTexture2D_gy5b4")
+
+[node name="Light3" type="PointLight2D" parent="." unique_id=672883396]
+position = Vector2(-0.50000024, -70)
+scale = Vector2(0.6875, 0.62500036)
+color = Color(0.9724373, 0.83324826, 1.92523e-06, 1)
+texture = SubResource("GradientTexture2D_gy5b4")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=410404364]
+position = Vector2(-1.0000002, -55.5)
+scale = Vector2(2.8750002, 1.1875001)
+texture = SubResource("GradientTexture2D_khwga")
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1916697094]
+position = Vector2(3, -8.000001)
+scale = Vector2(0.8125, 0.65625)
+color = Color(1, 0.9784028, 0.9107134, 1)
+texture = SubResource("GradientTexture2D_00nqh")

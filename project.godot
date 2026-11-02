@@ -13,12 +13,14 @@ config_version=5
 config/name="expo-boom"
 run/main_scene="uid://be6cmw3h61h2u"
 config/features=PackedStringArray("4.7", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
 
 [autoload]
 
 ScoreServer="*uid://b7mer7484fpf6"
-Global="*uid://kv7gl16eswwa"
+LevelLoader="*uid://d05s6kckiikf3"
+Utils="*uid://kv7gl16eswwa"
 
 [display]
 
@@ -36,6 +38,12 @@ player=""
 
 theme/custom_font="uid://n07hbpgfe503"
 
+[internationalization]
+
+locale/translation_remaps={}
+locale/translations=PackedStringArray("res://Lang/Lang.en.translation", "res://Lang/Lang.es.translation", "res://Lang/Lang.it.translation", "res://Lang/Lang.pt.translation")
+locale/locale_filter_mode=1
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -44,3 +52,4 @@ theme/custom_font="uid://n07hbpgfe503"
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
