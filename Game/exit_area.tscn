@@ -1,14 +1,20 @@
 [gd_scene format=3 uid="uid://djh4jympr7lxk"]
 
 [ext_resource type="Script" uid="uid://thwylm4w15li" path="res://Game/exit_area.gd" id="1_vg0yx"]
+[ext_resource type="AudioStream" uid="uid://ddkc2rm6qdykv" path="res://Assets/Sounds/Win.ogg" id="2_t70jd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
 
 [node name="ExitArea" type="Area2D" unique_id=684560570]
 script = ExtResource("1_vg0yx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=865002336]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=865002336]
 shape = SubResource("RectangleShape2D_gy5b4")
 debug_color = Color(0.2554756, 0.6138361, 0.46747237, 0.41960785)
+
+[node name="Sound" type="Node2D" parent="." unique_id=251025912]
+
+[node name="Win" type="AudioStreamPlayer2D" parent="Sound" unique_id=255308995]
+stream = ExtResource("2_t70jd")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

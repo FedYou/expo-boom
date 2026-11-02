@@ -1,12 +1,51 @@
 [gd_scene format=3 uid="uid://csjkhf8h4uaj5"]
 
+[ext_resource type="Shader" uid="uid://daervfeskjmar" path="res://Game/Player/shake.gdshader" id="1_4ddeg"]
 [ext_resource type="Script" uid="uid://bnp17op5lhfsp" path="res://Game/Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://cndd2e4q3fpu3" path="res://Assets/Textures/Player/Car.png" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://4ayix8kyipxd" path="res://Assets/Textures/Player/explosion.png" id="4_db2hk"]
 [ext_resource type="Texture2D" uid="uid://bk1eytmyooyaf" path="res://Assets/Textures/Player/Light/back.png" id="4_gwnis"]
 [ext_resource type="Texture2D" uid="uid://y6tsvykhvgxy" path="res://Assets/Textures/Player/Light/front-32x32.png" id="5_k53q1"]
+[ext_resource type="AudioStream" uid="uid://cufi81703qps6" path="res://Assets/Sounds/Player/Moving.ogg" id="7_db2hk"]
+[ext_resource type="AudioStream" uid="uid://cf7y2rulsw7ta" path="res://Assets/Sounds/Player/Stop.ogg" id="8_q0m6d"]
+[ext_resource type="AudioStream" uid="uid://csctgw6k6fhva" path="res://Assets/Sounds/Player/Collision.ogg" id="9_qwver"]
+[ext_resource type="AudioStream" uid="uid://dyboakrqv3f2u" path="res://Assets/Sounds/Player/Explosion.ogg" id="10_nfw5o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
 size = Vector2(12, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_db2hk"]
+shader = ExtResource("1_4ddeg")
+shader_parameter/intensity = 1.5
+shader_parameter/speed = 35.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0m6d"]
+atlas = ExtResource("4_db2hk")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwver"]
+atlas = ExtResource("4_db2hk")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfw5o"]
+atlas = ExtResource("4_db2hk")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlpas"]
+atlas = ExtResource("4_db2hk")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akrrf"]
+atlas = ExtResource("4_db2hk")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqhgd"]
+atlas = ExtResource("4_db2hk")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v7ly"]
+atlas = ExtResource("4_db2hk")
+region = Rect2(288, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gy5b4"]
 animations = [{
@@ -16,6 +55,32 @@ animations = [{
 }],
 "loop": 1,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0m6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwver")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfw5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlpas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akrrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqhgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v7ly")
+}],
+"loop": 0,
+"name": &"explosion",
 "speed": 5.0
 }]
 
@@ -28,6 +93,7 @@ shape = SubResource("RectangleShape2D_gy5b4")
 debug_color = Color(0.9808484, 0, 0.3801851, 0.41960785)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=36176894]
+material = SubResource("ShaderMaterial_db2hk")
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_gy5b4")
 
@@ -69,3 +135,18 @@ scale = Vector2(1.6000004, 1.5635967)
 color = Color(0.99999994, 0.7750603, 0.37770998, 1)
 texture = ExtResource("5_k53q1")
 texture_scale = 0.01
+
+[node name="Sound" type="Node2D" parent="." unique_id=1386065165]
+
+[node name="Moving" type="AudioStreamPlayer2D" parent="Sound" unique_id=463802043]
+stream = ExtResource("7_db2hk")
+
+[node name="Stop" type="AudioStreamPlayer2D" parent="Sound" unique_id=1701350984]
+stream = ExtResource("8_q0m6d")
+attenuation = 1.7411014
+
+[node name="Collision" type="AudioStreamPlayer2D" parent="Sound" unique_id=547382583]
+stream = ExtResource("9_qwver")
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="Sound" unique_id=138968303]
+stream = ExtResource("10_nfw5o")

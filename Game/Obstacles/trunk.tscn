@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dtws5ca7ukycy" path="res://Game/Obstacles/trunk.gd" id="1_40lei"]
 [ext_resource type="Texture2D" uid="uid://bp8dvx4eswmq4" path="res://Assets/Textures/Obstacles/Trunk.png" id="1_q8xib"]
+[ext_resource type="AudioStream" uid="uid://cws2at137p0p1" path="res://Assets/Sounds/Obstacles/TrunkCollision.ogg" id="3_3s8xk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_40lei"]
 atlas = ExtResource("1_q8xib")
@@ -89,6 +90,11 @@ sprite_frames = SubResource("SpriteFrames_gy5b4")
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1321662913]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_gy5b4")
+
+[node name="Sound" type="Node2D" parent="." unique_id=1114636301]
+
+[node name="Collision" type="AudioStreamPlayer2D" parent="Sound" unique_id=1748858143]
+stream = ExtResource("3_3s8xk")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]

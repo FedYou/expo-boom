@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://k3eiwkdvds63" path="res://Game/Decorations/streetlight.tscn" id="13_fk345"]
 [ext_resource type="PackedScene" uid="uid://djbbmudxpq5m7" path="res://Game/Decorations/grass_small.tscn" id="14_a6sbm"]
 [ext_resource type="PackedScene" uid="uid://bs88kaanskhpa" path="res://Game/Decorations/grass_larger.tscn" id="15_dpx8e"]
+[ext_resource type="AudioStream" uid="uid://7a07xe7ed773" path="res://Assets/Sounds/Ambient/Wind.ogg" id="15_tbm0t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v60wc"]
 texture = ExtResource("2_tbm0t")
@@ -122,11 +123,12 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/1 = SubResource("TileSetAtlasSource_yiigh")
 
-[node name="Level 0" type="Node2D" unique_id=1660126528 node_paths=PackedStringArray("player", "camara_limits")]
+[node name="Level 0" type="Node2D" unique_id=1660126528 node_paths=PackedStringArray("player", "camara_limits", "ambient_sound")]
 script = ExtResource("1_funcs")
 player = NodePath("Player")
 max_movements = 100
 camara_limits = NodePath("Camara")
+ambient_sound = NodePath("Sound/Ambient")
 
 [node name="Map" type="Node2D" parent="." unique_id=1472609951]
 
@@ -164,6 +166,7 @@ position = Vector2(441, 581)
 scale = Vector2(1.4, 1.4)
 
 [node name="Decorations" type="Node2D" parent="Map" unique_id=1293201264]
+visible = false
 
 [node name="RedFlower8" parent="Map/Decorations" unique_id=546098938 instance=ExtResource("12_py3gb")]
 position = Vector2(52, 285)
@@ -2997,3 +3000,8 @@ color = Color(1, 1, 1, 0.1764706)
 
 [node name="Player" type="Marker2D" parent="." unique_id=907121523]
 position = Vector2(271, 618)
+
+[node name="Sound" type="Node2D" parent="." unique_id=1208482137]
+
+[node name="Ambient" type="AudioStreamPlayer2D" parent="Sound" unique_id=9605820]
+stream = ExtResource("15_tbm0t")

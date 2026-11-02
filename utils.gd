@@ -51,3 +51,20 @@ func fade_out(node: Control, duration: float = 0.5) -> void:
 	await tween.finished
 	node.visible = false
 	node.hide()
+
+func stop_sound_fade(audio: AudioStreamPlayer2D, duration: float = 1.0) -> void:
+	if not audio.playing:
+		return
+
+	var tween := create_tween()
+
+	tween.tween_property(
+		audio,
+		"volume_db",
+		-80.0,
+		duration
+	)
+
+	await tween.finished
+	audio.stop()
+	audio.volume_db = 0.0

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dgsnwtud6qgde" path="res://Game/Decorations/streetlight.gd" id="1_6eli7"]
 [ext_resource type="Texture2D" uid="uid://d3e70d4a4amex" path="res://Assets/Textures/Decorations/streetlight.png" id="1_xl18r"]
 [ext_resource type="Texture2D" uid="uid://b4ex8o2lvnxl" path="res://Assets/Textures/Decorations/streetlight-light.png" id="2_1hove"]
+[ext_resource type="AudioStream" uid="uid://867kijcwpq5k" path="res://Assets/Sounds/Decorations/StreetlightBreaking.ogg" id="4_hvkwm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6eli7"]
 atlas = ExtResource("1_xl18r")
@@ -112,6 +113,14 @@ shape = SubResource("RectangleShape2D_gy5b4")
 position = Vector2(13, -21.343748)
 scale = Vector2(1.25, 1.2285157)
 texture = ExtResource("2_1hove")
+
+[node name="Sound" type="Node2D" parent="." unique_id=1580204381]
+
+[node name="Breaking" type="AudioStreamPlayer2D" parent="Sound" unique_id=1044531361]
+stream = ExtResource("4_hvkwm")
+volume_db = -7.536
+max_distance = 120.0
+panning_strength = 0.67
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]

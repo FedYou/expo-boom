@@ -27,9 +27,11 @@ func _on_body_entered(body: Node2D) -> void:
 		body.healt-=1
 		is_destroyed = true
 		collision.set_deferred("disabled", true)
+		collision.free()
 		sprite.play("breakup")
 		body.remove_points(POINTS)
 		body.must_wait = 1.2
+		$Sound/Collision.play()
 		
 
 

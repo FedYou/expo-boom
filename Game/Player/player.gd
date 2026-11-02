@@ -8,13 +8,20 @@ enum DIRECTION {
 	RIGHT
 }
 
+@onready var sprite = $Sprite
+@onready var light = $Light
+@onready var light_vertical_position = light.position
+
+@onready var sound: Dictionary = {
+	"moving": $Sound/Moving,
+	"stop": $Sound/Stop,
+	"explosion": $Sound/Explosion,
+	"collision": $Sound/Collision
+}
+
 @export var max_healt = 3
 @export var max_movements = 10
 @export var direction: DIRECTION
-@onready var SPRITE = $Sprite
-@onready var LIGHT = $Light
-@onready var LIGHT_VERTICAL_POSITION = LIGHT.position
-
 
 const MOVE_TIME = 0.25
 const CELL = 32.0
@@ -31,14 +38,29 @@ var win := false
 var lost :=false
 var movements_count : int = 0
 
+var shake_material: ShaderMaterial
+
 func _ready() -> void:
 	update_positions()
+	shake_material = sprite.material as ShaderMaterial
+	stop_shake()
 
 func _process(delta: float) -> void:
 	if must_wait > 0:
 		await get_tree().create_timer(must_wait).timeout
 		must_wait = 0
 
+func start_shake() -> void:
+	sprite.material = shake_material
+
+func stop_shake() -> void:
+	sprite.material = null
+	
+
+func start_explosion()-> void:
+	sprite.play("explosion")
+	sound.explosion.play()
+	light.hide()
 
 func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 	var executed_moves: Array[DIRECTION] = []
@@ -47,7 +69,13 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 		return executed_moves
 
 	is_moving = true
-
+	sound.moving.play()
+	velocity = Vector2.ZERO
+	start_shake()
+	
+	## Limpia la detección de los coliciones anterior
+	move_and_slide()
+	
 	for index in range(pending_moves.size()):
 		if win || lost:
 			break
@@ -107,9 +135,14 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 			await get_tree().physics_frame
 			if must_wait > 0:
 				$Light/Back.energy = 2.0
+				Utils.stop_sound_fade(sound.moving,0.5)
+				sound.stop.play()
+				stop_shake()
 				await get_tree().create_timer(must_wait).timeout
 				must_wait = 0
 				$Light/Back.energy = 1.0
+				start_shake()
+
 			
 			if !should_continue:
 				match move:
@@ -126,6 +159,10 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 						if $Horizontal/RayRight.is_colliding():
 							break
 			
+			if should_continue:
+				if !sound.moving.playing:
+					sound.moving.play()
+				
 			var hit := false
 			
 			for i in get_slide_collision_count():
@@ -143,9 +180,11 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 			
 			if hit:
 				healt-=1
+				sound.collision.play()
 				remove_points(HIT_POINTS)
 				if healt <= 0:
 					is_alive = false
+					start_explosion()
 					break
 				
 				match move:
@@ -193,8 +232,14 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 		
 		if movements_count >= max_movements && !win:
 			lost = true
+			start_explosion()
 			break
 	is_moving = false
+	stop_shake()
+	if sound.moving.playing:
+		Utils.stop_sound_fade(sound.moving,0.5)
+		sound.stop.play()
+	
 	return executed_moves
 
 func add_movements(movements: int) -> void:
@@ -220,34 +265,34 @@ func update_positions()-> void:
 	match direction:
 		DIRECTION.UP:
 			$Collision.rotation = deg_to_rad(0)
-			SPRITE.rotation = deg_to_rad(0)
-			LIGHT.rotation = deg_to_rad(0)
-			LIGHT.position = LIGHT_VERTICAL_POSITION
+			sprite.rotation = deg_to_rad(0)
+			light.rotation = deg_to_rad(0)
+			light.position = light_vertical_position
 		DIRECTION.RIGHT:
 			$Collision.rotation = deg_to_rad(90)
-			SPRITE.rotation = deg_to_rad(90)
-			LIGHT.rotation = deg_to_rad(90)
-			LIGHT.position = Vector2(40,0)
+			sprite.rotation = deg_to_rad(90)
+			light.rotation = deg_to_rad(90)
+			light.position = Vector2(40,0)
 		DIRECTION.DOWN:
 			$Collision.rotation = deg_to_rad(0)
-			SPRITE.rotation = deg_to_rad(0)
-			LIGHT.rotation = deg_to_rad(180)
-			LIGHT.position = Vector2(0,40)
+			sprite.rotation = deg_to_rad(0)
+			light.rotation = deg_to_rad(180)
+			light.position = Vector2(0,40)
 		DIRECTION.LEFT:
 			$Collision.rotation = deg_to_rad(90)
-			SPRITE.rotation = deg_to_rad(90)
-			LIGHT.rotation = deg_to_rad(-90)
-			LIGHT.position = Vector2(-40,0)
+			sprite.rotation = deg_to_rad(90)
+			light.rotation = deg_to_rad(-90)
+			light.position = Vector2(-40,0)
 
 	match direction:
 		DIRECTION.UP:
-			SPRITE.flip_v = false
+			sprite.flip_v = false
 		DIRECTION.DOWN:
-			SPRITE.flip_v = true
+			sprite.flip_v = true
 		DIRECTION.LEFT:
-			SPRITE.flip_v = true 
+			sprite.flip_v = true 
 		DIRECTION.RIGHT:
-			SPRITE.flip_v = false
+			sprite.flip_v = false
 
 func reset()->void:
 	healt = max_healt
@@ -258,3 +303,5 @@ func reset()->void:
 	win = false
 	lost = false
 	movements_count = 0
+	sprite.play("default")
+	light.show()

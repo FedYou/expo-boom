@@ -23,6 +23,7 @@ func _on_body_entered(body: Node2D) -> void:
 		collision.set_deferred("disabled", true)
 		light.enabled = false
 		sprite.play("breakup")
+		$Sound/Breaking.play()
 
 
 func _on_sprite_animation_finished() -> void:

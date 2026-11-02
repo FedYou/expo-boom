@@ -8,6 +8,7 @@ extends Node2D
 
 @export_group("Map")
 @export var camara_limits: ColorRect
+@export var ambient_sound: AudioStreamPlayer2D
 
 var executed_moves :Array[Player.DIRECTION] = []
 var pending_moves: Array[Player.DIRECTION] = []
@@ -18,6 +19,7 @@ var end_time: int = 0
 func _ready() -> void:
 	start_time = Time.get_ticks_msec()
 	camara_limits.color = "#ffffff00"
+	ambient_sound.play()
 
 func finish() -> void:
 	if end_time == 0:
