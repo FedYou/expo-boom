@@ -25,7 +25,9 @@ enum DIRECTION {
 
 const MOVE_TIME = 0.25
 const CELL = 32.0
+const GRID_OFFSET := Vector2(16, 16)
 const REBOUND = 10.0
+const REBOUND_TIME = 0.1
 const HIT_POINTS = 10
 const SPEED = 200.0
 
@@ -62,6 +64,23 @@ func start_explosion()-> void:
 	sound.explosion.play()
 	light.hide()
 
+func _direction_vector(m: DIRECTION) -> Vector2:
+	match m:
+		DIRECTION.UP: return Vector2.UP
+		DIRECTION.DOWN: return Vector2.DOWN
+		DIRECTION.LEFT: return Vector2.LEFT
+		_: return Vector2.RIGHT
+
+# true si hay una pared dentro de la próxima celda
+func _is_blocked_ahead(m: DIRECTION) -> bool:
+	return test_move(global_transform, _direction_vector(m) * CELL)
+
+## Perimite ubicar la posicion del jugador en la mitad de cada celda altes de moverse
+func _snap_to_grid() -> void:
+	position = ((position - GRID_OFFSET) / CELL).round() * CELL + GRID_OFFSET
+
+
+
 func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 	var executed_moves: Array[DIRECTION] = []
 
@@ -84,52 +103,13 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 		direction = move
 
 		update_positions()
+		_snap_to_grid()
 		
-		var should_continue := false
-		
-		if pending_moves.size() - 1 > index:
-			if move == pending_moves[index +1 ]:
-				should_continue = true
-
-		if !should_continue:
-			match move:
-				DIRECTION.UP:
-					if $Vertical/RayTop.is_colliding():
-						should_continue = true
-					elif $Vertical/RayDown.is_colliding():
-						should_continue = true
-				DIRECTION.DOWN:
-					if $Vertical/RayDown.is_colliding():
-						should_continue = true
-					elif $Vertical/RayTop.is_colliding():
-						should_continue = true
-				DIRECTION.LEFT:
-					if $Horizontal/RayLeft.is_colliding():
-						should_continue = true
-					elif $Horizontal/RayRight.is_colliding():
-						should_continue = true
-				DIRECTION.RIGHT:
-					if $Horizontal/RayRight.is_colliding():
-						should_continue = true
-					elif $Horizontal/RayLeft.is_colliding():
-						should_continue = true
-
-		var target_position := 0.0
-		match move:
-			DIRECTION.UP:
-				velocity.y = -SPEED
-				target_position = position.y - CELL
-			DIRECTION.DOWN:
-				velocity.y = SPEED
-				target_position = position.y + CELL
-			DIRECTION.LEFT:
-				velocity.x = -SPEED
-				target_position = position.x - CELL
-			DIRECTION.RIGHT:
-				velocity.x = SPEED
-				target_position = position.x + CELL
-
+		var start_position := position
+		var direction_move := _direction_vector(move)
+		var target_position := start_position + direction_move * CELL
 		var elapsed := 0.0
+		var hit_this_move := false
 
 		while elapsed < MOVE_TIME:
 			await get_tree().physics_frame
@@ -141,106 +121,61 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 				await get_tree().create_timer(must_wait).timeout
 				must_wait = 0
 				$Light/Back.energy = 1.0
+				sound.moving.play()
 				start_shake()
 
-			
-			if !should_continue:
-				match move:
-					DIRECTION.UP:
-						if $Vertical/RayTop.is_colliding():
-							break
-					DIRECTION.DOWN:
-						if $Vertical/RayDown.is_colliding():
-							break
-					DIRECTION.LEFT:
-						if $Horizontal/RayLeft.is_colliding():
-							break
-					DIRECTION.RIGHT:
-						if $Horizontal/RayRight.is_colliding():
-							break
-			
-			if should_continue:
-				if !sound.moving.playing:
-					sound.moving.play()
-				
-			var hit := false
-			
-			for i in get_slide_collision_count():
-				var collision = get_slide_collision(i)
-				var normal = collision.get_normal()
+			var dt := get_physics_process_delta_time()
+			var remaining := (target_position - position).dot(direction_move)
 
-				if normal.x > 0 && move == DIRECTION.LEFT:
-					hit = true
-				elif normal.x < 0 && move == DIRECTION.RIGHT:
-					hit = true
-				elif normal.y < 0 && move == DIRECTION.DOWN:
-					hit = true
-				elif normal.y > 0 && move == DIRECTION.UP:
-					hit = true
-			
-			if hit:
-				healt-=1
-				sound.collision.play()
-				remove_points(HIT_POINTS)
-				if healt <= 0:
-					is_alive = false
-					start_explosion()
-					break
-				
-				match move:
-					DIRECTION.UP:
-						velocity.y = REBOUND
-					DIRECTION.DOWN:
-						velocity.y = -REBOUND
-					DIRECTION.LEFT:
-						velocity.x = REBOUND
-					DIRECTION.RIGHT:
-						velocity.x = -REBOUND
-				hit=false
-				move_and_slide()
-				continue
+			if remaining <= 0.01:
+				break
 
-			match move:
-				DIRECTION.UP:
-					if position.y <= target_position:
-						velocity = Vector2.ZERO
-						move_and_slide()
-						break
-				DIRECTION.DOWN:
-					if position.y >= target_position:
-						velocity = Vector2.ZERO
-						move_and_slide()
-						break
-				DIRECTION.LEFT:
-					if position.x <= target_position:
-						velocity = Vector2.ZERO
-						move_and_slide()
-						break
-				DIRECTION.RIGHT:
-					if position.x >= target_position:
-						velocity = Vector2.ZERO
-						move_and_slide()
-						break
-
-			elapsed += get_physics_process_delta_time()
+			# Velocidad limitada en el último tramo frena justo en el objetivo
+			velocity = direction_move * minf(SPEED, remaining / dt)
 			move_and_slide()
 
-		velocity = Vector2.ZERO       # el player SE DETIENE
-		
-		movements_count+=1
+			# Detección de choque contra algo que se oponga al movimiento
+			for i in get_slide_collision_count():
+				var normal := get_slide_collision(i).get_normal()
+				if normal.dot(direction_move) < -0.5:
+					hit_this_move = true
+
+			if hit_this_move:
+				break
+
+			elapsed += dt
+		## ----- ##
+		if hit_this_move:
+			healt -= 1
+			sound.collision.play()
+			remove_points(HIT_POINTS)
+			if healt <= 0:
+				is_alive = false
+				start_explosion()
+				break
+			# Rebote: vuelve a la celda de origen, así nunca se desfasa
+			var tween := create_tween()
+			tween.tween_property(self, "position", start_position, REBOUND_TIME)
+			await tween.finished
+		else:
+			position = target_position  # aterriza exacto en la celda
+
+		movements_count += 1
 		executed_moves.push_back(move)
-		
+
 		if movements_count >= max_movements && !win:
 			lost = true
 			start_explosion()
 			break
+
 	is_moving = false
 	stop_shake()
 	if sound.moving.playing:
-		Utils.stop_sound_fade(sound.moving,0.5)
+		Utils.stop_sound_fade(sound.moving, 0.5)
 		sound.stop.play()
-	
+
 	return executed_moves
+
 
 func add_movements(movements: int) -> void:
 	max_movements += randi_range(movements/2, movements)
