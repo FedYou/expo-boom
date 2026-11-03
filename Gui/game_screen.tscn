@@ -18,6 +18,10 @@
 [ext_resource type="Texture2D" uid="uid://276tmd6eoh5" path="res://Assets/Ui/Buttons/Left.png" id="16_8foqs"]
 [ext_resource type="Texture2D" uid="uid://bcontnxev4si7" path="res://Assets/Ui/Buttons/LeftPress.png" id="17_5ospq"]
 [ext_resource type="Texture2D" uid="uid://b5xgjqpfjfdgi" path="res://Assets/Ui/Buttons/LeftHover.png" id="18_lqp10"]
+[ext_resource type="Texture2D" uid="uid://df4nb52n6db17" path="res://Assets/Ui/Buttons/Delete.png" id="19_mvp1t"]
+[ext_resource type="Texture2D" uid="uid://dqcsxp8m1ebxm" path="res://Assets/Ui/Buttons/DeletePress.png" id="20_lxtof"]
+[ext_resource type="Texture2D" uid="uid://pys04svqjwgt" path="res://Assets/Ui/Buttons/DeleteHover.png" id="21_6avwv"]
+[ext_resource type="Texture2D" uid="uid://chvbl2n1f0l5q" path="res://Assets/Ui/Buttons/DeleteDisabled.png" id="22_lxtof"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tqcbx"]
 font_size = 23
@@ -169,7 +173,7 @@ propagate_maximum_size = false
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 offset_transform_enabled = true
-columns = 5
+columns = 6
 
 [node name="Play" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=1320728784]
 layout_mode = 2
@@ -193,6 +197,13 @@ texture_pressed = ExtResource("11_0i13e")
 texture_hover = ExtResource("12_qdlyy")
 metadata/_edit_use_anchors_ = true
 
+[node name="Left" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=347511284]
+layout_mode = 2
+texture_normal = ExtResource("16_8foqs")
+texture_pressed = ExtResource("17_5ospq")
+texture_hover = ExtResource("18_lqp10")
+metadata/_edit_use_anchors_ = true
+
 [node name="Right" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=1923062389]
 layout_mode = 2
 texture_normal = ExtResource("13_h8ghj")
@@ -200,11 +211,12 @@ texture_pressed = ExtResource("14_4252r")
 texture_hover = ExtResource("15_cmkwv")
 metadata/_edit_use_anchors_ = true
 
-[node name="Left" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=347511284]
+[node name="Delete" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=1749330032]
 layout_mode = 2
-texture_normal = ExtResource("16_8foqs")
-texture_pressed = ExtResource("17_5ospq")
-texture_hover = ExtResource("18_lqp10")
+texture_normal = ExtResource("19_mvp1t")
+texture_pressed = ExtResource("20_lxtof")
+texture_hover = ExtResource("21_6avwv")
+texture_disabled = ExtResource("22_lxtof")
 metadata/_edit_use_anchors_ = true
 
 [node name="Moves" type="Control" parent="Hub" unique_id=1530895039]
@@ -429,8 +441,9 @@ color = Color(1, 1, 1, 0)
 [connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Up" to="." method="_on_up_pressed"]
 [connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Down" to="." method="_on_down_pressed"]
-[connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Right" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Hub/Controls/Actions/HBox/Grid/Delete" to="." method="_on_delete_pressed"]
 [connection signal="pressed" from="GameOver/Center/VBox/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameWin/Center/VBox/MarginInput/VBox/Margin/Center/Grid/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="GameWin/Center/VBox/MarginInput/VBox/Margin/Center/Grid/Accept" to="." method="_on_accept_pressed"]

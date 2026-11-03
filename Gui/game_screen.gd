@@ -27,6 +27,7 @@ var move_icon_left_texture = preload("res://Assets/Ui/MoveIcons/Left.png")
 var move_icon_right_texture = preload("res://Assets/Ui/MoveIcons/Right.png")
 
 @onready var bt_play = $Hub/Controls/Actions/HBox/Grid/Play
+@onready var bt_delete = $Hub/Controls/Actions/HBox/Grid/Delete
 @onready var bt_up = $Hub/Controls/Actions/HBox/Grid/Up
 @onready var bt_down = $Hub/Controls/Actions/HBox/Grid/Down
 @onready var bt_left = $Hub/Controls/Actions/HBox/Grid/Left
@@ -125,17 +126,19 @@ func _get_content_item(move: Player.DIRECTION) -> TextureRect:
 	return item
 
 func _update_buttons_state():
-	if level.pending_moves.is_empty():
+	if level.pending_moves.is_empty() || player.is_moving:
 		bt_play.disabled = true
-		
+		bt_delete.disabled = true
+	else:
+		bt_play.disabled = false
+		bt_delete.disabled = false
+
 	if player.is_moving:
-		bt_play.disabled = true
 		bt_up.disabled = true
 		bt_down.disabled = true
 		bt_left.disabled = true
 		bt_right.disabled = true
 	else:
-		bt_play.disabled = false
 		bt_up.disabled = false
 		bt_down.disabled = false
 		bt_left.disabled = false
@@ -208,6 +211,11 @@ func _on_play_pressed() -> void:
 	
 	level.executed_moves.append_array(executed_moves)
 	
+	_refresh_ui_move_lists()
+
+func _on_delete_pressed() -> void:
+	if !level.pending_moves.is_empty():
+		level.pending_moves.pop_back()
 	_refresh_ui_move_lists()
 
 
