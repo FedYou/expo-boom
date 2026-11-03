@@ -24,17 +24,6 @@ limit_smoothed = true
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
-[node name="Settings" type="Node2D" parent="." unique_id=1294428112]
-
-[node name="CanvasModulate" type="CanvasModulate" parent="Settings" unique_id=935067793]
-color = Color(1, 0.97199565, 0.89066684, 1)
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Settings" unique_id=1674313741]
-color = Color(0.6052743, 0.6052744, 0.6052742, 1)
-energy = 0.25
-blend_mode = 2
-max_distance = 14998.0
-
 [node name="GUI" parent="." unique_id=1292643777 node_paths=PackedStringArray("player", "level_maneger") instance=ExtResource("2_1r4le")]
 player = NodePath("../LevelManager/Player")
 level_maneger = NodePath("../LevelManager")

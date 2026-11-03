@@ -8,6 +8,13 @@ enum DIRECTION {
 	RIGHT
 }
 
+const MOVE_TIME = 0.25
+const CELL = 32.0
+const GRID_OFFSET := Vector2(16, 16)
+const REBOUND_TIME = 0.1
+const HIT_REMOVE_POINTS = 10
+const SPEED = 200.0
+
 @onready var sprite = $Sprite
 @onready var light = $Light
 @onready var light_vertical_position = light.position
@@ -22,14 +29,6 @@ enum DIRECTION {
 @export var max_healt = 3
 @export var max_movements = 10
 @export var direction: DIRECTION
-
-const MOVE_TIME = 0.25
-const CELL = 32.0
-const GRID_OFFSET := Vector2(16, 16)
-const REBOUND = 10.0
-const REBOUND_TIME = 0.1
-const HIT_POINTS = 10
-const SPEED = 200.0
 
 var healt = max_healt
 var score : int = 0
@@ -148,7 +147,7 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 		if hit_this_move:
 			healt -= 1
 			sound.collision.play()
-			remove_points(HIT_POINTS)
+			remove_points(HIT_REMOVE_POINTS)
 			if healt <= 0:
 				is_alive = false
 				start_explosion()
@@ -178,13 +177,16 @@ func execute_pending_moves(pending_moves: Array[DIRECTION]) -> Array[DIRECTION]:
 
 
 func add_movements(movements: int) -> void:
-	max_movements += randi_range(movements/2, movements)
+	#max_movements += randi_range(movements/2, movements)
+	max_movements += movements
 
 func add_points(points: int) -> void:
-	score += randi_range(1, points)
+	score += points
+	#score += randi_range(1, points)
 
 func remove_points(points: int) -> void:
-	score = maxi(0, score -  randi_range(1, points))
+	score = maxi(0, score -  points)
+	#score = maxi(0, score -  randi_range(1, points))
 	$Light/Back.energy = 2.0
 	$Light/Front.energy = 0.0
 	await get_tree().create_timer(0.15).timeout

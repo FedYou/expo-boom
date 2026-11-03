@@ -171,7 +171,7 @@ func _update_time_ui():
 	time_value.set_text(Utils.format_time(level.get_current_time()))
 
 func _update_movements_ui():
-	movements_value.text = str(player.movements_count) + "/" + str(level.max_movements)
+	movements_value.text = str(player.movements_count) + "/" + str(player.max_movements)
 
 
 func _on_up_pressed() -> void:

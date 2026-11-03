@@ -81,11 +81,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
 size = Vector2(30, 13)
 
-[node name="Trunk" type="Area2D" unique_id=1648015434]
+[node name="Trunk" type="Area2D" unique_id=1648015434 node_paths=PackedStringArray("collision", "sprite", "collision_sound")]
 script = ExtResource("1_40lei")
+collision = NodePath("Collision")
+sprite = NodePath("Sprite")
+collision_sound = NodePath("Sound/Collision")
+remove_points = 15
+must_wait = 1.2
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=476852726]
 sprite_frames = SubResource("SpriteFrames_gy5b4")
+animation = &"break"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1321662913]
 position = Vector2(0, -0.5)
@@ -95,6 +101,3 @@ shape = SubResource("RectangleShape2D_gy5b4")
 
 [node name="Collision" type="AudioStreamPlayer2D" parent="Sound" unique_id=1748858143]
 stream = ExtResource("3_3s8xk")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]

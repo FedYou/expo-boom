@@ -1,0 +1,20 @@
+[gd_resource type="TileSet" format=3 uid="uid://dsq0o8urixgoe"]
+
+[ext_resource type="Texture2D" uid="uid://cj5t86rodym3g" path="res://Assets/Textures/Map/TileMap/Route.png" id="1_sfsle"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ehsv3"]
+texture = ExtResource("1_sfsle")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+1:1/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_ehsv3")
