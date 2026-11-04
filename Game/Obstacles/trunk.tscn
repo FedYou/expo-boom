@@ -91,7 +91,6 @@ must_wait = 1.2
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=476852726]
 sprite_frames = SubResource("SpriteFrames_gy5b4")
-animation = &"break"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1321662913]
 position = Vector2(0, -0.5)

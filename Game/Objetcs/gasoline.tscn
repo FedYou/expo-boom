@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://c0v52pv8cgw74"]
+
+[ext_resource type="Script" uid="uid://jrj86qsl1g5u" path="res://Game/Objetcs/gasoline.gd" id="1_rtcwk"]
+[ext_resource type="Texture2D" uid="uid://baxcfe7t1ps7m" path="res://Assets/Textures/Objects/Gasoline.png" id="2_rtcwk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bewbn"]
+atlas = ExtResource("2_rtcwk")
+region = Rect2(64, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2airb"]
+atlas = ExtResource("2_rtcwk")
+region = Rect2(0, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45a18"]
+atlas = ExtResource("2_rtcwk")
+region = Rect2(32, 0, 32, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_muwrp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bewbn")
+}],
+"loop": 0,
+"name": &"break",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 0,
+"name": &"breakup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2airb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45a18")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
+size = Vector2(26, 22)
+
+[node name="Gasoline" type="Area2D" unique_id=1701066295 node_paths=PackedStringArray("collision", "sprite")]
+script = ExtResource("1_rtcwk")
+collision = NodePath("Collision")
+sprite = NodePath("Sprite")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2045160950]
+position = Vector2(-3, -1)
+sprite_frames = SubResource("SpriteFrames_muwrp")
+animation = &"break"
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=303770324]
+shape = SubResource("RectangleShape2D_gy5b4")

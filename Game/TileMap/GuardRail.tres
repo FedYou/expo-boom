@@ -5,20 +5,34 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w560x"]
 texture = ExtResource("1_ustal")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0.7614422, 1.0660181, 1.066019, 8, -2.8934774, 8, -2.8934774, -3.0965295, 0.15228844, -2.9950037, 8, -2.9950037, 8, 0.9644928)
 1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 1.0660181, -8, -2.9950037, 8, -3.096529, 8, 0.9644928)
 2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.0660057, 8, -1.0028992, 8, -1.0028992, 0.9169359, -8, 0.9742451, -8, -2.865425, 2.9513893, -2.9227343)
 2:1/0 = 0
-1:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.0660172, -8, 2.9950027, -8, 2.9950027, 8, -1.0660172, 8)
 0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.096527, -8, 1.0660172, -8, 0.9644928, 8, -2.9950027, 8)
 0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.1675453, -0.9644928, 8, -0.8629675, 8, 2.8934774, -2.9950027, 2.9950027, -2.9950027, -3.096529, -2.9950027, -8, 1.1675453, -8)
 1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.9950027, -8, -1.1675444, 8, -0.9644928, 8, 2.9950027)
 2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.0660057, 3.0660057, -8, 3.123314, -8, -0.9644928, -0.9644928, -1.066019, -1.1675453, -8, 3.096531, -8)
 3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, -8, 3, -3, 8, -3, 8, 1, -1, 1, -1, -8)
 3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -1.2034788, 8, 2.9227343, 2.894081, 2.9227343, 2.9513893, 8, -0.94558907, 8, -1.1175156, -0.9742446)
 4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, -1, 1, 8, -4, 8, -4, 3, -8, 3, -8, -1)
 4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -8, 1, -8, 1, 1, -8, 1, -8, -3, -3, -3)
 3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.1980543, -8, -1.1675434, -0.15228844, -1.0660186, -0.25381374, 2.9950037)
 4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0.15228844, 0.9644928, 0.15228844, -2.9950037, 8, -2.9950037, 8, 0.9644928)
 
 [resource]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_w560x")
