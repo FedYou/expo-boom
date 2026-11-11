@@ -15,13 +15,14 @@ enum DIRECTION{
 func _ready() -> void:
 	if direction == DIRECTION.LEFT:
 		$Sprite.flip_h = true
-		$Light.position = Vector2(-12, $Light.position.y)
+		#$Light.position = Vector2(-12, $Light.position.y)
+		$Light.position = Vector2(-26, $Light.position.y)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		collision.set_deferred("disabled", true)
-		light.enabled = false
+		light.visible = false
 		sprite.play("breakup")
 		$Sound/Breaking.play()
 
@@ -29,3 +30,4 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_sprite_animation_finished() -> void:
 	if sprite.animation == "breakup":
 		sprite.play("break")
+		z_index = 0

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cvqsjdc60s7gg" path="res://Assets/Ui/Buttons/PlayPress.png" id="4_4qulx"]
 [ext_resource type="Texture2D" uid="uid://234ue7ac4t8" path="res://Assets/Ui/Buttons/PlayHover.png" id="5_y1cep"]
 [ext_resource type="Texture2D" uid="uid://2yor25335dp5" path="res://Assets/Ui/Buttons/PlayDisabled.png" id="6_lh6a5"]
+[ext_resource type="Script" uid="uid://bgl8df22adtok" path="res://Gui/button.gd" id="7_6avwv"]
 [ext_resource type="Texture2D" uid="uid://cbrqy3b43p08i" path="res://Assets/Ui/Buttons/Up.png" id="7_y460k"]
 [ext_resource type="Texture2D" uid="uid://c5y3g6374m2rf" path="res://Assets/Ui/Buttons/UpPress.png" id="8_itila"]
 [ext_resource type="Texture2D" uid="uid://svanwnmrcqco" path="res://Assets/Ui/Buttons/UpHover.png" id="9_hf40a"]
@@ -181,6 +182,8 @@ texture_normal = ExtResource("3_uj1me")
 texture_pressed = ExtResource("4_4qulx")
 texture_hover = ExtResource("5_y1cep")
 texture_disabled = ExtResource("6_lh6a5")
+script = ExtResource("7_6avwv")
+enable_double_clicking = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Up" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=2100232667]
@@ -188,6 +191,8 @@ layout_mode = 2
 texture_normal = ExtResource("7_y460k")
 texture_pressed = ExtResource("8_itila")
 texture_hover = ExtResource("9_hf40a")
+script = ExtResource("7_6avwv")
+enable_double_clicking = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Down" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=1503579703]
@@ -195,6 +200,8 @@ layout_mode = 2
 texture_normal = ExtResource("10_iaa25")
 texture_pressed = ExtResource("11_0i13e")
 texture_hover = ExtResource("12_qdlyy")
+script = ExtResource("7_6avwv")
+enable_double_clicking = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Left" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=347511284]
@@ -202,6 +209,8 @@ layout_mode = 2
 texture_normal = ExtResource("16_8foqs")
 texture_pressed = ExtResource("17_5ospq")
 texture_hover = ExtResource("18_lqp10")
+script = ExtResource("7_6avwv")
+enable_double_clicking = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Right" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=1923062389]
@@ -209,6 +218,8 @@ layout_mode = 2
 texture_normal = ExtResource("13_h8ghj")
 texture_pressed = ExtResource("14_4252r")
 texture_hover = ExtResource("15_cmkwv")
+script = ExtResource("7_6avwv")
+enable_double_clicking = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Delete" type="TextureButton" parent="Hub/Controls/Actions/HBox/Grid" unique_id=1749330032]
@@ -217,6 +228,8 @@ texture_normal = ExtResource("19_mvp1t")
 texture_pressed = ExtResource("20_lxtof")
 texture_hover = ExtResource("21_6avwv")
 texture_disabled = ExtResource("22_lxtof")
+script = ExtResource("7_6avwv")
+enable_double_clicking = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Moves" type="Control" parent="Hub" unique_id=1530895039]
@@ -295,6 +308,8 @@ vertical_alignment = 1
 [node name="Restart" type="Button" parent="GameOver/Center/VBox" unique_id=565145784]
 layout_mode = 2
 text = "game.bt_respawn"
+flat = true
+script = ExtResource("7_6avwv")
 
 [node name="GameWin" type="Control" parent="." unique_id=395851722]
 visible = false
@@ -409,10 +424,14 @@ columns = 2
 [node name="Cancel" type="Button" parent="GameWin/Center/VBox/MarginInput/VBox/Margin/Center/Grid" unique_id=303036917]
 layout_mode = 2
 text = "game.win.cancel"
+flat = true
+script = ExtResource("7_6avwv")
 
 [node name="Accept" type="Button" parent="GameWin/Center/VBox/MarginInput/VBox/Margin/Center/Grid" unique_id=1006781248]
 layout_mode = 2
 text = "game.win.accept"
+flat = true
+script = ExtResource("7_6avwv")
 
 [node name="ExitMargin" type="MarginContainer" parent="." unique_id=1306534916]
 anchors_preset = 1
@@ -429,6 +448,8 @@ theme_override_constants/margin_bottom = 10
 [node name="Exit" type="Button" parent="ExitMargin" unique_id=2098589926]
 layout_mode = 2
 text = "game.bt_exit"
+flat = true
+script = ExtResource("7_6avwv")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1710449139]
 anchors_preset = 15

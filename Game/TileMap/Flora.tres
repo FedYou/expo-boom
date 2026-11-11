@@ -1,0 +1,32 @@
+[gd_resource type="TileSet" format=3 uid="uid://6km2aflaxy6q"]
+
+[ext_resource type="Texture2D" uid="uid://doxc1t20d2pr1" path="res://Assets/Textures/Decorations/GrassSmall.png" id="1_koi4p"]
+[ext_resource type="Texture2D" uid="uid://dqs1iant1nuvw" path="res://Assets/Textures/Decorations/RedFlower.png" id="2_oyh3f"]
+[ext_resource type="Texture2D" uid="uid://di7o6w6yvdkp6" path="res://Assets/Textures/Decorations/GrassLarger.png" id="3_gg6ub"]
+[ext_resource type="Texture2D" uid="uid://dun0a4cuq3t17" path="res://Assets/Textures/Decorations/DryBush.png" id="4_emb1n"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fwu2q"]
+texture = ExtResource("1_koi4p")
+0:0/animation_columns = 3
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_74sfo"]
+texture = ExtResource("2_oyh3f")
+0:0/animation_columns = 4
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s5ecr"]
+texture = ExtResource("3_gg6ub")
+0:0/animation_columns = 3
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gjeei"]
+texture = ExtResource("4_emb1n")
+0:0/animation_columns = 3
+0:0/0 = 0
+
+[resource]
+sources/1 = SubResource("TileSetAtlasSource_fwu2q")
+sources/2 = SubResource("TileSetAtlasSource_74sfo")
+sources/4 = SubResource("TileSetAtlasSource_s5ecr")
+sources/6 = SubResource("TileSetAtlasSource_gjeei")
