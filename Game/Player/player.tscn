@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://csjkhf8h4uaj5"]
 
-[ext_resource type="Shader" uid="uid://daervfeskjmar" path="res://Game/Shaders/shake.gdshader" id="1_4ddeg"]
+[ext_resource type="Shader" uid="uid://daervfeskjmar" path="res://Game/Shaders/Shake.gdshader" id="1_4ddeg"]
 [ext_resource type="Script" uid="uid://bnp17op5lhfsp" path="res://Game/Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://cndd2e4q3fpu3" path="res://Assets/Textures/Player/Car.png" id="2_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://4ayix8kyipxd" path="res://Assets/Textures/Player/explosion.png" id="4_db2hk"]

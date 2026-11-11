@@ -1,0 +1,1623 @@
+[gd_scene format=4 uid="uid://d2lh2yq885obe"]
+
+[ext_resource type="Script" uid="uid://yu223ir4matd" path="res://Game/Levels/level.gd" id="1_lv"]
+[ext_resource type="TileSet" uid="uid://tp4jrg70h07y" path="res://Game/TileMap/Background.tres" id="2_6jkk2"]
+[ext_resource type="TileSet" uid="uid://dsq0o8urixgoe" path="res://Game/TileMap/Route.tres" id="3_y8ydg"]
+[ext_resource type="TileSet" uid="uid://b5u4vorjvwrwv" path="res://Game/TileMap/GuardRail.tres" id="4_l31ht"]
+[ext_resource type="Shader" uid="uid://iucnpboexr8r" path="res://Game/Shaders/WindSway.gdshader" id="5_706iw"]
+[ext_resource type="TileSet" uid="uid://6km2aflaxy6q" path="res://Game/TileMap/Flora.tres" id="6_4tdl2"]
+[ext_resource type="TileSet" uid="uid://bfhn1cj74wueu" path="res://Game/TileMap/Borders.tres" id="7_tmscx"]
+[ext_resource type="PackedScene" uid="uid://mkmrk384itda" path="res://Game/Obstacles/pothole.tscn" id="8_47w8d"]
+[ext_resource type="PackedScene" uid="uid://bydmptbajswuk" path="res://Game/Obstacles/trunk.tscn" id="9_jux3h"]
+[ext_resource type="PackedScene" uid="uid://ct8hp0l21vfrn" path="res://Game/Obstacles/tree.tscn" id="9_w3g7y"]
+[ext_resource type="PackedScene" uid="uid://bgv3a4omm7tva" path="res://Game/Objetcs/coin.tscn" id="10_2m6w3"]
+[ext_resource type="PackedScene" uid="uid://k3eiwkdvds63" path="res://Game/Decorations/streetlight.tscn" id="11_21f3s"]
+[ext_resource type="Shader" uid="uid://d0lc737f8iq81" path="res://Game/Shaders/AnimatedFog.gdshader" id="12_2wpxb"]
+[ext_resource type="PackedScene" uid="uid://c0v52pv8cgw74" path="res://Game/Objetcs/gasoline.tscn" id="12_lce14"]
+[ext_resource type="AudioStream" uid="uid://7a07xe7ed773" path="res://Assets/Sounds/Ambient/Wind.ogg" id="12_r5trp"]
+[ext_resource type="PackedScene" uid="uid://djh4jympr7lxk" path="res://Game/exit_area.tscn" id="13_f8e4p"]
+[ext_resource type="PackedScene" uid="uid://ntx26e1uclqr" path="res://Game/Fog/individual_fog .tscn" id="13_lce14"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4fcl"]
+shader = ExtResource("5_706iw")
+shader_parameter/wind_speed = 1.6
+shader_parameter/sway_horizontal = 0.11
+shader_parameter/sway_vertical = 0.06
+shader_parameter/flutter_speed = 1.5
+shader_parameter/flutter = 0.02
+shader_parameter/fixed_base = 0.18
+shader_parameter/height_curve = 1.55
+shader_parameter/mesh_expand = 1.0
+shader_parameter/phase_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gy5b4"]
+shader = ExtResource("12_2wpxb")
+shader_parameter/color = Color(1, 1, 1, 0.23921569)
+shader_parameter/OCTAVES = 4
+shader_parameter/enable_pixelation = true
+shader_parameter/pixelation_amount = 150
+shader_parameter/fog_direction = Vector2(1, 1)
+shader_parameter/scroll_noise_tex = false
+shader_parameter/noise_scroll_direction = Vector2(1, 0)
+
+[sub_resource type="Gradient" id="Gradient_lce14"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_khwga"]
+gradient = SubResource("Gradient_lce14")
+
+[node name="Level 2" type="Node2D" unique_id=1660126528 node_paths=PackedStringArray("player", "camara_limits", "ambient_sound")]
+script = ExtResource("1_lv")
+player = NodePath("Settings/Level/Player")
+player_direction = 3
+max_movements = 32
+camara_limits = NodePath("Settings/Level/Camara")
+ambient_sound = NodePath("Sound/Ambient")
+
+[node name="Map" type="Node2D" parent="." unique_id=1472609951]
+
+[node name="TileMap" type="Node2D" parent="Map" unique_id=1776185870]
+
+[node name="Background" type="TileMapLayer" parent="Map/TileMap" unique_id=1329073482]
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAMAAgAAAAAAAAAAAAQAAgAAAAAAAAAAAAUAAgAAAAAAAAAAAAYAAgAAAAAAAAAAAAcAAgAAAAAAAAAAAAgAAgAAAAAAAAAAAAkAAgAAAAAAAAAAAAoAAgAAAAAAAAAAAAsAAgAAAAAAAAABAAAAAgAAAAAAAAABAAEAAgAAAAAAAAABAAIAAgAAAAAAAAABAAMAAgAAAAAAAAABAAQAAgAAAAAAAAABAAUAAgAAAAAAAAABAAYAAgAAAAAAAAABAAcAAgAAAAAAAAABAAgAAgAAAAAAAAABAAkAAgAAAAAAAAABAAoAAgAAAAAAAAABAAsAAgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAACAAIAAgAAAAAAAAACAAMAAgAAAAAAAAACAAQAAgAAAAAAAAACAAUAAgAAAAAAAAACAAYAAgAAAAAAAAACAAcAAgAAAAAAAAACAAgAAgAAAAAAAAACAAkAAgAAAAAAAAACAAoAAgAAAAAAAAACAAsAAgAAAAAAAAADAAAAAgAAAAAAAAADAAEAAgAAAAAAAAADAAIAAgAAAAAAAAADAAMAAgAAAAAAAAADAAQAAgAAAAAAAAADAAUAAgAAAAAAAAADAAYAAgAAAAAAAAADAAcAAgAAAAAAAAADAAgAAgAAAAAAAAADAAkAAgAAAAAAAAADAAoAAgAAAAAAAAADAAsAAgAAAAAAAAAEAAAAAgAAAAAAAAAEAAEAAgAAAAAAAAAEAAIAAgAAAAAAAAAEAAMAAgAAAAAAAAAEAAQAAgAAAAAAAAAEAAUAAgAAAAAAAAAEAAYAAgAAAAAAAAAEAAcAAgAAAAAAAAAEAAgAAgAAAAAAAAAEAAkAAgAAAAAAAAAEAAoAAgAAAAAAAAAEAAsAAgAAAAAAAAAFAAAAAgAAAAAAAAAFAAEAAgAAAAAAAAAFAAIAAgAAAAAAAAAFAAMAAgAAAAAAAAAFAAQAAgAAAAAAAAAFAAUAAgAAAAAAAAAFAAYAAgAAAAAAAAAFAAcAAgAAAAAAAAAFAAgAAgAAAAAAAAAFAAkAAgAAAAAAAAAFAAoAAgAAAAAAAAAFAAsAAgAAAAAAAAAGAAAAAgAAAAAAAAAGAAEAAgAAAAAAAAAGAAIAAgAAAAAAAAAGAAMAAgAAAAAAAAAGAAQAAgAAAAAAAAAGAAUAAgAAAAAAAAAGAAYAAgAAAAAAAAAGAAcAAgAAAAAAAAAGAAgAAgAAAAAAAAAGAAkAAgAAAAAAAAAGAAoAAgAAAAAAAAAGAAsAAgAAAAAAAAAHAAAAAgAAAAAAAAAHAAEAAgAAAAAAAAAHAAIAAgAAAAAAAAAHAAMAAgAAAAAAAAAHAAQAAgAAAAAAAAAHAAUAAgAAAAAAAAAHAAYAAgAAAAAAAAAHAAcAAgAAAAAAAAAHAAgAAgAAAAAAAAAHAAkAAgAAAAAAAAAHAAoAAgAAAAAAAAAHAAsAAgAAAAAAAAAIAAAAAgAAAAAAAAAIAAEAAgAAAAAAAAAIAAIAAgAAAAAAAAAIAAMAAgAAAAAAAAAIAAQAAgAAAAAAAAAIAAUAAgAAAAAAAAAIAAYAAgAAAAAAAAAIAAcAAgAAAAAAAAAIAAgAAgAAAAAAAAAIAAkAAgAAAAAAAAAIAAoAAgAAAAAAAAAIAAsAAgAAAAAAAAAJAAAAAgAAAAAAAAAJAAEAAgAAAAAAAAAJAAIAAgAAAAAAAAAJAAMAAgAAAAAAAAAJAAQAAgAAAAAAAAAJAAUAAgAAAAAAAAAJAAYAAgAAAAAAAAAJAAcAAgAAAAAAAAAJAAgAAgAAAAAAAAAJAAkAAgAAAAAAAAAJAAoAAgAAAAAAAAAJAAsAAgAAAAAAAAAKAAAAAgAAAAAAAAAKAAIAAgAAAAAAAAAKAAMAAgAAAAAAAAAKAAQAAgAAAAAAAAAKAAUAAgAAAAAAAAAKAAYAAgAAAAAAAAAKAAcAAgAAAAAAAAAKAAgAAgAAAAAAAAAKAAkAAgAAAAAAAAAKAAoAAgAAAAAAAAAKAAsAAgAAAAAAAAALAAAAAgAAAAAAAAALAAEAAgAAAAAAAAALAAIAAgAAAAAAAAALAAMAAgAAAAAAAAALAAQAAgAAAAAAAAALAAUAAgAAAAAAAAALAAYAAgAAAAAAAAALAAcAAgAAAAAAAAALAAgAAgAAAAAAAAALAAkAAgAAAAAAAAALAAoAAgAAAAAAAAALAAsAAgAAAAAAAAAMAAAAAgAAAAAAAAAMAAEAAgAAAAAAAAAMAAIAAgAAAAAAAAAMAAMAAgAAAAAAAAAMAAQAAgAAAAAAAAAMAAUAAgAAAAAAAAAMAAYAAgAAAAAAAAAMAAcAAgAAAAAAAAAMAAgAAgAAAAAAAAAMAAkAAgAAAAAAAAAMAAoAAgAAAAAAAAAMAAsAAgAAAAAAAAANAAAAAgAAAAAAAAANAAEAAgAAAAAAAAANAAIAAgAAAAAAAAANAAMAAgAAAAAAAAANAAQAAgAAAAAAAAANAAUAAgAAAAAAAAANAAYAAgAAAAAAAAANAAcAAgAAAAAAAAANAAgAAgAAAAAAAAANAAkAAgAAAAAAAAANAAoAAgAAAAAAAAANAAsAAgAAAAAAAAAOAAAAAgAAAAAAAAAOAAEAAgAAAAAAAAAOAAIAAgAAAAAAAAAOAAMAAgAAAAAAAAAOAAQAAgAAAAAAAAAOAAUAAgAAAAAAAAAOAAYAAgAAAAAAAAAOAAcAAgAAAAAAAAAOAAgAAgAAAAAAAAAOAAkAAgAAAAAAAAAOAAoAAgAAAAAAAAAOAAsAAgAAAAAAAAAAAAwAAgAAAAAAAAABAAwAAgAAAAAAAAACAAwAAgAAAAAAAAADAAwAAgAAAAAAAAAEAAwAAgAAAAAAAAAFAAwAAgAAAAAAAAAGAAwAAgAAAAAAAAAHAAwAAgAAAAAAAAAIAAwAAgAAAAAAAAAJAAwAAgAAAAAAAAAKAAwAAgAAAAAAAAALAAwAAgAAAAAAAAAMAAwAAgAAAAAAAAANAAwAAgAAAAAAAAAOAAwAAgAAAAAAAAAAAP//AgAAAAAAAAABAP//AgAAAAAAAAACAP//AgAAAAAAAAADAP//AgAAAAAAAAAEAP//AgAAAAAAAAAFAP//AgAAAAAAAAAGAP//AgAAAAAAAAAHAP//AgAAAAAAAAAIAP//AgAAAAAAAAAJAP//AgAAAAAAAAAKAP//AgAAAAAAAAALAP//AgAAAAAAAAAMAP//AgAAAAAAAAANAP//AgAAAAAAAAAOAP//AgAAAAAAAAD//wEAAgAAAAAAAAD//wIAAgAAAAAAAAD//wMAAgAAAAAAAAD//wQAAgAAAAAAAAD//wUAAgAAAAAAAAD//wYAAgAAAAAAAAD//wcAAgAAAAAAAAD//wgAAgAAAAAAAAD//wkAAgAAAAAAAAD//woAAgAAAAAAAAD//wsAAgAAAAAAAAD//wwAAgAAAAAAAAD/////AgAAAAAAAAD//wAAAgAAAAAAAAAPAP//AgAAAAAAAAAPAAAAAgAAAAAAAAAPAAEAAgAAAAAAAAAPAAIAAgAAAAAAAAAPAAMAAgAAAAAAAAAPAAQAAgAAAAAAAAAPAAUAAgAAAAAAAAAPAAYAAgAAAAAAAAAPAAcAAgAAAAAAAAAPAAgAAgAAAAAAAAAPAAkAAgAAAAAAAAAPAAoAAgAAAAAAAAAPAAsAAgAAAAAAAAAPAAwAAgAAAAAAAAAQAP//AgAAAAAAAAAQAAAAAgAAAAAAAAAQAAEAAgAAAAAAAAAQAAIAAgAAAAAAAAAQAAMAAgAAAAAAAAAQAAQAAgAAAAAAAAAQAAUAAgAAAAAAAAAQAAYAAgAAAAAAAAAQAAcAAgAAAAAAAAAQAAgAAgAAAAAAAAAQAAkAAgAAAAAAAAAQAAoAAgAAAAAAAAAQAAsAAgAAAAAAAAAQAAwAAgAAAAAAAAD+////AgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD+/wIAAgAAAAAAAAD+/wMAAgAAAAAAAAD+/wQAAgAAAAAAAAD+/wUAAgAAAAAAAAD+/wYAAgAAAAAAAAD+/wcAAgAAAAAAAAD+/wgAAgAAAAAAAAD+/wkAAgAAAAAAAAD+/woAAgAAAAAAAAD+/wsAAgAAAAAAAAD+/wwAAgAAAAAAAAD+/w0AAgAAAAAAAAD//w0AAgAAAAAAAAAAAA0AAgAAAAAAAAABAA0AAgAAAAAAAAACAA0AAgAAAAAAAAADAA0AAgAAAAAAAAAEAA0AAgAAAAAAAAAFAA0AAgAAAAAAAAAGAA0AAgAAAAAAAAAHAA0AAgAAAAAAAAAIAA0AAgAAAAAAAAAJAA0AAgAAAAAAAAAKAA0AAgAAAAAAAAALAA0AAgAAAAAAAAAMAA0AAgAAAAAAAAANAA0AAgAAAAAAAAAOAA0AAgAAAAAAAAAPAA0AAgAAAAAAAAAQAA0AAgAAAAAAAAD+//7/AgAAAAAAAAD///7/AgAAAAAAAAAAAP7/AgAAAAAAAAABAP7/AgAAAAAAAAACAP7/AgAAAAAAAAADAP7/AgAAAAAAAAAEAP7/AgAAAAAAAAAFAP7/AgAAAAAAAAAGAP7/AgAAAAAAAAAHAP7/AgAAAAAAAAAIAP7/AgAAAAAAAAAJAP7/AgAAAAAAAAAKAP7/AgAAAAAAAAALAP7/AgAAAAAAAAAMAP7/AgAAAAAAAAANAP7/AgAAAAAAAAAOAP7/AgAAAAAAAAAPAP7/AgAAAAAAAAAQAP7/AgAAAAAAAAAKAAEAAgAAAAAAAAARAP7/AgAAAAAAAAARAP//AgAAAAAAAAARAAAAAgAAAAAAAAARAAEAAgAAAAAAAAARAAIAAgAAAAAAAAARAAMAAgAAAAAAAAARAAQAAgAAAAAAAAARAAUAAgAAAAAAAAARAAYAAgAAAAAAAAARAAcAAgAAAAAAAAARAAgAAgAAAAAAAAARAAkAAgAAAAAAAAARAAoAAgAAAAAAAAARAAsAAgAAAAAAAAARAAwAAgAAAAAAAAARAA0AAgAAAAAAAAASAP7/AgAAAAAAAAASAP//AgAAAAAAAAASAAAAAgAAAAAAAAASAAEAAgAAAAAAAAASAAIAAgAAAAAAAAASAAMAAgAAAAAAAAASAAQAAgAAAAAAAAASAAUAAgAAAAAAAAASAAYAAgAAAAAAAAASAAcAAgAAAAAAAAASAAgAAgAAAAAAAAASAAkAAgAAAAAAAAASAAoAAgAAAAAAAAASAAsAAgAAAAAAAAASAAwAAgAAAAAAAAASAA0AAgAAAAAAAAA=")
+tile_set = ExtResource("2_6jkk2")
+
+[node name="Route" type="TileMapLayer" parent="Map/TileMap" unique_id=1458574065]
+tile_map_data = PackedByteArray("AAACAAgAAQAAAAEAAAACAAcAAQACAAAAAAABAAcAAQAAAAIAAAABAAYAAQAAAAEAAAAEAAEAAQAAAAAAAAAFAAEAAQABAAAAAAAHAAMAAQAAAAAAAAAIAAMAAQABAAAAAAAJAAMAAQABAAAAAAAKAAMAAQACAAIAAAALAAIAAQABAAAAAAAMAAIAAQACAAIAAAAMAAEAAQAAAAAAAAANAAEAAQABAAAAAAAOAAIAAQAAAAIAAAAPAAIAAQACAAAAAAAPAAMAAQACAAEAAAAPAAQAAQACAAEAAAAOAAUAAQABAAAAAAANAAYAAQACAAEAAAANAAcAAQACAAIAAAAOAAgAAQAAAAAAAAAHAAQAAQAAAAEAAAAHAAUAAQABAAEAAGAIAAYAAQABAAEAAAALAAcAAQABAAEAAFAMAAcAAQABAAAAAAADAAkAAQACAAAAAAAEAAoAAQABAAAAAAAGAAsAAQABAAAAAAAHAAsAAQABAAEAAGAIAAsAAQABAAAAAAAJAAsAAQABAAAAAAAKAAsAAQACAAIAAAAKAAoAAQAAAAAAAAALAAoAAQACAAIAAAALAAkAAQAAAAEAAAADAAIAAQABAAEAAFACAAkAAQAAAAIAAAAFAAoAAQACAAAAAAAGAAUAAQABAAAAAAAFAAUAAQABAAEAAFAEAAUAAQAAAAIAAAAEAAQAAQACAAAAAAADAAQAAQAAAAIAAAADAAMAAQAAAAEAAAAHAAEAAQABAAAAAAAJAAEAAQABAAAAAAAKAAIAAQABAAEAAAAIAAEAAQABAAAAAAAPAAgAAQABAAAAAAAQAAgAAQABAAAAAAANAAkAAQABAAAAAAABAAIAAQAAAAAAAAACAAIAAQABAAAAAAABAAUAAQAAAAEAAAAAAAQAAQABAAAAAAABAAQAAQABAAEAADABAAMAAQAAAAEAAAADAAoAAQAAAAIAAAAFAAsAAQAAAAIAAAAHAAkAAQAAAAAAAAAHAAoAAQAAAAEAAAAIAAkAAQACAAIAAAAIAAgAAQAAAAEAAAAIAAcAAQABAAEAADAIAAUAAQACAAAAAAAJAAYAAQABAAAAAAAKAAYAAQACAAAAAAAKAAcAAQAAAAIAAAAHAAcAAQABAAIAAAAGAAcAAQABAAIAAAAFAAcAAQAAAAIAAAAFAAYAAQAAAAEAAAAEAAIAAQACAAIAAAAGAAEAAQABAAAAAAAKAAEAAQACAAAAAAAOAAEAAQACAAAAAAAPAAUAAQACAAIAAAANAAUAAQAAAAAAAAALAAgAAQAAAAEAAAAMAAkAAQABAAIAAAAOAAkAAQACAAIAAAAEAAcAAQABAAIAAAADAAcAAQABAAIAAAARAAgAAQABAAIAAAASAAgAAQABAAIAAAA=")
+tile_set = ExtResource("3_y8ydg")
+
+[node name="Exit" type="TileMapLayer" parent="Map/TileMap" unique_id=1048631239]
+tile_map_data = PackedByteArray("AAAQAAgABQAAAAAAAAA=")
+tile_set = ExtResource("2_6jkk2")
+
+[node name="Borders" type="TileMapLayer" parent="Map/TileMap" unique_id=764989942]
+tile_map_data = PackedByteArray("AAAAAAQAAQAAAAAAAAABAAQAAQAAAAAAAAABAAMAAQAAAAAAAAABAAIAAQAAAAAAAAACAAIAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAEAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAMAAQAAAAAAAAAIAAMAAQAAAAAAAAAJAAMAAQAAAAAAAAAKAAMAAQAAAAAAAAAKAAIAAQAAAAAAAAAKAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAIAAEAAQAAAAAAAAAJAAEAAQAAAAAAAAAEAAIAAQAAAAAAAAABAAUAAQAAAAAAAAABAAYAAQAAAAAAAAABAAcAAQAAAAAAAAACAAcAAQAAAAAAAAADAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAAFAAYAAQAAAAAAAAAFAAcAAQAAAAAAAAAIAAYAAQAAAAAAAAAIAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAHAAcAAQAAAAAAAAAJAAYAAQAAAAAAAAAKAAYAAQAAAAAAAAAKAAcAAQAAAAAAAAACAAgAAQAAAAAAAAACAAkAAQAAAAAAAAADAAkAAQAAAAAAAAADAAoAAQAAAAAAAAAEAAoAAQAAAAAAAAAFAAoAAQAAAAAAAAAFAAsAAQAAAAAAAAAGAAsAAQAAAAAAAAAHAAsAAQAAAAAAAAAHAAoAAQAAAAAAAAAHAAkAAQAAAAAAAAAIAAkAAQAAAAAAAAAIAAgAAQAAAAAAAAALAAcAAQAAAAAAAAALAAgAAQAAAAAAAAALAAkAAQAAAAAAAAALAAoAAQAAAAAAAAAKAAoAAQAAAAAAAAAKAAsAAQAAAAAAAAAIAAsAAQAAAAAAAAAJAAsAAQAAAAAAAAAQAAgAAQAAAAAAAAAPAAgAAQAAAAAAAAAOAAgAAQAAAAAAAAAOAAkAAQAAAAAAAAANAAkAAQAAAAAAAAAMAAkAAQAAAAAAAAAMAAcAAQAAAAAAAAANAAcAAQAAAAAAAAANAAYAAQAAAAAAAAANAAUAAQAAAAAAAAAOAAUAAQAAAAAAAAAPAAUAAQAAAAAAAAALAAIAAQAAAAAAAAAMAAIAAQAAAAAAAAAMAAEAAQAAAAAAAAANAAEAAQAAAAAAAAAOAAEAAQAAAAAAAAAOAAIAAQAAAAAAAAAPAAIAAQAAAAAAAAAPAAMAAQAAAAAAAAAPAAQAAQAAAAAAAAA=")
+tile_set = ExtResource("7_tmscx")
+
+[node name="GuardRail" type="TileMapLayer" parent="Map/TileMap" unique_id=1751025461]
+tile_map_data = PackedByteArray("AAAAAAcAAAABAAIAAAABAAcAAAACAAIAAAD//wcAAAADAAAAAAD//wkAAAACAAEAAAD//woAAAADAAEAAAD//wgAAAACAAEAAAAAAAoAAAABAAAAAAABAAoAAAACAAAAAAABAAsAAAACAAEAAAABAAwAAAACAAEAAAABAA0AAAACAAEAAAABAA4AAAACAAEAAAABAA8AAAACAAEAAAABABAAAAADAAEAAAACABAAAAABAAAAAAADABAAAAACAAAAAAADABIAAAACAAEAAAADABEAAAACAAEAAAADABMAAAACAAEAAAADABQAAAADAAEAAAAEABQAAAABAAAAAAAFABQAAAACAAAAAAAFABUAAAACAAEAAAAFABYAAAADAAEAAAAGABYAAAABAAAAAAAHABYAAAABAAAAAAAIABYAAAABAAAAAAAJABYAAAACAAAAAAAKABgAAAABAAAAAAALABgAAAABAAAAAAAMABgAAAABAAAAAAANABgAAAABAAAAAAAOABgAAAABAAAAAAAPABgAAAABAAAAAAAQABgAAAABAAAAAAARABgAAAABAAAAAAASABgAAAABAAAAAAATABgAAAABAAAAAAAUABgAAAABAAAAAAAVABgAAAABAAAAAAAWABgAAAAEAAEAAAAWABYAAAAAAAAAAAAXABYAAAABAAAAAAAYABQAAAAAAAAAAAAZABQAAAABAAAAAAAaABQAAAABAAAAAAAbABQAAAABAAAAAAAcABQAAAABAAAAAAAdABQAAAABAAAAAAAeABIAAAAAAAAAAAAfABIAAAABAAAAAAAgABIAAAABAAAAAAAhABIAAAABAAAAAAAcAAwAAAAAAAAAAAAdAAwAAAABAAAAAAAeAAwAAAABAAAAAAAfAAwAAAABAAAAAAAZABAAAAABAAAAAAAaABAAAAABAAAAAAAbABAAAAACAAAAAAAYABAAAAAAAAAAAAAgAAwAAAAEAAEAAAASAA4AAAAAAAAAAAATAA4AAAACAAAAAAAQABQAAAAAAAAAAAARABQAAAABAAAAAAASABQAAAAEAAEAAAATABAAAAADAAEAAAAUABAAAAABAAAAAAAVABAAAAACAAAAAAAGABAAAAAAAAAAAAAHABAAAAABAAAAAAAIABAAAAABAAAAAAAJABAAAAABAAAAAAAKABAAAAABAAAAAAALABAAAAABAAAAAAAMABAAAAABAAAAAAANABAAAAABAAAAAAAOABAAAAABAAAAAAAPABAAAAACAAAAAAAMAAwAAAAAAAAAAAANAAwAAAABAAAAAAAOAAwAAAADAAIAAAAEAAYAAAAAAAAAAAAFAAYAAAACAAAAAAAGAAoAAAABAAAAAAAHAAoAAAACAAAAAAAIAAwAAAABAAAAAAAJAAwAAAABAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAABAAAAAAAKAAQAAAAAAAAAAAALAAQAAAABAAAAAAAMAAQAAAABAAAAAAANAAQAAAABAAAAAAAOAAQAAAABAAAAAAAPAAQAAAABAAAAAAAQAAQAAAABAAAAAAARAAQAAAABAAAAAAASAAQAAAABAAAAAAATAAQAAAACAAAAAAAaAAQAAAAAAAAAAAAbAAQAAAACAAAAAAAWAAYAAAAAAAAAAAAXAAYAAAABAAAAAAAYAAYAAAABAAAAAAAZAAYAAAABAAAAAAAcAAYAAAABAAAAAAAdAAYAAAACAAAAAAAQAAgAAAAAAAAAAAARAAgAAAABAAAAAAASAAgAAAABAAAAAAATAAgAAAABAAAAAAAUAAgAAAABAAAAAAAVAAgAAAABAAAAAAAMABUAAAAAAAIAAAANABUAAAACAAIAAAAOABEAAAABAAIAAAAPABEAAAACAAIAAAANABEAAAADAAAAAAAGABEAAAAAAAIAAAAHABEAAAABAAIAAAAIABEAAAAEAAAAAAAIABMAAAAAAAIAAAAJABMAAAABAAIAAAAKABMAAAABAAIAAAALABMAAAABAAIAAAAMABMAAAAEAAAAAAAQABUAAAAAAAIAAAARABUAAAABAAIAAAASABUAAAABAAIAAAATABUAAAACAAIAAAAUABMAAAABAAIAAAAVABMAAAACAAIAAAAQAAkAAAAAAAIAAAARAAkAAAABAAIAAAASAAsAAAAAAAIAAAATAAsAAAABAAIAAAAUAAsAAAABAAIAAAAVAAsAAAABAAIAAAAWAAsAAAAEAAAAAAAWAA0AAAAAAAIAAAAXAA0AAAABAAIAAAAYAA0AAAABAAIAAAAZAA0AAAACAAIAAAAZAAkAAAADAAAAAAAaAAkAAAABAAIAAAAbAAkAAAABAAIAAAAcAAkAAAABAAIAAAAdAAkAAAACAAIA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")
+tile_set = ExtResource("4_l31ht")
+
+[node name="Flora" type="TileMapLayer" parent="Map/TileMap" unique_id=256183264]
+material = SubResource("ShaderMaterial_y4fcl")
+tile_map_data = PackedByteArray("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")
+tile_set = ExtResource("6_4tdl2")
+
+[node name="Obstacles" type="Node2D" parent="Map" unique_id=609440660]
+
+[node name="Trunk" parent="Map/Obstacles" unique_id=1648015434 instance=ExtResource("9_jux3h")]
+position = Vector2(332, 112)
+
+[node name="Tree" parent="Map/Obstacles" unique_id=594023752 instance=ExtResource("9_w3g7y")]
+position = Vector2(266, 210)
+
+[node name="Pothole2" parent="Map/Obstacles" unique_id=938554628 instance=ExtResource("8_47w8d")]
+position = Vector2(434, 235)
+
+[node name="Trunk2" parent="Map/Obstacles" unique_id=1891041550 instance=ExtResource("9_jux3h")]
+position = Vector2(176, 371)
+
+[node name="Trunk3" parent="Map/Obstacles" unique_id=1180074448 instance=ExtResource("9_jux3h")]
+position = Vector2(48, 242)
+
+[node name="Objects" type="Node2D" parent="Map" unique_id=170932897]
+
+[node name="Coin" parent="Map/Objects" unique_id=816056592 instance=ExtResource("10_2m6w3")]
+position = Vector2(128, 336)
+
+[node name="Coin2" parent="Map/Objects" unique_id=633115418 instance=ExtResource("10_2m6w3")]
+position = Vector2(217, 370)
+
+[node name="Coin3" parent="Map/Objects" unique_id=395642777 instance=ExtResource("10_2m6w3")]
+position = Vector2(239, 313)
+
+[node name="Coin4" parent="Map/Objects" unique_id=335706776 instance=ExtResource("10_2m6w3")]
+position = Vector2(268, 252)
+
+[node name="Coin5" parent="Map/Objects" unique_id=396560631 instance=ExtResource("10_2m6w3")]
+position = Vector2(170, 244)
+
+[node name="Coin6" parent="Map/Objects" unique_id=329168380 instance=ExtResource("10_2m6w3")]
+position = Vector2(75, 241)
+
+[node name="Coin7" parent="Map/Objects" unique_id=1255138729 instance=ExtResource("10_2m6w3")]
+position = Vector2(79, 299)
+
+[node name="Coin8" parent="Map/Objects" unique_id=913193163 instance=ExtResource("10_2m6w3")]
+position = Vector2(41, 219)
+
+[node name="Coin9" parent="Map/Objects" unique_id=1774252630 instance=ExtResource("10_2m6w3")]
+position = Vector2(48, 176)
+
+[node name="Coin10" parent="Map/Objects" unique_id=806979741 instance=ExtResource("10_2m6w3")]
+position = Vector2(110, 83)
+
+[node name="Coin11" parent="Map/Objects" unique_id=1804308981 instance=ExtResource("10_2m6w3")]
+position = Vector2(47, 119)
+
+[node name="Coin12" parent="Map/Objects" unique_id=1867386399 instance=ExtResource("10_2m6w3")]
+position = Vector2(138, 146)
+
+[node name="Coin13" parent="Map/Objects" unique_id=961620982 instance=ExtResource("10_2m6w3")]
+position = Vector2(150, 53)
+
+[node name="Coin14" parent="Map/Objects" unique_id=141393385 instance=ExtResource("10_2m6w3")]
+position = Vector2(244, 45)
+
+[node name="Coin15" parent="Map/Objects" unique_id=1838726685 instance=ExtResource("10_2m6w3")]
+position = Vector2(327, 47)
+
+[node name="Coin16" parent="Map/Objects" unique_id=911990751 instance=ExtResource("10_2m6w3")]
+position = Vector2(241, 122)
+
+[node name="Coin17" parent="Map/Objects" unique_id=1643367521 instance=ExtResource("10_2m6w3")]
+position = Vector2(194, 176)
+
+[node name="Coin18" parent="Map/Objects" unique_id=425838152 instance=ExtResource("10_2m6w3")]
+position = Vector2(382, 76)
+
+[node name="Coin19" parent="Map/Objects" unique_id=962142497 instance=ExtResource("10_2m6w3")]
+position = Vector2(343, 83)
+
+[node name="Coin20" parent="Map/Objects" unique_id=386861342 instance=ExtResource("10_2m6w3")]
+position = Vector2(434, 46)
+
+[node name="Coin21" parent="Map/Objects" unique_id=1148664089 instance=ExtResource("10_2m6w3")]
+position = Vector2(497, 94)
+
+[node name="Coin22" parent="Map/Objects" unique_id=110192328 instance=ExtResource("10_2m6w3")]
+position = Vector2(487, 172)
+
+[node name="Coin23" parent="Map/Objects" unique_id=304345515 instance=ExtResource("10_2m6w3")]
+position = Vector2(431, 181)
+
+[node name="Coin24" parent="Map/Objects" unique_id=1557332357 instance=ExtResource("10_2m6w3")]
+position = Vector2(333, 208)
+
+[node name="Coin25" parent="Map/Objects" unique_id=340609387 instance=ExtResource("10_2m6w3")]
+position = Vector2(365, 281)
+
+[node name="Coin26" parent="Map/Objects" unique_id=1858803274 instance=ExtResource("10_2m6w3")]
+position = Vector2(339, 353)
+
+[node name="Coin27" parent="Map/Objects" unique_id=188436576 instance=ExtResource("10_2m6w3")]
+position = Vector2(397, 307)
+
+[node name="Coin28" parent="Map/Objects" unique_id=1978791814 instance=ExtResource("10_2m6w3")]
+position = Vector2(455, 303)
+
+[node name="Coin29" parent="Map/Objects" unique_id=2009567866 instance=ExtResource("10_2m6w3")]
+position = Vector2(489, 273)
+
+[node name="Gasoline" parent="Map/Objects" unique_id=1701066295 instance=ExtResource("12_lce14")]
+position = Vector2(280, 114)
+
+[node name="Gasoline2" parent="Map/Objects" unique_id=1325152287 instance=ExtResource("12_lce14")]
+position = Vector2(470, 76)
+
+[node name="Gasoline3" parent="Map/Objects" unique_id=261168636 instance=ExtResource("12_lce14")]
+position = Vector2(433, 206)
+
+[node name="Gasoline4" parent="Map/Objects" unique_id=2084858666 instance=ExtResource("12_lce14")]
+position = Vector2(199, 47)
+
+[node name="Decorations" type="Node2D" parent="Map" unique_id=143074236]
+
+[node name="Streetlight2" parent="Map/Decorations" unique_id=969300936 instance=ExtResource("11_21f3s")]
+position = Vector2(488, 254)
+
+[node name="Streetlight3" parent="Map/Decorations" unique_id=1115108738 instance=ExtResource("11_21f3s")]
+position = Vector2(503, 300)
+
+[node name="Streetlight" parent="Map/Decorations" unique_id=952236615 instance=ExtResource("11_21f3s")]
+position = Vector2(552, 254)
+
+[node name="Streetlight4" parent="Map/Decorations" unique_id=337081837 instance=ExtResource("11_21f3s")]
+position = Vector2(584, 299)
+
+[node name="Fog" type="Node2D" parent="Map" unique_id=1264300328]
+
+[node name="IndividualFog" parent="Map/Fog" unique_id=347170004 instance=ExtResource("13_lce14")]
+position = Vector2(54, 239)
+
+[node name="IndividualFog2" parent="Map/Fog" unique_id=1063524279 instance=ExtResource("13_lce14")]
+position = Vector2(88, 243)
+
+[node name="IndividualFog3" parent="Map/Fog" unique_id=345007807 instance=ExtResource("13_lce14")]
+position = Vector2(90, 217)
+
+[node name="IndividualFog4" parent="Map/Fog" unique_id=1166733730 instance=ExtResource("13_lce14")]
+position = Vector2(78, 276)
+
+[node name="IndividualFog5" parent="Map/Fog" unique_id=1093143107 instance=ExtResource("13_lce14")]
+position = Vector2(109, 260)
+
+[node name="IndividualFog6" parent="Map/Fog" unique_id=2017637013 instance=ExtResource("13_lce14")]
+position = Vector2(135, 237)
+
+[node name="IndividualFog7" parent="Map/Fog" unique_id=1864547512 instance=ExtResource("13_lce14")]
+position = Vector2(58, 301)
+
+[node name="IndividualFog8" parent="Map/Fog" unique_id=1012316932 instance=ExtResource("13_lce14")]
+position = Vector2(28, 273)
+
+[node name="IndividualFog9" parent="Map/Fog" unique_id=55002506 instance=ExtResource("13_lce14")]
+position = Vector2(-5, 258)
+
+[node name="IndividualFog10" parent="Map/Fog" unique_id=1500031891 instance=ExtResource("13_lce14")]
+position = Vector2(9, 227)
+
+[node name="IndividualFog11" parent="Map/Fog" unique_id=2103583483 instance=ExtResource("13_lce14")]
+position = Vector2(45, 216)
+
+[node name="IndividualFog12" parent="Map/Fog" unique_id=1997381574 instance=ExtResource("13_lce14")]
+position = Vector2(3, 195)
+
+[node name="IndividualFog14" parent="Map/Fog" unique_id=803773193 instance=ExtResource("13_lce14")]
+position = Vector2(157, 329)
+
+[node name="IndividualFog15" parent="Map/Fog" unique_id=2000299619 instance=ExtResource("13_lce14")]
+position = Vector2(191, 333)
+
+[node name="IndividualFog16" parent="Map/Fog" unique_id=2577602 instance=ExtResource("13_lce14")]
+position = Vector2(193, 307)
+
+[node name="IndividualFog17" parent="Map/Fog" unique_id=2114341640 instance=ExtResource("13_lce14")]
+position = Vector2(181, 366)
+
+[node name="IndividualFog18" parent="Map/Fog" unique_id=1918638688 instance=ExtResource("13_lce14")]
+position = Vector2(212, 350)
+
+[node name="IndividualFog19" parent="Map/Fog" unique_id=1342871729 instance=ExtResource("13_lce14")]
+position = Vector2(238, 327)
+
+[node name="IndividualFog20" parent="Map/Fog" unique_id=1586795176 instance=ExtResource("13_lce14")]
+position = Vector2(161, 391)
+
+[node name="IndividualFog21" parent="Map/Fog" unique_id=1164819189 instance=ExtResource("13_lce14")]
+position = Vector2(131, 363)
+
+[node name="IndividualFog22" parent="Map/Fog" unique_id=174098221 instance=ExtResource("13_lce14")]
+position = Vector2(98, 348)
+
+[node name="IndividualFog23" parent="Map/Fog" unique_id=1048832856 instance=ExtResource("13_lce14")]
+position = Vector2(112, 317)
+
+[node name="IndividualFog24" parent="Map/Fog" unique_id=837518889 instance=ExtResource("13_lce14")]
+position = Vector2(148, 306)
+
+[node name="IndividualFog25" parent="Map/Fog" unique_id=1093004934 instance=ExtResource("13_lce14")]
+position = Vector2(106, 285)
+
+[node name="IndividualFog26" parent="Map/Fog" unique_id=119179718 instance=ExtResource("13_lce14")]
+position = Vector2(165, 276)
+
+[node name="IndividualFog27" parent="Map/Fog" unique_id=132629415 instance=ExtResource("13_lce14")]
+position = Vector2(27, 352)
+
+[node name="IndividualFog28" parent="Map/Fog" unique_id=1895837746 instance=ExtResource("13_lce14")]
+position = Vector2(61, 356)
+
+[node name="IndividualFog29" parent="Map/Fog" unique_id=354764522 instance=ExtResource("13_lce14")]
+position = Vector2(63, 330)
+
+[node name="IndividualFog30" parent="Map/Fog" unique_id=217944006 instance=ExtResource("13_lce14")]
+position = Vector2(51, 389)
+
+[node name="IndividualFog31" parent="Map/Fog" unique_id=1557775508 instance=ExtResource("13_lce14")]
+position = Vector2(82, 373)
+
+[node name="IndividualFog32" parent="Map/Fog" unique_id=1372831992 instance=ExtResource("13_lce14")]
+position = Vector2(108, 350)
+
+[node name="IndividualFog33" parent="Map/Fog" unique_id=1649944192 instance=ExtResource("13_lce14")]
+position = Vector2(31, 414)
+
+[node name="IndividualFog34" parent="Map/Fog" unique_id=1362026224 instance=ExtResource("13_lce14")]
+position = Vector2(1, 386)
+
+[node name="IndividualFog35" parent="Map/Fog" unique_id=1936150748 instance=ExtResource("13_lce14")]
+position = Vector2(-32, 371)
+
+[node name="IndividualFog36" parent="Map/Fog" unique_id=194029841 instance=ExtResource("13_lce14")]
+position = Vector2(-18, 340)
+
+[node name="IndividualFog37" parent="Map/Fog" unique_id=1294364437 instance=ExtResource("13_lce14")]
+position = Vector2(18, 329)
+
+[node name="IndividualFog38" parent="Map/Fog" unique_id=376719070 instance=ExtResource("13_lce14")]
+position = Vector2(-24, 308)
+
+[node name="IndividualFog39" parent="Map/Fog" unique_id=1645500585 instance=ExtResource("13_lce14")]
+position = Vector2(35, 299)
+
+[node name="IndividualFog40" parent="Map/Fog" unique_id=2031622290 instance=ExtResource("13_lce14")]
+position = Vector2(298, 362)
+
+[node name="IndividualFog41" parent="Map/Fog" unique_id=1475515985 instance=ExtResource("13_lce14")]
+position = Vector2(332, 366)
+
+[node name="IndividualFog42" parent="Map/Fog" unique_id=357891467 instance=ExtResource("13_lce14")]
+position = Vector2(334, 340)
+
+[node name="IndividualFog43" parent="Map/Fog" unique_id=878354074 instance=ExtResource("13_lce14")]
+position = Vector2(322, 399)
+
+[node name="IndividualFog44" parent="Map/Fog" unique_id=1481335637 instance=ExtResource("13_lce14")]
+position = Vector2(353, 383)
+
+[node name="IndividualFog45" parent="Map/Fog" unique_id=670335731 instance=ExtResource("13_lce14")]
+position = Vector2(379, 360)
+
+[node name="IndividualFog46" parent="Map/Fog" unique_id=439067610 instance=ExtResource("13_lce14")]
+position = Vector2(302, 424)
+
+[node name="IndividualFog47" parent="Map/Fog" unique_id=618160844 instance=ExtResource("13_lce14")]
+position = Vector2(272, 396)
+
+[node name="IndividualFog48" parent="Map/Fog" unique_id=549938022 instance=ExtResource("13_lce14")]
+position = Vector2(239, 381)
+
+[node name="IndividualFog49" parent="Map/Fog" unique_id=778884328 instance=ExtResource("13_lce14")]
+position = Vector2(253, 350)
+
+[node name="IndividualFog50" parent="Map/Fog" unique_id=1524153517 instance=ExtResource("13_lce14")]
+position = Vector2(289, 339)
+
+[node name="IndividualFog51" parent="Map/Fog" unique_id=114497747 instance=ExtResource("13_lce14")]
+position = Vector2(247, 318)
+
+[node name="IndividualFog52" parent="Map/Fog" unique_id=1183117235 instance=ExtResource("13_lce14")]
+position = Vector2(306, 309)
+
+[node name="IndividualFog53" parent="Map/Fog" unique_id=2059741271 instance=ExtResource("13_lce14")]
+position = Vector2(154, 426)
+
+[node name="IndividualFog54" parent="Map/Fog" unique_id=1281513303 instance=ExtResource("13_lce14")]
+position = Vector2(188, 430)
+
+[node name="IndividualFog55" parent="Map/Fog" unique_id=1648851105 instance=ExtResource("13_lce14")]
+position = Vector2(190, 404)
+
+[node name="IndividualFog56" parent="Map/Fog" unique_id=1765690372 instance=ExtResource("13_lce14")]
+position = Vector2(178, 463)
+
+[node name="IndividualFog57" parent="Map/Fog" unique_id=53657774 instance=ExtResource("13_lce14")]
+position = Vector2(209, 447)
+
+[node name="IndividualFog58" parent="Map/Fog" unique_id=369155232 instance=ExtResource("13_lce14")]
+position = Vector2(235, 424)
+
+[node name="IndividualFog59" parent="Map/Fog" unique_id=2015630022 instance=ExtResource("13_lce14")]
+position = Vector2(158, 488)
+
+[node name="IndividualFog60" parent="Map/Fog" unique_id=1656852507 instance=ExtResource("13_lce14")]
+position = Vector2(128, 460)
+
+[node name="IndividualFog61" parent="Map/Fog" unique_id=1580405249 instance=ExtResource("13_lce14")]
+position = Vector2(95, 445)
+
+[node name="IndividualFog62" parent="Map/Fog" unique_id=540885755 instance=ExtResource("13_lce14")]
+position = Vector2(109, 414)
+
+[node name="IndividualFog63" parent="Map/Fog" unique_id=246343733 instance=ExtResource("13_lce14")]
+position = Vector2(145, 403)
+
+[node name="IndividualFog64" parent="Map/Fog" unique_id=1494764833 instance=ExtResource("13_lce14")]
+position = Vector2(103, 382)
+
+[node name="IndividualFog65" parent="Map/Fog" unique_id=753914410 instance=ExtResource("13_lce14")]
+position = Vector2(162, 373)
+
+[node name="IndividualFog66" parent="Map/Fog" unique_id=613139155 instance=ExtResource("13_lce14")]
+position = Vector2(229, 266)
+
+[node name="IndividualFog67" parent="Map/Fog" unique_id=1296077564 instance=ExtResource("13_lce14")]
+position = Vector2(263, 270)
+
+[node name="IndividualFog68" parent="Map/Fog" unique_id=1180773407 instance=ExtResource("13_lce14")]
+position = Vector2(265, 244)
+
+[node name="IndividualFog69" parent="Map/Fog" unique_id=192659837 instance=ExtResource("13_lce14")]
+position = Vector2(253, 303)
+
+[node name="IndividualFog70" parent="Map/Fog" unique_id=848146604 instance=ExtResource("13_lce14")]
+position = Vector2(284, 287)
+
+[node name="IndividualFog71" parent="Map/Fog" unique_id=605345937 instance=ExtResource("13_lce14")]
+position = Vector2(310, 264)
+
+[node name="IndividualFog72" parent="Map/Fog" unique_id=1573877287 instance=ExtResource("13_lce14")]
+position = Vector2(233, 328)
+
+[node name="IndividualFog73" parent="Map/Fog" unique_id=1618681052 instance=ExtResource("13_lce14")]
+position = Vector2(203, 300)
+
+[node name="IndividualFog74" parent="Map/Fog" unique_id=1870652430 instance=ExtResource("13_lce14")]
+position = Vector2(170, 285)
+
+[node name="IndividualFog75" parent="Map/Fog" unique_id=153251015 instance=ExtResource("13_lce14")]
+position = Vector2(184, 254)
+
+[node name="IndividualFog76" parent="Map/Fog" unique_id=94621399 instance=ExtResource("13_lce14")]
+position = Vector2(220, 243)
+
+[node name="IndividualFog77" parent="Map/Fog" unique_id=896681272 instance=ExtResource("13_lce14")]
+position = Vector2(178, 222)
+
+[node name="IndividualFog78" parent="Map/Fog" unique_id=124850235 instance=ExtResource("13_lce14")]
+position = Vector2(237, 213)
+
+[node name="IndividualFog79" parent="Map/Fog" unique_id=1172515639 instance=ExtResource("13_lce14")]
+position = Vector2(152, 177)
+
+[node name="IndividualFog80" parent="Map/Fog" unique_id=1948462052 instance=ExtResource("13_lce14")]
+position = Vector2(186, 181)
+
+[node name="IndividualFog81" parent="Map/Fog" unique_id=176798759 instance=ExtResource("13_lce14")]
+position = Vector2(188, 155)
+
+[node name="IndividualFog82" parent="Map/Fog" unique_id=962156567 instance=ExtResource("13_lce14")]
+position = Vector2(176, 214)
+
+[node name="IndividualFog83" parent="Map/Fog" unique_id=2022618875 instance=ExtResource("13_lce14")]
+position = Vector2(207, 198)
+
+[node name="IndividualFog84" parent="Map/Fog" unique_id=461398403 instance=ExtResource("13_lce14")]
+position = Vector2(233, 175)
+
+[node name="IndividualFog85" parent="Map/Fog" unique_id=1601377029 instance=ExtResource("13_lce14")]
+position = Vector2(156, 239)
+
+[node name="IndividualFog86" parent="Map/Fog" unique_id=1879724439 instance=ExtResource("13_lce14")]
+position = Vector2(126, 211)
+
+[node name="IndividualFog87" parent="Map/Fog" unique_id=2083205936 instance=ExtResource("13_lce14")]
+position = Vector2(93, 196)
+
+[node name="IndividualFog88" parent="Map/Fog" unique_id=57445303 instance=ExtResource("13_lce14")]
+position = Vector2(107, 165)
+
+[node name="IndividualFog89" parent="Map/Fog" unique_id=1795923525 instance=ExtResource("13_lce14")]
+position = Vector2(143, 154)
+
+[node name="IndividualFog90" parent="Map/Fog" unique_id=795446968 instance=ExtResource("13_lce14")]
+position = Vector2(101, 133)
+
+[node name="IndividualFog91" parent="Map/Fog" unique_id=1202649390 instance=ExtResource("13_lce14")]
+position = Vector2(160, 124)
+
+[node name="IndividualFog92" parent="Map/Fog" unique_id=49678623 instance=ExtResource("13_lce14")]
+position = Vector2(34, 135)
+
+[node name="IndividualFog93" parent="Map/Fog" unique_id=1464204369 instance=ExtResource("13_lce14")]
+position = Vector2(68, 139)
+
+[node name="IndividualFog94" parent="Map/Fog" unique_id=1527562696 instance=ExtResource("13_lce14")]
+position = Vector2(70, 113)
+
+[node name="IndividualFog95" parent="Map/Fog" unique_id=429623818 instance=ExtResource("13_lce14")]
+position = Vector2(58, 172)
+
+[node name="IndividualFog96" parent="Map/Fog" unique_id=1399246982 instance=ExtResource("13_lce14")]
+position = Vector2(89, 156)
+
+[node name="IndividualFog97" parent="Map/Fog" unique_id=771412066 instance=ExtResource("13_lce14")]
+position = Vector2(115, 133)
+
+[node name="IndividualFog98" parent="Map/Fog" unique_id=804347726 instance=ExtResource("13_lce14")]
+position = Vector2(38, 197)
+
+[node name="IndividualFog99" parent="Map/Fog" unique_id=1027052361 instance=ExtResource("13_lce14")]
+position = Vector2(8, 169)
+
+[node name="IndividualFog100" parent="Map/Fog" unique_id=1552713326 instance=ExtResource("13_lce14")]
+position = Vector2(-25, 154)
+
+[node name="IndividualFog101" parent="Map/Fog" unique_id=558380701 instance=ExtResource("13_lce14")]
+position = Vector2(-11, 123)
+
+[node name="IndividualFog102" parent="Map/Fog" unique_id=608116935 instance=ExtResource("13_lce14")]
+position = Vector2(25, 112)
+
+[node name="IndividualFog103" parent="Map/Fog" unique_id=629531414 instance=ExtResource("13_lce14")]
+position = Vector2(-17, 91)
+
+[node name="IndividualFog104" parent="Map/Fog" unique_id=1299643791 instance=ExtResource("13_lce14")]
+position = Vector2(42, 82)
+
+[node name="IndividualFog105" parent="Map/Fog" unique_id=320467723 instance=ExtResource("13_lce14")]
+position = Vector2(-20, 227)
+
+[node name="IndividualFog106" parent="Map/Fog" unique_id=754629506 instance=ExtResource("13_lce14")]
+position = Vector2(14, 231)
+
+[node name="IndividualFog107" parent="Map/Fog" unique_id=238255603 instance=ExtResource("13_lce14")]
+position = Vector2(16, 205)
+
+[node name="IndividualFog108" parent="Map/Fog" unique_id=1870493451 instance=ExtResource("13_lce14")]
+position = Vector2(4, 264)
+
+[node name="IndividualFog109" parent="Map/Fog" unique_id=1449556282 instance=ExtResource("13_lce14")]
+position = Vector2(35, 248)
+
+[node name="IndividualFog110" parent="Map/Fog" unique_id=135507281 instance=ExtResource("13_lce14")]
+position = Vector2(61, 225)
+
+[node name="IndividualFog111" parent="Map/Fog" unique_id=492400654 instance=ExtResource("13_lce14")]
+position = Vector2(-16, 289)
+
+[node name="IndividualFog112" parent="Map/Fog" unique_id=2037468094 instance=ExtResource("13_lce14")]
+position = Vector2(-46, 261)
+
+[node name="IndividualFog113" parent="Map/Fog" unique_id=246095532 instance=ExtResource("13_lce14")]
+position = Vector2(-79, 246)
+
+[node name="IndividualFog114" parent="Map/Fog" unique_id=1696193411 instance=ExtResource("13_lce14")]
+position = Vector2(-65, 215)
+
+[node name="IndividualFog115" parent="Map/Fog" unique_id=1328423957 instance=ExtResource("13_lce14")]
+position = Vector2(-29, 204)
+
+[node name="IndividualFog116" parent="Map/Fog" unique_id=1879105324 instance=ExtResource("13_lce14")]
+position = Vector2(-71, 183)
+
+[node name="IndividualFog117" parent="Map/Fog" unique_id=379968218 instance=ExtResource("13_lce14")]
+position = Vector2(-12, 174)
+
+[node name="IndividualFog118" parent="Map/Fog" unique_id=1809212402 instance=ExtResource("13_lce14")]
+position = Vector2(-12, 410)
+
+[node name="IndividualFog119" parent="Map/Fog" unique_id=568760071 instance=ExtResource("13_lce14")]
+position = Vector2(22, 414)
+
+[node name="IndividualFog120" parent="Map/Fog" unique_id=417277314 instance=ExtResource("13_lce14")]
+position = Vector2(24, 388)
+
+[node name="IndividualFog121" parent="Map/Fog" unique_id=1932605948 instance=ExtResource("13_lce14")]
+position = Vector2(12, 447)
+
+[node name="IndividualFog122" parent="Map/Fog" unique_id=1569165317 instance=ExtResource("13_lce14")]
+position = Vector2(43, 431)
+
+[node name="IndividualFog123" parent="Map/Fog" unique_id=652028034 instance=ExtResource("13_lce14")]
+position = Vector2(69, 408)
+
+[node name="IndividualFog124" parent="Map/Fog" unique_id=1772342907 instance=ExtResource("13_lce14")]
+position = Vector2(-8, 472)
+
+[node name="IndividualFog125" parent="Map/Fog" unique_id=1251144152 instance=ExtResource("13_lce14")]
+position = Vector2(-38, 444)
+
+[node name="IndividualFog126" parent="Map/Fog" unique_id=113844333 instance=ExtResource("13_lce14")]
+position = Vector2(-71, 429)
+
+[node name="IndividualFog127" parent="Map/Fog" unique_id=786082585 instance=ExtResource("13_lce14")]
+position = Vector2(-57, 398)
+
+[node name="IndividualFog128" parent="Map/Fog" unique_id=683643873 instance=ExtResource("13_lce14")]
+position = Vector2(-21, 387)
+
+[node name="IndividualFog129" parent="Map/Fog" unique_id=110253561 instance=ExtResource("13_lce14")]
+position = Vector2(-63, 366)
+
+[node name="IndividualFog130" parent="Map/Fog" unique_id=579818604 instance=ExtResource("13_lce14")]
+position = Vector2(-4, 357)
+
+[node name="IndividualFog131" parent="Map/Fog" unique_id=1109895280 instance=ExtResource("13_lce14")]
+position = Vector2(-70, 322)
+
+[node name="IndividualFog132" parent="Map/Fog" unique_id=1922873477 instance=ExtResource("13_lce14")]
+position = Vector2(-36, 326)
+
+[node name="IndividualFog133" parent="Map/Fog" unique_id=683971450 instance=ExtResource("13_lce14")]
+position = Vector2(-34, 300)
+
+[node name="IndividualFog134" parent="Map/Fog" unique_id=250470613 instance=ExtResource("13_lce14")]
+position = Vector2(-46, 359)
+
+[node name="IndividualFog135" parent="Map/Fog" unique_id=1156825898 instance=ExtResource("13_lce14")]
+position = Vector2(-15, 343)
+
+[node name="IndividualFog136" parent="Map/Fog" unique_id=2136069479 instance=ExtResource("13_lce14")]
+position = Vector2(11, 320)
+
+[node name="IndividualFog137" parent="Map/Fog" unique_id=355473398 instance=ExtResource("13_lce14")]
+position = Vector2(-66, 384)
+
+[node name="IndividualFog138" parent="Map/Fog" unique_id=310641190 instance=ExtResource("13_lce14")]
+position = Vector2(-96, 356)
+
+[node name="IndividualFog139" parent="Map/Fog" unique_id=487656719 instance=ExtResource("13_lce14")]
+position = Vector2(-129, 341)
+
+[node name="IndividualFog140" parent="Map/Fog" unique_id=1450690244 instance=ExtResource("13_lce14")]
+position = Vector2(-115, 310)
+
+[node name="IndividualFog141" parent="Map/Fog" unique_id=1723742142 instance=ExtResource("13_lce14")]
+position = Vector2(-79, 299)
+
+[node name="IndividualFog142" parent="Map/Fog" unique_id=178339450 instance=ExtResource("13_lce14")]
+position = Vector2(-121, 278)
+
+[node name="IndividualFog143" parent="Map/Fog" unique_id=775967301 instance=ExtResource("13_lce14")]
+position = Vector2(-62, 269)
+
+[node name="IndividualFog144" parent="Map/Fog" unique_id=178445547 instance=ExtResource("13_lce14")]
+position = Vector2(-45, 72)
+
+[node name="IndividualFog145" parent="Map/Fog" unique_id=854875611 instance=ExtResource("13_lce14")]
+position = Vector2(-11, 76)
+
+[node name="IndividualFog146" parent="Map/Fog" unique_id=1698214057 instance=ExtResource("13_lce14")]
+position = Vector2(-9, 50)
+
+[node name="IndividualFog147" parent="Map/Fog" unique_id=1385870396 instance=ExtResource("13_lce14")]
+position = Vector2(-21, 109)
+
+[node name="IndividualFog148" parent="Map/Fog" unique_id=1424557985 instance=ExtResource("13_lce14")]
+position = Vector2(10, 93)
+
+[node name="IndividualFog149" parent="Map/Fog" unique_id=1217036932 instance=ExtResource("13_lce14")]
+position = Vector2(36, 70)
+
+[node name="IndividualFog150" parent="Map/Fog" unique_id=1273873777 instance=ExtResource("13_lce14")]
+position = Vector2(-41, 134)
+
+[node name="IndividualFog151" parent="Map/Fog" unique_id=426231826 instance=ExtResource("13_lce14")]
+position = Vector2(-71, 106)
+
+[node name="IndividualFog152" parent="Map/Fog" unique_id=304558325 instance=ExtResource("13_lce14")]
+position = Vector2(-104, 91)
+
+[node name="IndividualFog153" parent="Map/Fog" unique_id=317900396 instance=ExtResource("13_lce14")]
+position = Vector2(-90, 60)
+
+[node name="IndividualFog154" parent="Map/Fog" unique_id=477459242 instance=ExtResource("13_lce14")]
+position = Vector2(-54, 49)
+
+[node name="IndividualFog155" parent="Map/Fog" unique_id=1229033342 instance=ExtResource("13_lce14")]
+position = Vector2(-96, 28)
+
+[node name="IndividualFog156" parent="Map/Fog" unique_id=145270543 instance=ExtResource("13_lce14")]
+position = Vector2(-37, 19)
+
+[node name="IndividualFog157" parent="Map/Fog" unique_id=380156423 instance=ExtResource("13_lce14")]
+position = Vector2(64, 56)
+
+[node name="IndividualFog158" parent="Map/Fog" unique_id=11847139 instance=ExtResource("13_lce14")]
+position = Vector2(98, 60)
+
+[node name="IndividualFog159" parent="Map/Fog" unique_id=1273821471 instance=ExtResource("13_lce14")]
+position = Vector2(100, 34)
+
+[node name="IndividualFog160" parent="Map/Fog" unique_id=426153239 instance=ExtResource("13_lce14")]
+position = Vector2(88, 93)
+
+[node name="IndividualFog161" parent="Map/Fog" unique_id=1327021039 instance=ExtResource("13_lce14")]
+position = Vector2(119, 77)
+
+[node name="IndividualFog162" parent="Map/Fog" unique_id=1722270131 instance=ExtResource("13_lce14")]
+position = Vector2(145, 54)
+
+[node name="IndividualFog163" parent="Map/Fog" unique_id=2089099949 instance=ExtResource("13_lce14")]
+position = Vector2(68, 118)
+
+[node name="IndividualFog164" parent="Map/Fog" unique_id=688372516 instance=ExtResource("13_lce14")]
+position = Vector2(38, 90)
+
+[node name="IndividualFog165" parent="Map/Fog" unique_id=2110251681 instance=ExtResource("13_lce14")]
+position = Vector2(5, 75)
+
+[node name="IndividualFog166" parent="Map/Fog" unique_id=91606123 instance=ExtResource("13_lce14")]
+position = Vector2(19, 44)
+
+[node name="IndividualFog167" parent="Map/Fog" unique_id=566898925 instance=ExtResource("13_lce14")]
+position = Vector2(55, 33)
+
+[node name="IndividualFog168" parent="Map/Fog" unique_id=1798051374 instance=ExtResource("13_lce14")]
+position = Vector2(13, 12)
+
+[node name="IndividualFog169" parent="Map/Fog" unique_id=1818262814 instance=ExtResource("13_lce14")]
+position = Vector2(72, 3)
+
+[node name="IndividualFog170" parent="Map/Fog" unique_id=1152249303 instance=ExtResource("13_lce14")]
+position = Vector2(170, 59)
+
+[node name="IndividualFog171" parent="Map/Fog" unique_id=1195333628 instance=ExtResource("13_lce14")]
+position = Vector2(204, 63)
+
+[node name="IndividualFog172" parent="Map/Fog" unique_id=74093371 instance=ExtResource("13_lce14")]
+position = Vector2(206, 37)
+
+[node name="IndividualFog173" parent="Map/Fog" unique_id=2085474478 instance=ExtResource("13_lce14")]
+position = Vector2(194, 96)
+
+[node name="IndividualFog174" parent="Map/Fog" unique_id=1840340422 instance=ExtResource("13_lce14")]
+position = Vector2(225, 80)
+
+[node name="IndividualFog175" parent="Map/Fog" unique_id=643967517 instance=ExtResource("13_lce14")]
+position = Vector2(251, 57)
+
+[node name="IndividualFog176" parent="Map/Fog" unique_id=1419777351 instance=ExtResource("13_lce14")]
+position = Vector2(174, 121)
+
+[node name="IndividualFog177" parent="Map/Fog" unique_id=225967628 instance=ExtResource("13_lce14")]
+position = Vector2(144, 93)
+
+[node name="IndividualFog178" parent="Map/Fog" unique_id=1896275279 instance=ExtResource("13_lce14")]
+position = Vector2(111, 78)
+
+[node name="IndividualFog179" parent="Map/Fog" unique_id=1332115149 instance=ExtResource("13_lce14")]
+position = Vector2(125, 47)
+
+[node name="IndividualFog180" parent="Map/Fog" unique_id=2034611619 instance=ExtResource("13_lce14")]
+position = Vector2(161, 36)
+
+[node name="IndividualFog181" parent="Map/Fog" unique_id=1947749909 instance=ExtResource("13_lce14")]
+position = Vector2(119, 15)
+
+[node name="IndividualFog182" parent="Map/Fog" unique_id=1452202926 instance=ExtResource("13_lce14")]
+position = Vector2(178, 6)
+
+[node name="IndividualFog183" parent="Map/Fog" unique_id=1589855097 instance=ExtResource("13_lce14")]
+position = Vector2(255, 113)
+
+[node name="IndividualFog184" parent="Map/Fog" unique_id=779829526 instance=ExtResource("13_lce14")]
+position = Vector2(289, 117)
+
+[node name="IndividualFog185" parent="Map/Fog" unique_id=2143074742 instance=ExtResource("13_lce14")]
+position = Vector2(291, 91)
+
+[node name="IndividualFog186" parent="Map/Fog" unique_id=2140835872 instance=ExtResource("13_lce14")]
+position = Vector2(279, 150)
+
+[node name="IndividualFog187" parent="Map/Fog" unique_id=1388646267 instance=ExtResource("13_lce14")]
+position = Vector2(310, 134)
+
+[node name="IndividualFog188" parent="Map/Fog" unique_id=1536208905 instance=ExtResource("13_lce14")]
+position = Vector2(336, 111)
+
+[node name="IndividualFog189" parent="Map/Fog" unique_id=453868972 instance=ExtResource("13_lce14")]
+position = Vector2(259, 175)
+
+[node name="IndividualFog190" parent="Map/Fog" unique_id=37589157 instance=ExtResource("13_lce14")]
+position = Vector2(229, 147)
+
+[node name="IndividualFog191" parent="Map/Fog" unique_id=1316048727 instance=ExtResource("13_lce14")]
+position = Vector2(196, 132)
+
+[node name="IndividualFog192" parent="Map/Fog" unique_id=1382053375 instance=ExtResource("13_lce14")]
+position = Vector2(210, 101)
+
+[node name="IndividualFog193" parent="Map/Fog" unique_id=145542958 instance=ExtResource("13_lce14")]
+position = Vector2(246, 90)
+
+[node name="IndividualFog194" parent="Map/Fog" unique_id=1483596588 instance=ExtResource("13_lce14")]
+position = Vector2(204, 69)
+
+[node name="IndividualFog195" parent="Map/Fog" unique_id=227826023 instance=ExtResource("13_lce14")]
+position = Vector2(263, 60)
+
+[node name="IndividualFog196" parent="Map/Fog" unique_id=1277455134 instance=ExtResource("13_lce14")]
+position = Vector2(288, 31)
+
+[node name="IndividualFog197" parent="Map/Fog" unique_id=1793994867 instance=ExtResource("13_lce14")]
+position = Vector2(322, 35)
+
+[node name="IndividualFog198" parent="Map/Fog" unique_id=1988205076 instance=ExtResource("13_lce14")]
+position = Vector2(324, 9)
+
+[node name="IndividualFog199" parent="Map/Fog" unique_id=150745429 instance=ExtResource("13_lce14")]
+position = Vector2(312, 68)
+
+[node name="IndividualFog200" parent="Map/Fog" unique_id=2130837105 instance=ExtResource("13_lce14")]
+position = Vector2(343, 52)
+
+[node name="IndividualFog201" parent="Map/Fog" unique_id=124376623 instance=ExtResource("13_lce14")]
+position = Vector2(369, 29)
+
+[node name="IndividualFog202" parent="Map/Fog" unique_id=2085329821 instance=ExtResource("13_lce14")]
+position = Vector2(292, 93)
+
+[node name="IndividualFog203" parent="Map/Fog" unique_id=111169152 instance=ExtResource("13_lce14")]
+position = Vector2(262, 65)
+
+[node name="IndividualFog204" parent="Map/Fog" unique_id=1317568438 instance=ExtResource("13_lce14")]
+position = Vector2(229, 50)
+
+[node name="IndividualFog205" parent="Map/Fog" unique_id=728010409 instance=ExtResource("13_lce14")]
+position = Vector2(243, 19)
+
+[node name="IndividualFog206" parent="Map/Fog" unique_id=953794301 instance=ExtResource("13_lce14")]
+position = Vector2(279, 8)
+
+[node name="IndividualFog207" parent="Map/Fog" unique_id=109265129 instance=ExtResource("13_lce14")]
+position = Vector2(237, -13)
+
+[node name="IndividualFog208" parent="Map/Fog" unique_id=1052980012 instance=ExtResource("13_lce14")]
+position = Vector2(296, -22)
+
+[node name="IndividualFog209" parent="Map/Fog" unique_id=665569622 instance=ExtResource("13_lce14")]
+position = Vector2(321, 213)
+
+[node name="IndividualFog210" parent="Map/Fog" unique_id=764012085 instance=ExtResource("13_lce14")]
+position = Vector2(355, 217)
+
+[node name="IndividualFog211" parent="Map/Fog" unique_id=45768582 instance=ExtResource("13_lce14")]
+position = Vector2(357, 191)
+
+[node name="IndividualFog212" parent="Map/Fog" unique_id=1741130156 instance=ExtResource("13_lce14")]
+position = Vector2(345, 250)
+
+[node name="IndividualFog213" parent="Map/Fog" unique_id=1518549303 instance=ExtResource("13_lce14")]
+position = Vector2(376, 234)
+
+[node name="IndividualFog214" parent="Map/Fog" unique_id=2036371626 instance=ExtResource("13_lce14")]
+position = Vector2(402, 211)
+
+[node name="IndividualFog215" parent="Map/Fog" unique_id=1435898994 instance=ExtResource("13_lce14")]
+position = Vector2(325, 275)
+
+[node name="IndividualFog216" parent="Map/Fog" unique_id=1838867715 instance=ExtResource("13_lce14")]
+position = Vector2(295, 247)
+
+[node name="IndividualFog217" parent="Map/Fog" unique_id=427233469 instance=ExtResource("13_lce14")]
+position = Vector2(262, 232)
+
+[node name="IndividualFog218" parent="Map/Fog" unique_id=1096757728 instance=ExtResource("13_lce14")]
+position = Vector2(276, 201)
+
+[node name="IndividualFog219" parent="Map/Fog" unique_id=531638575 instance=ExtResource("13_lce14")]
+position = Vector2(312, 190)
+
+[node name="IndividualFog220" parent="Map/Fog" unique_id=1609907754 instance=ExtResource("13_lce14")]
+position = Vector2(270, 169)
+
+[node name="IndividualFog221" parent="Map/Fog" unique_id=1622157671 instance=ExtResource("13_lce14")]
+position = Vector2(329, 160)
+
+[node name="IndividualFog222" parent="Map/Fog" unique_id=1422226486 instance=ExtResource("13_lce14")]
+position = Vector2(390, 313)
+
+[node name="IndividualFog223" parent="Map/Fog" unique_id=216676745 instance=ExtResource("13_lce14")]
+position = Vector2(424, 317)
+
+[node name="IndividualFog224" parent="Map/Fog" unique_id=454283505 instance=ExtResource("13_lce14")]
+position = Vector2(426, 291)
+
+[node name="IndividualFog225" parent="Map/Fog" unique_id=1414177849 instance=ExtResource("13_lce14")]
+position = Vector2(414, 350)
+
+[node name="IndividualFog226" parent="Map/Fog" unique_id=1491093661 instance=ExtResource("13_lce14")]
+position = Vector2(445, 334)
+
+[node name="IndividualFog227" parent="Map/Fog" unique_id=988371543 instance=ExtResource("13_lce14")]
+position = Vector2(471, 311)
+
+[node name="IndividualFog228" parent="Map/Fog" unique_id=455191996 instance=ExtResource("13_lce14")]
+position = Vector2(394, 375)
+
+[node name="IndividualFog229" parent="Map/Fog" unique_id=670085821 instance=ExtResource("13_lce14")]
+position = Vector2(364, 347)
+
+[node name="IndividualFog230" parent="Map/Fog" unique_id=1506717158 instance=ExtResource("13_lce14")]
+position = Vector2(331, 332)
+
+[node name="IndividualFog231" parent="Map/Fog" unique_id=1141208431 instance=ExtResource("13_lce14")]
+position = Vector2(345, 301)
+
+[node name="IndividualFog232" parent="Map/Fog" unique_id=1147818705 instance=ExtResource("13_lce14")]
+position = Vector2(381, 290)
+
+[node name="IndividualFog233" parent="Map/Fog" unique_id=1937266780 instance=ExtResource("13_lce14")]
+position = Vector2(339, 269)
+
+[node name="IndividualFog234" parent="Map/Fog" unique_id=1428014310 instance=ExtResource("13_lce14")]
+position = Vector2(398, 260)
+
+[node name="IndividualFog" parent="Map/Fog/IndividualFog234" unique_id=212496448 instance=ExtResource("13_lce14")]
+position = Vector2(1, 151)
+
+[node name="IndividualFog2" parent="Map/Fog/IndividualFog234" unique_id=1706475846 instance=ExtResource("13_lce14")]
+position = Vector2(35, 155)
+
+[node name="IndividualFog3" parent="Map/Fog/IndividualFog234" unique_id=629945031 instance=ExtResource("13_lce14")]
+position = Vector2(37, 129)
+
+[node name="IndividualFog4" parent="Map/Fog/IndividualFog234" unique_id=2144482593 instance=ExtResource("13_lce14")]
+position = Vector2(25, 188)
+
+[node name="IndividualFog5" parent="Map/Fog/IndividualFog234" unique_id=1726517636 instance=ExtResource("13_lce14")]
+position = Vector2(56, 172)
+
+[node name="IndividualFog6" parent="Map/Fog/IndividualFog234" unique_id=828760330 instance=ExtResource("13_lce14")]
+position = Vector2(82, 149)
+
+[node name="IndividualFog7" parent="Map/Fog/IndividualFog234" unique_id=1716125448 instance=ExtResource("13_lce14")]
+position = Vector2(5, 213)
+
+[node name="IndividualFog8" parent="Map/Fog/IndividualFog234" unique_id=833323548 instance=ExtResource("13_lce14")]
+position = Vector2(-25, 185)
+
+[node name="IndividualFog9" parent="Map/Fog/IndividualFog234" unique_id=2077614141 instance=ExtResource("13_lce14")]
+position = Vector2(-58, 170)
+
+[node name="IndividualFog10" parent="Map/Fog/IndividualFog234" unique_id=787415062 instance=ExtResource("13_lce14")]
+position = Vector2(-44, 139)
+
+[node name="IndividualFog11" parent="Map/Fog/IndividualFog234" unique_id=2033051726 instance=ExtResource("13_lce14")]
+position = Vector2(-8, 128)
+
+[node name="IndividualFog12" parent="Map/Fog/IndividualFog234" unique_id=731991132 instance=ExtResource("13_lce14")]
+position = Vector2(-50, 107)
+
+[node name="IndividualFog13" parent="Map/Fog/IndividualFog234" unique_id=456101649 instance=ExtResource("13_lce14")]
+position = Vector2(9, 98)
+
+[node name="IndividualFog14" parent="Map/Fog/IndividualFog234" unique_id=1898112574 instance=ExtResource("13_lce14")]
+position = Vector2(113, 130)
+
+[node name="IndividualFog15" parent="Map/Fog/IndividualFog234" unique_id=666407249 instance=ExtResource("13_lce14")]
+position = Vector2(147, 134)
+
+[node name="IndividualFog16" parent="Map/Fog/IndividualFog234" unique_id=1599338389 instance=ExtResource("13_lce14")]
+position = Vector2(149, 108)
+
+[node name="IndividualFog17" parent="Map/Fog/IndividualFog234" unique_id=1135386480 instance=ExtResource("13_lce14")]
+position = Vector2(137, 167)
+
+[node name="IndividualFog18" parent="Map/Fog/IndividualFog234" unique_id=1704185216 instance=ExtResource("13_lce14")]
+position = Vector2(168, 151)
+
+[node name="IndividualFog19" parent="Map/Fog/IndividualFog234" unique_id=653071982 instance=ExtResource("13_lce14")]
+position = Vector2(194, 128)
+
+[node name="IndividualFog20" parent="Map/Fog/IndividualFog234" unique_id=1644261543 instance=ExtResource("13_lce14")]
+position = Vector2(117, 192)
+
+[node name="IndividualFog21" parent="Map/Fog/IndividualFog234" unique_id=660266907 instance=ExtResource("13_lce14")]
+position = Vector2(87, 164)
+
+[node name="IndividualFog22" parent="Map/Fog/IndividualFog234" unique_id=1420111199 instance=ExtResource("13_lce14")]
+position = Vector2(54, 149)
+
+[node name="IndividualFog23" parent="Map/Fog/IndividualFog234" unique_id=2115510801 instance=ExtResource("13_lce14")]
+position = Vector2(68, 118)
+
+[node name="IndividualFog24" parent="Map/Fog/IndividualFog234" unique_id=1318502922 instance=ExtResource("13_lce14")]
+position = Vector2(104, 107)
+
+[node name="IndividualFog25" parent="Map/Fog/IndividualFog234" unique_id=1992833601 instance=ExtResource("13_lce14")]
+position = Vector2(62, 86)
+
+[node name="IndividualFog26" parent="Map/Fog/IndividualFog234" unique_id=1542771100 instance=ExtResource("13_lce14")]
+position = Vector2(121, 77)
+
+[node name="IndividualFog27" parent="Map/Fog/IndividualFog234" unique_id=886836742 instance=ExtResource("13_lce14")]
+position = Vector2(177, 151)
+
+[node name="IndividualFog28" parent="Map/Fog/IndividualFog234" unique_id=543118952 instance=ExtResource("13_lce14")]
+position = Vector2(211, 155)
+
+[node name="IndividualFog29" parent="Map/Fog/IndividualFog234" unique_id=1848146959 instance=ExtResource("13_lce14")]
+position = Vector2(213, 129)
+
+[node name="IndividualFog30" parent="Map/Fog/IndividualFog234" unique_id=1597600841 instance=ExtResource("13_lce14")]
+position = Vector2(201, 188)
+
+[node name="IndividualFog31" parent="Map/Fog/IndividualFog234" unique_id=17141194 instance=ExtResource("13_lce14")]
+position = Vector2(232, 172)
+
+[node name="IndividualFog32" parent="Map/Fog/IndividualFog234" unique_id=707325134 instance=ExtResource("13_lce14")]
+position = Vector2(258, 149)
+
+[node name="IndividualFog33" parent="Map/Fog/IndividualFog234" unique_id=1264672024 instance=ExtResource("13_lce14")]
+position = Vector2(181, 213)
+
+[node name="IndividualFog34" parent="Map/Fog/IndividualFog234" unique_id=411150352 instance=ExtResource("13_lce14")]
+position = Vector2(151, 185)
+
+[node name="IndividualFog35" parent="Map/Fog/IndividualFog234" unique_id=294186178 instance=ExtResource("13_lce14")]
+position = Vector2(118, 170)
+
+[node name="IndividualFog36" parent="Map/Fog/IndividualFog234" unique_id=1770206555 instance=ExtResource("13_lce14")]
+position = Vector2(132, 139)
+
+[node name="IndividualFog37" parent="Map/Fog/IndividualFog234" unique_id=706015239 instance=ExtResource("13_lce14")]
+position = Vector2(168, 128)
+
+[node name="IndividualFog38" parent="Map/Fog/IndividualFog234" unique_id=648329034 instance=ExtResource("13_lce14")]
+position = Vector2(126, 107)
+
+[node name="IndividualFog39" parent="Map/Fog/IndividualFog234" unique_id=944961458 instance=ExtResource("13_lce14")]
+position = Vector2(185, 98)
+
+[node name="IndividualFog40" parent="Map/Fog/IndividualFog234" unique_id=919977061 instance=ExtResource("13_lce14")]
+position = Vector2(170, 46)
+
+[node name="IndividualFog41" parent="Map/Fog/IndividualFog234" unique_id=1439462475 instance=ExtResource("13_lce14")]
+position = Vector2(204, 50)
+
+[node name="IndividualFog42" parent="Map/Fog/IndividualFog234" unique_id=1128575975 instance=ExtResource("13_lce14")]
+position = Vector2(206, 24)
+
+[node name="IndividualFog43" parent="Map/Fog/IndividualFog234" unique_id=796819396 instance=ExtResource("13_lce14")]
+position = Vector2(194, 83)
+
+[node name="IndividualFog44" parent="Map/Fog/IndividualFog234" unique_id=1785792952 instance=ExtResource("13_lce14")]
+position = Vector2(225, 67)
+
+[node name="IndividualFog45" parent="Map/Fog/IndividualFog234" unique_id=1627596938 instance=ExtResource("13_lce14")]
+position = Vector2(251, 44)
+
+[node name="IndividualFog46" parent="Map/Fog/IndividualFog234" unique_id=1371145789 instance=ExtResource("13_lce14")]
+position = Vector2(174, 108)
+
+[node name="IndividualFog47" parent="Map/Fog/IndividualFog234" unique_id=830244123 instance=ExtResource("13_lce14")]
+position = Vector2(144, 80)
+
+[node name="IndividualFog48" parent="Map/Fog/IndividualFog234" unique_id=68286526 instance=ExtResource("13_lce14")]
+position = Vector2(111, 65)
+
+[node name="IndividualFog49" parent="Map/Fog/IndividualFog234" unique_id=947120062 instance=ExtResource("13_lce14")]
+position = Vector2(125, 34)
+
+[node name="IndividualFog50" parent="Map/Fog/IndividualFog234" unique_id=390674518 instance=ExtResource("13_lce14")]
+position = Vector2(161, 23)
+
+[node name="IndividualFog51" parent="Map/Fog/IndividualFog234" unique_id=1136159718 instance=ExtResource("13_lce14")]
+position = Vector2(119, 2)
+
+[node name="IndividualFog52" parent="Map/Fog/IndividualFog234" unique_id=1133017036 instance=ExtResource("13_lce14")]
+position = Vector2(178, -7)
+
+[node name="IndividualFog53" parent="Map/Fog/IndividualFog234" unique_id=1049278040 instance=ExtResource("13_lce14")]
+position = Vector2(85, -20)
+
+[node name="IndividualFog54" parent="Map/Fog/IndividualFog234" unique_id=1036519311 instance=ExtResource("13_lce14")]
+position = Vector2(119, -16)
+
+[node name="IndividualFog55" parent="Map/Fog/IndividualFog234" unique_id=372101999 instance=ExtResource("13_lce14")]
+position = Vector2(121, -42)
+
+[node name="IndividualFog56" parent="Map/Fog/IndividualFog234" unique_id=1136264762 instance=ExtResource("13_lce14")]
+position = Vector2(109, 17)
+
+[node name="IndividualFog57" parent="Map/Fog/IndividualFog234" unique_id=615348378 instance=ExtResource("13_lce14")]
+position = Vector2(140, 1)
+
+[node name="IndividualFog58" parent="Map/Fog/IndividualFog234" unique_id=80583671 instance=ExtResource("13_lce14")]
+position = Vector2(166, -22)
+
+[node name="IndividualFog59" parent="Map/Fog/IndividualFog234" unique_id=1737397444 instance=ExtResource("13_lce14")]
+position = Vector2(89, 42)
+
+[node name="IndividualFog60" parent="Map/Fog/IndividualFog234" unique_id=54708794 instance=ExtResource("13_lce14")]
+position = Vector2(59, 14)
+
+[node name="IndividualFog61" parent="Map/Fog/IndividualFog234" unique_id=468864868 instance=ExtResource("13_lce14")]
+position = Vector2(26, -1)
+
+[node name="IndividualFog62" parent="Map/Fog/IndividualFog234" unique_id=2114966215 instance=ExtResource("13_lce14")]
+position = Vector2(40, -32)
+
+[node name="IndividualFog63" parent="Map/Fog/IndividualFog234" unique_id=1286665259 instance=ExtResource("13_lce14")]
+position = Vector2(76, -43)
+
+[node name="IndividualFog64" parent="Map/Fog/IndividualFog234" unique_id=1096195623 instance=ExtResource("13_lce14")]
+position = Vector2(34, -64)
+
+[node name="IndividualFog65" parent="Map/Fog/IndividualFog234" unique_id=1889373449 instance=ExtResource("13_lce14")]
+position = Vector2(93, -73)
+
+[node name="IndividualFog66" parent="Map/Fog/IndividualFog234" unique_id=1683875904 instance=ExtResource("13_lce14")]
+position = Vector2(159, -66)
+
+[node name="IndividualFog67" parent="Map/Fog/IndividualFog234" unique_id=267686777 instance=ExtResource("13_lce14")]
+position = Vector2(193, -62)
+
+[node name="IndividualFog68" parent="Map/Fog/IndividualFog234" unique_id=1796098581 instance=ExtResource("13_lce14")]
+position = Vector2(195, -88)
+
+[node name="IndividualFog69" parent="Map/Fog/IndividualFog234" unique_id=320807149 instance=ExtResource("13_lce14")]
+position = Vector2(183, -29)
+
+[node name="IndividualFog70" parent="Map/Fog/IndividualFog234" unique_id=1329212933 instance=ExtResource("13_lce14")]
+position = Vector2(214, -45)
+
+[node name="IndividualFog71" parent="Map/Fog/IndividualFog234" unique_id=1512702361 instance=ExtResource("13_lce14")]
+position = Vector2(240, -68)
+
+[node name="IndividualFog72" parent="Map/Fog/IndividualFog234" unique_id=1278958904 instance=ExtResource("13_lce14")]
+position = Vector2(163, -4)
+
+[node name="IndividualFog73" parent="Map/Fog/IndividualFog234" unique_id=897357315 instance=ExtResource("13_lce14")]
+position = Vector2(133, -32)
+
+[node name="IndividualFog74" parent="Map/Fog/IndividualFog234" unique_id=430487257 instance=ExtResource("13_lce14")]
+position = Vector2(100, -47)
+
+[node name="IndividualFog75" parent="Map/Fog/IndividualFog234" unique_id=1330287757 instance=ExtResource("13_lce14")]
+position = Vector2(114, -78)
+
+[node name="IndividualFog76" parent="Map/Fog/IndividualFog234" unique_id=670072702 instance=ExtResource("13_lce14")]
+position = Vector2(150, -89)
+
+[node name="IndividualFog77" parent="Map/Fog/IndividualFog234" unique_id=1702534298 instance=ExtResource("13_lce14")]
+position = Vector2(108, -110)
+
+[node name="IndividualFog78" parent="Map/Fog/IndividualFog234" unique_id=1441628896 instance=ExtResource("13_lce14")]
+position = Vector2(167, -119)
+
+[node name="IndividualFog79" parent="Map/Fog/IndividualFog234" unique_id=1808492447 instance=ExtResource("13_lce14")]
+position = Vector2(24, -116)
+
+[node name="IndividualFog80" parent="Map/Fog/IndividualFog234" unique_id=1114522637 instance=ExtResource("13_lce14")]
+position = Vector2(58, -112)
+
+[node name="IndividualFog81" parent="Map/Fog/IndividualFog234" unique_id=709319369 instance=ExtResource("13_lce14")]
+position = Vector2(60, -138)
+
+[node name="IndividualFog82" parent="Map/Fog/IndividualFog234" unique_id=1596894577 instance=ExtResource("13_lce14")]
+position = Vector2(48, -79)
+
+[node name="IndividualFog83" parent="Map/Fog/IndividualFog234" unique_id=609171177 instance=ExtResource("13_lce14")]
+position = Vector2(79, -95)
+
+[node name="IndividualFog84" parent="Map/Fog/IndividualFog234" unique_id=1336981026 instance=ExtResource("13_lce14")]
+position = Vector2(105, -118)
+
+[node name="IndividualFog85" parent="Map/Fog/IndividualFog234" unique_id=1707232388 instance=ExtResource("13_lce14")]
+position = Vector2(28, -54)
+
+[node name="IndividualFog86" parent="Map/Fog/IndividualFog234" unique_id=792309944 instance=ExtResource("13_lce14")]
+position = Vector2(-2, -82)
+
+[node name="IndividualFog87" parent="Map/Fog/IndividualFog234" unique_id=663206234 instance=ExtResource("13_lce14")]
+position = Vector2(-35, -97)
+
+[node name="IndividualFog88" parent="Map/Fog/IndividualFog234" unique_id=1566253429 instance=ExtResource("13_lce14")]
+position = Vector2(-21, -128)
+
+[node name="IndividualFog89" parent="Map/Fog/IndividualFog234" unique_id=863451948 instance=ExtResource("13_lce14")]
+position = Vector2(15, -139)
+
+[node name="IndividualFog90" parent="Map/Fog/IndividualFog234" unique_id=1967468069 instance=ExtResource("13_lce14")]
+position = Vector2(-27, -160)
+
+[node name="IndividualFog91" parent="Map/Fog/IndividualFog234" unique_id=568944732 instance=ExtResource("13_lce14")]
+position = Vector2(32, -169)
+
+[node name="IndividualFog92" parent="Map/Fog/IndividualFog234" unique_id=196458314 instance=ExtResource("13_lce14")]
+position = Vector2(33, -208)
+
+[node name="IndividualFog93" parent="Map/Fog/IndividualFog234" unique_id=353197136 instance=ExtResource("13_lce14")]
+position = Vector2(67, -204)
+
+[node name="IndividualFog94" parent="Map/Fog/IndividualFog234" unique_id=539620937 instance=ExtResource("13_lce14")]
+position = Vector2(69, -230)
+
+[node name="IndividualFog95" parent="Map/Fog/IndividualFog234" unique_id=1200987425 instance=ExtResource("13_lce14")]
+position = Vector2(57, -171)
+
+[node name="IndividualFog96" parent="Map/Fog/IndividualFog234" unique_id=303688751 instance=ExtResource("13_lce14")]
+position = Vector2(88, -187)
+
+[node name="IndividualFog97" parent="Map/Fog/IndividualFog234" unique_id=1455611707 instance=ExtResource("13_lce14")]
+position = Vector2(114, -210)
+
+[node name="IndividualFog98" parent="Map/Fog/IndividualFog234" unique_id=658507940 instance=ExtResource("13_lce14")]
+position = Vector2(37, -146)
+
+[node name="IndividualFog99" parent="Map/Fog/IndividualFog234" unique_id=98317673 instance=ExtResource("13_lce14")]
+position = Vector2(7, -174)
+
+[node name="IndividualFog100" parent="Map/Fog/IndividualFog234" unique_id=855365967 instance=ExtResource("13_lce14")]
+position = Vector2(-26, -189)
+
+[node name="IndividualFog101" parent="Map/Fog/IndividualFog234" unique_id=529047770 instance=ExtResource("13_lce14")]
+position = Vector2(-12, -220)
+
+[node name="IndividualFog102" parent="Map/Fog/IndividualFog234" unique_id=1762149595 instance=ExtResource("13_lce14")]
+position = Vector2(24, -231)
+
+[node name="IndividualFog103" parent="Map/Fog/IndividualFog234" unique_id=1218353582 instance=ExtResource("13_lce14")]
+position = Vector2(-18, -252)
+
+[node name="IndividualFog104" parent="Map/Fog/IndividualFog234" unique_id=356093097 instance=ExtResource("13_lce14")]
+position = Vector2(41, -261)
+
+[node name="IndividualFog105" parent="Map/Fog/IndividualFog234" unique_id=2126972711 instance=ExtResource("13_lce14")]
+position = Vector2(150, -157)
+
+[node name="IndividualFog106" parent="Map/Fog/IndividualFog234" unique_id=1514976211 instance=ExtResource("13_lce14")]
+position = Vector2(184, -153)
+
+[node name="IndividualFog107" parent="Map/Fog/IndividualFog234" unique_id=2038739308 instance=ExtResource("13_lce14")]
+position = Vector2(186, -179)
+
+[node name="IndividualFog108" parent="Map/Fog/IndividualFog234" unique_id=1755627773 instance=ExtResource("13_lce14")]
+position = Vector2(174, -120)
+
+[node name="IndividualFog109" parent="Map/Fog/IndividualFog234" unique_id=1022176421 instance=ExtResource("13_lce14")]
+position = Vector2(205, -136)
+
+[node name="IndividualFog110" parent="Map/Fog/IndividualFog234" unique_id=478872458 instance=ExtResource("13_lce14")]
+position = Vector2(231, -159)
+
+[node name="IndividualFog111" parent="Map/Fog/IndividualFog234" unique_id=1278401660 instance=ExtResource("13_lce14")]
+position = Vector2(154, -95)
+
+[node name="IndividualFog112" parent="Map/Fog/IndividualFog234" unique_id=1490428027 instance=ExtResource("13_lce14")]
+position = Vector2(124, -123)
+
+[node name="IndividualFog113" parent="Map/Fog/IndividualFog234" unique_id=1695998490 instance=ExtResource("13_lce14")]
+position = Vector2(91, -138)
+
+[node name="IndividualFog114" parent="Map/Fog/IndividualFog234" unique_id=1240850581 instance=ExtResource("13_lce14")]
+position = Vector2(105, -169)
+
+[node name="IndividualFog115" parent="Map/Fog/IndividualFog234" unique_id=1533480033 instance=ExtResource("13_lce14")]
+position = Vector2(141, -180)
+
+[node name="IndividualFog116" parent="Map/Fog/IndividualFog234" unique_id=175422598 instance=ExtResource("13_lce14")]
+position = Vector2(99, -201)
+
+[node name="IndividualFog117" parent="Map/Fog/IndividualFog234" unique_id=1870419722 instance=ExtResource("13_lce14")]
+position = Vector2(158, -210)
+
+[node name="IndividualFog118" parent="Map/Fog/IndividualFog234" unique_id=1347440472 instance=ExtResource("13_lce14")]
+position = Vector2(182, -224)
+
+[node name="IndividualFog119" parent="Map/Fog/IndividualFog234" unique_id=542519863 instance=ExtResource("13_lce14")]
+position = Vector2(216, -220)
+
+[node name="IndividualFog120" parent="Map/Fog/IndividualFog234" unique_id=1801739490 instance=ExtResource("13_lce14")]
+position = Vector2(218, -246)
+
+[node name="IndividualFog121" parent="Map/Fog/IndividualFog234" unique_id=1254159487 instance=ExtResource("13_lce14")]
+position = Vector2(206, -187)
+
+[node name="IndividualFog122" parent="Map/Fog/IndividualFog234" unique_id=1288447264 instance=ExtResource("13_lce14")]
+position = Vector2(237, -203)
+
+[node name="IndividualFog123" parent="Map/Fog/IndividualFog234" unique_id=1609218487 instance=ExtResource("13_lce14")]
+position = Vector2(263, -226)
+
+[node name="IndividualFog124" parent="Map/Fog/IndividualFog234" unique_id=86348010 instance=ExtResource("13_lce14")]
+position = Vector2(186, -162)
+
+[node name="IndividualFog125" parent="Map/Fog/IndividualFog234" unique_id=781172345 instance=ExtResource("13_lce14")]
+position = Vector2(156, -190)
+
+[node name="IndividualFog126" parent="Map/Fog/IndividualFog234" unique_id=834619466 instance=ExtResource("13_lce14")]
+position = Vector2(123, -205)
+
+[node name="IndividualFog127" parent="Map/Fog/IndividualFog234" unique_id=1193363764 instance=ExtResource("13_lce14")]
+position = Vector2(137, -236)
+
+[node name="IndividualFog128" parent="Map/Fog/IndividualFog234" unique_id=1179610831 instance=ExtResource("13_lce14")]
+position = Vector2(173, -247)
+
+[node name="IndividualFog129" parent="Map/Fog/IndividualFog234" unique_id=640907296 instance=ExtResource("13_lce14")]
+position = Vector2(131, -268)
+
+[node name="IndividualFog130" parent="Map/Fog/IndividualFog234" unique_id=1569039644 instance=ExtResource("13_lce14")]
+position = Vector2(190, -277)
+
+[node name="IndividualFog131" parent="Map/Fog/IndividualFog234" unique_id=666872872 instance=ExtResource("13_lce14")]
+position = Vector2(131, -284)
+
+[node name="IndividualFog132" parent="Map/Fog/IndividualFog234" unique_id=1919715822 instance=ExtResource("13_lce14")]
+position = Vector2(165, -280)
+
+[node name="IndividualFog133" parent="Map/Fog/IndividualFog234" unique_id=1220506933 instance=ExtResource("13_lce14")]
+position = Vector2(167, -306)
+
+[node name="IndividualFog134" parent="Map/Fog/IndividualFog234" unique_id=916171767 instance=ExtResource("13_lce14")]
+position = Vector2(155, -247)
+
+[node name="IndividualFog135" parent="Map/Fog/IndividualFog234" unique_id=661951963 instance=ExtResource("13_lce14")]
+position = Vector2(186, -263)
+
+[node name="IndividualFog136" parent="Map/Fog/IndividualFog234" unique_id=695832611 instance=ExtResource("13_lce14")]
+position = Vector2(212, -286)
+
+[node name="IndividualFog137" parent="Map/Fog/IndividualFog234" unique_id=610388307 instance=ExtResource("13_lce14")]
+position = Vector2(135, -222)
+
+[node name="IndividualFog138" parent="Map/Fog/IndividualFog234" unique_id=557332867 instance=ExtResource("13_lce14")]
+position = Vector2(105, -250)
+
+[node name="IndividualFog139" parent="Map/Fog/IndividualFog234" unique_id=632272817 instance=ExtResource("13_lce14")]
+position = Vector2(72, -265)
+
+[node name="IndividualFog140" parent="Map/Fog/IndividualFog234" unique_id=1566991567 instance=ExtResource("13_lce14")]
+position = Vector2(86, -296)
+
+[node name="IndividualFog141" parent="Map/Fog/IndividualFog234" unique_id=1714488374 instance=ExtResource("13_lce14")]
+position = Vector2(122, -307)
+
+[node name="IndividualFog142" parent="Map/Fog/IndividualFog234" unique_id=1609117280 instance=ExtResource("13_lce14")]
+position = Vector2(80, -328)
+
+[node name="IndividualFog143" parent="Map/Fog/IndividualFog234" unique_id=2007516624 instance=ExtResource("13_lce14")]
+position = Vector2(139, -337)
+
+[node name="IndividualFog144" parent="Map/Fog/IndividualFog234" unique_id=344764534 instance=ExtResource("13_lce14")]
+position = Vector2(184, -296)
+
+[node name="IndividualFog145" parent="Map/Fog/IndividualFog234" unique_id=138244258 instance=ExtResource("13_lce14")]
+position = Vector2(218, -292)
+
+[node name="IndividualFog146" parent="Map/Fog/IndividualFog234" unique_id=441260983 instance=ExtResource("13_lce14")]
+position = Vector2(220, -318)
+
+[node name="IndividualFog147" parent="Map/Fog/IndividualFog234" unique_id=509099642 instance=ExtResource("13_lce14")]
+position = Vector2(208, -259)
+
+[node name="IndividualFog148" parent="Map/Fog/IndividualFog234" unique_id=1936390423 instance=ExtResource("13_lce14")]
+position = Vector2(239, -275)
+
+[node name="IndividualFog149" parent="Map/Fog/IndividualFog234" unique_id=282979114 instance=ExtResource("13_lce14")]
+position = Vector2(265, -298)
+
+[node name="IndividualFog150" parent="Map/Fog/IndividualFog234" unique_id=1419853634 instance=ExtResource("13_lce14")]
+position = Vector2(188, -234)
+
+[node name="IndividualFog151" parent="Map/Fog/IndividualFog234" unique_id=2092051600 instance=ExtResource("13_lce14")]
+position = Vector2(158, -262)
+
+[node name="IndividualFog152" parent="Map/Fog/IndividualFog234" unique_id=875152148 instance=ExtResource("13_lce14")]
+position = Vector2(125, -277)
+
+[node name="IndividualFog153" parent="Map/Fog/IndividualFog234" unique_id=775458968 instance=ExtResource("13_lce14")]
+position = Vector2(139, -308)
+
+[node name="IndividualFog154" parent="Map/Fog/IndividualFog234" unique_id=1111769489 instance=ExtResource("13_lce14")]
+position = Vector2(175, -319)
+
+[node name="IndividualFog155" parent="Map/Fog/IndividualFog234" unique_id=1701986359 instance=ExtResource("13_lce14")]
+position = Vector2(133, -340)
+
+[node name="IndividualFog156" parent="Map/Fog/IndividualFog234" unique_id=858673993 instance=ExtResource("13_lce14")]
+position = Vector2(192, -349)
+
+[node name="IndividualFog157" parent="Map/Fog/IndividualFog234" unique_id=1496679945 instance=ExtResource("13_lce14")]
+position = Vector2(26, -310)
+
+[node name="IndividualFog158" parent="Map/Fog/IndividualFog234" unique_id=928620633 instance=ExtResource("13_lce14")]
+position = Vector2(60, -306)
+
+[node name="IndividualFog159" parent="Map/Fog/IndividualFog234" unique_id=538172706 instance=ExtResource("13_lce14")]
+position = Vector2(62, -332)
+
+[node name="IndividualFog160" parent="Map/Fog/IndividualFog234" unique_id=633346511 instance=ExtResource("13_lce14")]
+position = Vector2(50, -273)
+
+[node name="IndividualFog161" parent="Map/Fog/IndividualFog234" unique_id=1705935065 instance=ExtResource("13_lce14")]
+position = Vector2(81, -289)
+
+[node name="IndividualFog162" parent="Map/Fog/IndividualFog234" unique_id=188762964 instance=ExtResource("13_lce14")]
+position = Vector2(107, -312)
+
+[node name="IndividualFog163" parent="Map/Fog/IndividualFog234" unique_id=838050329 instance=ExtResource("13_lce14")]
+position = Vector2(30, -248)
+
+[node name="IndividualFog164" parent="Map/Fog/IndividualFog234" unique_id=1759810691 instance=ExtResource("13_lce14")]
+position = Vector2(0, -276)
+
+[node name="IndividualFog165" parent="Map/Fog/IndividualFog234" unique_id=1392524902 instance=ExtResource("13_lce14")]
+position = Vector2(-33, -291)
+
+[node name="IndividualFog166" parent="Map/Fog/IndividualFog234" unique_id=914861098 instance=ExtResource("13_lce14")]
+position = Vector2(-19, -322)
+
+[node name="IndividualFog167" parent="Map/Fog/IndividualFog234" unique_id=1172633867 instance=ExtResource("13_lce14")]
+position = Vector2(17, -333)
+
+[node name="IndividualFog168" parent="Map/Fog/IndividualFog234" unique_id=855394814 instance=ExtResource("13_lce14")]
+position = Vector2(-25, -354)
+
+[node name="IndividualFog169" parent="Map/Fog/IndividualFog234" unique_id=1926072967 instance=ExtResource("13_lce14")]
+position = Vector2(34, -363)
+
+[node name="IndividualFog170" parent="Map/Fog/IndividualFog234" unique_id=62113247 instance=ExtResource("13_lce14")]
+position = Vector2(-105, -287)
+
+[node name="IndividualFog171" parent="Map/Fog/IndividualFog234" unique_id=1979487211 instance=ExtResource("13_lce14")]
+position = Vector2(-71, -283)
+
+[node name="IndividualFog172" parent="Map/Fog/IndividualFog234" unique_id=697570874 instance=ExtResource("13_lce14")]
+position = Vector2(-69, -309)
+
+[node name="IndividualFog173" parent="Map/Fog/IndividualFog234" unique_id=236312704 instance=ExtResource("13_lce14")]
+position = Vector2(-81, -250)
+
+[node name="IndividualFog174" parent="Map/Fog/IndividualFog234" unique_id=1158536872 instance=ExtResource("13_lce14")]
+position = Vector2(-50, -266)
+
+[node name="IndividualFog175" parent="Map/Fog/IndividualFog234" unique_id=1152118767 instance=ExtResource("13_lce14")]
+position = Vector2(-24, -289)
+
+[node name="IndividualFog176" parent="Map/Fog/IndividualFog234" unique_id=1178471150 instance=ExtResource("13_lce14")]
+position = Vector2(-101, -225)
+
+[node name="IndividualFog177" parent="Map/Fog/IndividualFog234" unique_id=959849729 instance=ExtResource("13_lce14")]
+position = Vector2(-131, -253)
+
+[node name="IndividualFog178" parent="Map/Fog/IndividualFog234" unique_id=880171088 instance=ExtResource("13_lce14")]
+position = Vector2(-164, -268)
+
+[node name="IndividualFog179" parent="Map/Fog/IndividualFog234" unique_id=1403667560 instance=ExtResource("13_lce14")]
+position = Vector2(-150, -299)
+
+[node name="IndividualFog180" parent="Map/Fog/IndividualFog234" unique_id=265532377 instance=ExtResource("13_lce14")]
+position = Vector2(-114, -310)
+
+[node name="IndividualFog181" parent="Map/Fog/IndividualFog234" unique_id=958418486 instance=ExtResource("13_lce14")]
+position = Vector2(-156, -331)
+
+[node name="IndividualFog182" parent="Map/Fog/IndividualFog234" unique_id=1692964306 instance=ExtResource("13_lce14")]
+position = Vector2(-97, -340)
+
+[node name="IndividualFog183" parent="Map/Fog/IndividualFog234" unique_id=442161310 instance=ExtResource("13_lce14")]
+position = Vector2(-229, -285)
+
+[node name="IndividualFog184" parent="Map/Fog/IndividualFog234" unique_id=1023665297 instance=ExtResource("13_lce14")]
+position = Vector2(-195, -281)
+
+[node name="IndividualFog185" parent="Map/Fog/IndividualFog234" unique_id=1570962207 instance=ExtResource("13_lce14")]
+position = Vector2(-193, -307)
+
+[node name="IndividualFog186" parent="Map/Fog/IndividualFog234" unique_id=1830024018 instance=ExtResource("13_lce14")]
+position = Vector2(-205, -248)
+
+[node name="IndividualFog187" parent="Map/Fog/IndividualFog234" unique_id=1781308332 instance=ExtResource("13_lce14")]
+position = Vector2(-174, -264)
+
+[node name="IndividualFog188" parent="Map/Fog/IndividualFog234" unique_id=1201627566 instance=ExtResource("13_lce14")]
+position = Vector2(-148, -287)
+
+[node name="IndividualFog189" parent="Map/Fog/IndividualFog234" unique_id=899013588 instance=ExtResource("13_lce14")]
+position = Vector2(-225, -223)
+
+[node name="IndividualFog190" parent="Map/Fog/IndividualFog234" unique_id=152912098 instance=ExtResource("13_lce14")]
+position = Vector2(-255, -251)
+
+[node name="IndividualFog191" parent="Map/Fog/IndividualFog234" unique_id=2097813492 instance=ExtResource("13_lce14")]
+position = Vector2(-288, -266)
+
+[node name="IndividualFog192" parent="Map/Fog/IndividualFog234" unique_id=1575606101 instance=ExtResource("13_lce14")]
+position = Vector2(-274, -297)
+
+[node name="IndividualFog193" parent="Map/Fog/IndividualFog234" unique_id=83141466 instance=ExtResource("13_lce14")]
+position = Vector2(-238, -308)
+
+[node name="IndividualFog194" parent="Map/Fog/IndividualFog234" unique_id=1106017050 instance=ExtResource("13_lce14")]
+position = Vector2(-280, -329)
+
+[node name="IndividualFog195" parent="Map/Fog/IndividualFog234" unique_id=1802155937 instance=ExtResource("13_lce14")]
+position = Vector2(-221, -338)
+
+[node name="IndividualFog196" parent="Map/Fog/IndividualFog234" unique_id=2088015367 instance=ExtResource("13_lce14")]
+position = Vector2(-360, -280)
+
+[node name="IndividualFog197" parent="Map/Fog/IndividualFog234" unique_id=1490164730 instance=ExtResource("13_lce14")]
+position = Vector2(-326, -276)
+
+[node name="IndividualFog198" parent="Map/Fog/IndividualFog234" unique_id=1038120139 instance=ExtResource("13_lce14")]
+position = Vector2(-324, -302)
+
+[node name="IndividualFog199" parent="Map/Fog/IndividualFog234" unique_id=1878445010 instance=ExtResource("13_lce14")]
+position = Vector2(-336, -243)
+
+[node name="IndividualFog200" parent="Map/Fog/IndividualFog234" unique_id=1396760468 instance=ExtResource("13_lce14")]
+position = Vector2(-305, -259)
+
+[node name="IndividualFog201" parent="Map/Fog/IndividualFog234" unique_id=1466512096 instance=ExtResource("13_lce14")]
+position = Vector2(-279, -282)
+
+[node name="IndividualFog202" parent="Map/Fog/IndividualFog234" unique_id=1746183287 instance=ExtResource("13_lce14")]
+position = Vector2(-356, -218)
+
+[node name="IndividualFog203" parent="Map/Fog/IndividualFog234" unique_id=678129328 instance=ExtResource("13_lce14")]
+position = Vector2(-386, -246)
+
+[node name="IndividualFog204" parent="Map/Fog/IndividualFog234" unique_id=1916715421 instance=ExtResource("13_lce14")]
+position = Vector2(-419, -261)
+
+[node name="IndividualFog205" parent="Map/Fog/IndividualFog234" unique_id=1130694187 instance=ExtResource("13_lce14")]
+position = Vector2(-405, -292)
+
+[node name="IndividualFog206" parent="Map/Fog/IndividualFog234" unique_id=2034210559 instance=ExtResource("13_lce14")]
+position = Vector2(-369, -303)
+
+[node name="IndividualFog207" parent="Map/Fog/IndividualFog234" unique_id=777835484 instance=ExtResource("13_lce14")]
+position = Vector2(-411, -324)
+
+[node name="IndividualFog208" parent="Map/Fog/IndividualFog234" unique_id=1279949802 instance=ExtResource("13_lce14")]
+position = Vector2(-352, -333)
+
+[node name="IndividualFog209" parent="Map/Fog/IndividualFog234" unique_id=292150646 instance=ExtResource("13_lce14")]
+position = Vector2(-447, -273)
+
+[node name="IndividualFog210" parent="Map/Fog/IndividualFog234" unique_id=1374854991 instance=ExtResource("13_lce14")]
+position = Vector2(-413, -269)
+
+[node name="IndividualFog211" parent="Map/Fog/IndividualFog234" unique_id=1837130582 instance=ExtResource("13_lce14")]
+position = Vector2(-411, -295)
+
+[node name="IndividualFog212" parent="Map/Fog/IndividualFog234" unique_id=1464629295 instance=ExtResource("13_lce14")]
+position = Vector2(-423, -236)
+
+[node name="IndividualFog213" parent="Map/Fog/IndividualFog234" unique_id=1151068147 instance=ExtResource("13_lce14")]
+position = Vector2(-392, -252)
+
+[node name="IndividualFog214" parent="Map/Fog/IndividualFog234" unique_id=1333936122 instance=ExtResource("13_lce14")]
+position = Vector2(-366, -275)
+
+[node name="IndividualFog215" parent="Map/Fog/IndividualFog234" unique_id=189415501 instance=ExtResource("13_lce14")]
+position = Vector2(-443, -211)
+
+[node name="IndividualFog216" parent="Map/Fog/IndividualFog234" unique_id=1086223001 instance=ExtResource("13_lce14")]
+position = Vector2(-473, -239)
+
+[node name="IndividualFog217" parent="Map/Fog/IndividualFog234" unique_id=946162903 instance=ExtResource("13_lce14")]
+position = Vector2(-506, -254)
+
+[node name="IndividualFog218" parent="Map/Fog/IndividualFog234" unique_id=1618639954 instance=ExtResource("13_lce14")]
+position = Vector2(-492, -285)
+
+[node name="IndividualFog219" parent="Map/Fog/IndividualFog234" unique_id=1967528293 instance=ExtResource("13_lce14")]
+position = Vector2(-456, -296)
+
+[node name="IndividualFog220" parent="Map/Fog/IndividualFog234" unique_id=1103298643 instance=ExtResource("13_lce14")]
+position = Vector2(-498, -317)
+
+[node name="IndividualFog221" parent="Map/Fog/IndividualFog234" unique_id=2095991897 instance=ExtResource("13_lce14")]
+position = Vector2(-439, -326)
+
+[node name="IndividualFog222" parent="Map/Fog/IndividualFog234" unique_id=1896371675 instance=ExtResource("13_lce14")]
+position = Vector2(-336, -74)
+
+[node name="Settings" type="Node2D" parent="." unique_id=1097321267]
+
+[node name="Level" type="Node2D" parent="Settings" unique_id=1661473356]
+
+[node name="Camara" type="ColorRect" parent="Settings/Level" unique_id=896584840]
+visible = false
+offset_right = 539.0
+offset_bottom = 416.0
+color = Color(1, 1, 1, 0.1764706)
+
+[node name="Player" type="Marker2D" parent="Settings/Level" unique_id=907121523]
+position = Vector2(15, 144)
+
+[node name="Ambient" type="Node2D" parent="Settings" unique_id=699013752]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Settings/Ambient" unique_id=1465882700]
+color = Color(0.8318033, 0.9097085, 0.9667118, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Settings/Ambient" unique_id=57047560]
+color = Color(0.6052743, 0.6052744, 0.6052742, 1)
+energy = 0.25
+blend_mode = 2
+max_distance = 14998.0
+
+[node name="Fog" type="TextureRect" parent="Settings/Ambient" unique_id=1079995116]
+material = SubResource("ShaderMaterial_gy5b4")
+offset_left = -61.0
+offset_top = -65.0
+offset_right = 606.0
+offset_bottom = 443.0
+texture = SubResource("GradientTexture2D_khwga")
+
+[node name="Sound" type="Node2D" parent="." unique_id=1208482137]
+
+[node name="Ambient" type="AudioStreamPlayer2D" parent="Sound" unique_id=9605820]
+stream = ExtResource("12_r5trp")
+
+[node name="ExitArea" parent="." unique_id=684560570 instance=ExtResource("13_f8e4p")]
+position = Vector2(529, 272)

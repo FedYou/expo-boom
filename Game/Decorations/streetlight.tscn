@@ -97,6 +97,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy5b4"]
 size = Vector2(4, 9.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_00nqh"]
+radius = 19.999998
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ch57f"]
 blend_mode = 1
 light_mode = 1
@@ -116,7 +119,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Streetlight" type="Area2D" unique_id=63021176]
+[node name="Streetlight" type="Node2D" unique_id=952236615 groups=["light"]]
 z_index = 1
 rotation = 6.2831855
 script = ExtResource("1_6eli7")
@@ -125,21 +128,29 @@ script = ExtResource("1_6eli7")
 position = Vector2(-4.1962935e-06, -24)
 sprite_frames = SubResource("SpriteFrames_gy5b4")
 
-[node name="Collision" type="CollisionShape2D" parent="." unique_id=172106848]
+[node name="Player" type="Area2D" parent="." unique_id=2020535098]
+
+[node name="Collision" type="CollisionShape2D" parent="Player" unique_id=172106848]
 position = Vector2(-7.86805e-07, -4.225)
 scale = Vector2(1.1, 1.1)
 shape = SubResource("RectangleShape2D_gy5b4")
 
-[node name="Light" type="Node2D" parent="." unique_id=1333644226]
+[node name="Light" type="Area2D" parent="." unique_id=409817842 groups=["light"]]
 
-[node name="Light" type="AnimatedSprite2D" parent="Light" unique_id=691389748]
+[node name="Collision" type="CollisionShape2D" parent="Light" unique_id=1756706303]
+position = Vector2(12.999998, -13.000002)
+shape = SubResource("CircleShape2D_00nqh")
+
+[node name="LightNodes" type="Node2D" parent="." unique_id=1333644226]
+
+[node name="Light" type="AnimatedSprite2D" parent="LightNodes" unique_id=691389748]
 modulate = Color(1, 1, 1, 0.4627451)
 self_modulate = Color(0.9660199, 0.8849355, 0.6823093, 1)
 material = SubResource("CanvasItemMaterial_ch57f")
 position = Vector2(12.999996, -24.000002)
 sprite_frames = SubResource("SpriteFrames_khwga")
 
-[node name="Light2" type="Sprite2D" parent="Light" unique_id=851136776]
+[node name="Light2" type="Sprite2D" parent="LightNodes" unique_id=851136776]
 modulate = Color(1, 1, 1, 0.6627451)
 self_modulate = Color(0.9660199, 0.8849355, 0.6823093, 1)
 material = SubResource("CanvasItemMaterial_ch57f")
@@ -147,7 +158,7 @@ position = Vector2(12.999995, -31)
 scale = Vector2(0.480658, 0.4311968)
 texture = ExtResource("4_ch57f")
 
-[node name="Light3" type="Sprite2D" parent="Light" unique_id=1318743168]
+[node name="Light3" type="Sprite2D" parent="LightNodes" unique_id=1318743168]
 modulate = Color(1, 1, 1, 0.07450981)
 self_modulate = Color(0.9660199, 0.8849355, 0.6823093, 1)
 material = SubResource("CanvasItemMaterial_ch57f")
@@ -155,7 +166,7 @@ position = Vector2(12.999995, -30.000002)
 scale = Vector2(2.9273198, 2.6377492)
 texture = ExtResource("4_ch57f")
 
-[node name="Light4" type="Sprite2D" parent="Light" unique_id=536688323]
+[node name="Light4" type="Sprite2D" parent="LightNodes" unique_id=536688323]
 modulate = Color(1, 1, 1, 0.11372549)
 self_modulate = Color(0.9660199, 0.8849355, 0.6823093, 1)
 material = SubResource("CanvasItemMaterial_ch57f")
@@ -164,11 +175,12 @@ scale = Vector2(4.173935, 1.7998852)
 texture = ExtResource("4_ch57f")
 
 [node name="Sound" type="Node2D" parent="." unique_id=1580204381]
+visible = false
 
 [node name="Breaking" type="AudioStreamPlayer2D" parent="Sound" unique_id=1044531361]
 stream = ExtResource("4_hvkwm")
 volume_db = -7.536
 panning_strength = 0.67
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="body_entered" from="Player" to="." method="_on_player_body_entered"]

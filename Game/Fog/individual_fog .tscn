@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ntx26e1uclqr"]
+
+[ext_resource type="Script" uid="uid://crdnkt3j1s6gu" path="res://Game/Fog/individual_fog_.gd" id="1_500sd"]
+[ext_resource type="Texture2D" uid="uid://bmjg2atultws1" path="res://Assets/Textures/Fog/IndividualFog_baked.png" id="1_e14px"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xmjm2"]
+radius = 22.0
+height = 73.0
+
+[node name="IndividualFog" type="Area2D" unique_id=347170004]
+z_index = 2
+script = ExtResource("1_500sd")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=646056952]
+position = Vector2(0.5, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_xmjm2")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=863593410]
+texture = ExtResource("1_e14px")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -34,6 +34,7 @@ mouse_cursor/custom_image="uid://urxrsxk8ydeb"
 [global_group]
 
 player=""
+light=""
 
 [gui]
 

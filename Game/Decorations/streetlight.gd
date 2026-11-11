@@ -8,8 +8,9 @@ enum DIRECTION{
 @export var direction : DIRECTION = DIRECTION.RIGHT
 
 @onready var sprite = $Sprite
-@onready var light = $Light
-@onready var collision = $Collision
+@onready var light = $LightNodes
+@onready var player_collision = $Player/Collision
+@onready var light_collision = $Light/Collision
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,9 +20,10 @@ func _ready() -> void:
 		$Light.position = Vector2(-26, $Light.position.y)
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_player_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		collision.set_deferred("disabled", true)
+		player_collision.set_deferred("disabled", true)
+		light_collision.set_deferred("disabled", true)
 		light.visible = false
 		sprite.play("breakup")
 		$Sound/Breaking.play()
