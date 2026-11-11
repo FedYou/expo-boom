@@ -23,6 +23,10 @@ shader_parameter/phase_offset = 0.0
 [sub_resource type="LabelSettings" id="LabelSettings_gy5b4"]
 font_size = 27
 
+[sub_resource type="LabelSettings" id="LabelSettings_w568g"]
+shadow_size = 2
+shadow_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+
 [node name="MainScreen" type="Node2D" unique_id=1424403946 node_paths=PackedStringArray("background")]
 script = ExtResource("1_mrpmu")
 camara_duration = 1.5
@@ -208,8 +212,10 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="Label" type="Label" parent="Gui/MarginCredits" unique_id=1696733293]
+modulate = Color(1, 1, 1, 0.89411765)
 layout_mode = 2
 text = "main.credits"
+label_settings = SubResource("LabelSettings_w568g")
 autowrap_mode = 2
 
 [node name="Background" type="ColorRect" parent="Gui" unique_id=1190489884]
