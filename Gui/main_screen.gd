@@ -3,10 +3,10 @@ extends Screen
 @onready var camara = $Camera
 @onready var main = $Gui/Main
 @onready var score = $Gui/Score
-@onready var language = $Gui/Margin/Language
+@onready var language = $Gui/MarginLanguages/Language
 
 @onready var score_list = $Gui/Score/List
-@onready var language_option: OptionButton = $Gui/Margin/Language/LanguageOption
+@onready var language_option: OptionButton = $Gui/MarginLanguages/Language/LanguageOption
 
 
 

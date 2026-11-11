@@ -167,7 +167,7 @@ text = "game.bt_exit"
 flat = true
 script = ExtResource("5_uyawl")
 
-[node name="Margin" type="MarginContainer" parent="Gui" unique_id=326923603]
+[node name="MarginLanguages" type="MarginContainer" parent="Gui" unique_id=326923603]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -179,18 +179,38 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Language" type="VBoxContainer" parent="Gui/Margin" unique_id=1709840627]
+[node name="Language" type="VBoxContainer" parent="Gui/MarginLanguages" unique_id=1709840627]
 layout_mode = 2
 
-[node name="Title" type="CenterContainer" parent="Gui/Margin/Language" unique_id=1675588288]
+[node name="Title" type="CenterContainer" parent="Gui/MarginLanguages/Language" unique_id=1675588288]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Gui/Margin/Language/Title" unique_id=2107052832]
+[node name="Label" type="Label" parent="Gui/MarginLanguages/Language/Title" unique_id=2107052832]
 layout_mode = 2
 text = "gui.language"
 
-[node name="LanguageOption" type="OptionButton" parent="Gui/Margin/Language" unique_id=6403331]
+[node name="LanguageOption" type="OptionButton" parent="Gui/MarginLanguages/Language" unique_id=6403331]
 layout_mode = 2
+
+[node name="MarginCredits" type="MarginContainer" parent="Gui" unique_id=1260257922]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -560.0
+offset_top = -94.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="Gui/MarginCredits" unique_id=1696733293]
+layout_mode = 2
+text = "main.credits"
+autowrap_mode = 2
 
 [node name="Background" type="ColorRect" parent="Gui" unique_id=1190489884]
 anchors_preset = 15
@@ -204,4 +224,4 @@ color = Color(1, 1, 1, 0)
 [connection signal="pressed" from="Gui/Main/VBox/Score" to="." method="_on_score_pressed"]
 [connection signal="pressed" from="Gui/Main/VBox/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Gui/Score/Center/Back" to="." method="_on_back_pressed"]
-[connection signal="item_selected" from="Gui/Margin/Language/LanguageOption" to="." method="_on_language_option_item_selected"]
+[connection signal="item_selected" from="Gui/MarginLanguages/Language/LanguageOption" to="." method="_on_language_option_item_selected"]
