@@ -14,7 +14,7 @@ config/name="expo-boom"
 run/main_scene="uid://be6cmw3h61h2u"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/stretch_mode=4
+boot_splash/image="uid://dhqu8n17vuov7"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -28,7 +28,6 @@ Utils="*uid://kv7gl16eswwa"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://urxrsxk8ydeb"
 
 [global_group]
